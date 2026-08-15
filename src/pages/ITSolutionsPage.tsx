@@ -5,7 +5,7 @@ import "lenis/dist/lenis.css";
 import { Code, BarChart3, Cloud, Brain, Server, Database, Shield, Cpu } from "lucide-react";
 import { CTABanner } from "@/components/CTABanner";
 import BorderGlow from "@/components/ui/BorderGlow";
-import ParallaxPortfolio from "@/components/ParallaxPortfolio";
+import ExplorerShowcase from "@/components/ExplorerShowcase";
 
 const solutions = [
   {
@@ -197,7 +197,7 @@ const ITSolutionsPage = () => {
         </div>
       </section>
 
-      <ParallaxPortfolio />
+      <ExplorerShowcase />
 
       {/* Tech Stack */}
       <section className="py-24 relative overflow-hidden" ref={techRef}>

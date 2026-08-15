@@ -1,0 +1,217 @@
+.explorer-stage {
+  background: #08090c;
+}
+
+.explorer-coordinate {
+  position: absolute;
+  top: 6.5rem;
+  left: 2rem;
+  z-index: 5;
+  font-family: monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: hsl(32, 95%, 55%, 0.6);
+}
+
+.explorer-track {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  will-change: transform;
+}
+
+.explorer-panel {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding: 0 6vw;
+}
+
+.explorer-panel--intro {
+  width: 100vw;
+  align-items: flex-start;
+}
+
+.explorer-panel--outro {
+  width: 100vw;
+  align-items: center;
+  text-align: center;
+}
+
+.explorer-panel--project {
+  position: relative;
+  width: min(680px, 78vw);
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.explorer-headline {
+  font-family: "Space Grotesk", "Archivo", sans-serif;
+  font-weight: 700;
+  font-size: clamp(3rem, 9vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin-top: 1rem;
+}
+
+.explorer-connector {
+  flex-shrink: 0;
+  width: clamp(2.5rem, 5vw, 4.5rem);
+  height: 2px;
+  background: hsl(32, 95%, 55%, 0.45);
+}
+
+.explorer-ghost-index {
+  position: absolute;
+  top: -2vh;
+  right: 4vw;
+  font-family: "Space Grotesk", "Archivo", sans-serif;
+  font-weight: 800;
+  font-size: clamp(6rem, 14vw, 11rem);
+  color: transparent;
+  -webkit-text-stroke: 1px hsl(32, 95%, 55%, 0.12);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.explorer-mockup {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #0f1014;
+  border: 1px solid hsl(32, 95%, 55%, 0.15);
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.7), 0 0 60px -20px hsl(32, 95%, 55%, 0.15);
+}
+
+.explorer-mockup-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: #16171d;
+  border-bottom: 1px solid hsl(32, 95%, 55%, 0.1);
+}
+
+.explorer-mockup-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.explorer-mockup-url {
+  margin-left: 10px;
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.35);
+  font-family: monospace;
+}
+
+.explorer-mockup img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: top;
+}
+
+.explorer-panel-info {
+  position: relative;
+  z-index: 1;
+  margin-top: 1.5rem;
+}
+
+.explorer-visit-chip {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  padding: 0.7rem 1.4rem;
+  border-radius: 999px;
+  background: hsl(32, 95%, 55%);
+  color: #0a0a0a;
+  font-weight: 600;
+  font-size: 0.85rem;
+  box-shadow: 0 8px 30px -8px hsl(32, 95%, 55%, 0.6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.explorer-visit-chip:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px -8px hsl(32, 95%, 55%, 0.75);
+}
+
+.explorer-badge {
+  position: relative;
+  width: 140px;
+  height: 140px;
+}
+
+.explorer-badge-ring {
+  width: 100%;
+  height: 100%;
+  animation: explorer-badge-spin 24s linear infinite;
+}
+
+.explorer-badge-ring text {
+  font-size: 10.5px;
+  letter-spacing: 0.05em;
+  fill: hsl(32, 95%, 55%, 0.7);
+  text-transform: uppercase;
+}
+
+.explorer-badge-core {
+  position: absolute;
+  inset: 32%;
+  border-radius: 50%;
+  background: hsl(32, 95%, 55%, 0.1);
+  border: 1px solid hsl(32, 95%, 55%, 0.3);
+}
+
+@keyframes explorer-badge-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.explorer-progress {
+  position: absolute;
+  left: 6vw;
+  right: 6vw;
+  bottom: 2rem;
+  z-index: 5;
+  height: 2px;
+  background: hsl(217, 33%, 17%);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.explorer-progress-fill {
+  height: 100%;
+  width: 100%;
+  transform-origin: left;
+  background: hsl(32, 95%, 55%);
+}
+
+.explorer-mobile-row {
+  scrollbar-width: none;
+}
+
+.explorer-mobile-row::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .explorer-badge-ring {
+    animation: none;
+  }
+}
