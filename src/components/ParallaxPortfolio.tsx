@@ -85,7 +85,7 @@ const ParallaxPortfolio = () => {
           </div>
 
           <div className="parallax__layer parallax__layer--base">
-            <div className="container mx-auto px-4 lg:px-8 flex flex-col items-center text-center gap-4 mt-28">
+            <div className="container mx-auto px-4 lg:px-8 flex flex-col items-center text-center gap-4 mt-12 md:mt-28">
               {index === 0 && (
                 <div>
                   <span className="text-primary text-xs font-semibold tracking-wider uppercase">
@@ -117,6 +117,20 @@ const ParallaxPortfolio = () => {
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   {project.description}
                 </p>
+
+                {/* Below md, the fore layer's fixed bottom/right offset can land on
+                    top of this text block once it wraps to extra lines — text height
+                    varies with content while the chip's position doesn't. Keep the
+                    mobile chip in normal flow, right under the text, so it can never
+                    overlap; the depth-parallax version stays for larger screens. */}
+                <a
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="portfolio-visit-chip md:hidden mt-4 inline-flex"
+                >
+                  Visit Site <ExternalLink className="w-4 h-4" />
+                </a>
               </div>
             </div>
           </div>
@@ -126,7 +140,7 @@ const ParallaxPortfolio = () => {
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="portfolio-visit-chip absolute bottom-[16%] right-[12%]"
+              className="portfolio-visit-chip hidden md:inline-flex absolute bottom-[16%] right-[12%]"
             >
               Visit Site <ExternalLink className="w-4 h-4" />
             </a>

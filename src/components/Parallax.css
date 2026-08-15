@@ -13,6 +13,7 @@
   height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   perspective: 300px;
   perspective-origin: 50% 50%;
   background: #08090c;
@@ -116,5 +117,14 @@
 @media (max-width: 768px) {
   .parallax {
     perspective: 180px;
+  }
+
+  /* On phones the first portfolio slide's content column now runs tall enough
+     (heading + mockup + text + the in-flow "Visit Site" button, see
+     ParallaxPortfolio.tsx) to reach this hint's fixed bottom offset — and
+     touch users already know to swipe/scroll, so the hint is redundant here
+     rather than worth repositioning. */
+  .parallax__scroll-hint {
+    display: none;
   }
 }

@@ -145,7 +145,7 @@ export const Footer = () => {
         {/* Bottom bar */}
         <div className="pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © 2026 Zon Robotics & Ai private limited. All rights reserved.
+            © 2026 Sun Robotics & AI Private Limited. All rights reserved.
           </p>
           <p className="text-sm text-muted-foreground">
             Crafted with precision in Indore, India 🇮🇳

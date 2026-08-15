@@ -198,7 +198,15 @@ function ScrubReveal() {
     const ch = canvas.height / dpr;
     const sw = frameWidth(src);
     const sh = frameHeight(src);
-    const scale = Math.max(cw / sw, ch / sh);
+    const coverScale = Math.max(cw / sw, ch / sh);
+    const widthScale = cw / sw;
+    // On tall/narrow viewports (phones), a full "cover" fit is dominated by
+    // height and crops away most of the wide cinematic frame — e.g. a 390x844
+    // phone against a 720x344 frame would only show the center ~22% of the
+    // width. Fall back to fitting the width and letterboxing top/bottom
+    // (the section bg shows through the transparent canvas) instead of
+    // losing the sides of the shot.
+    const scale = coverScale / widthScale > 1.5 ? widthScale : coverScale;
     const dw = sw * scale;
     const dh = sh * scale;
     const dx = (cw - dw) / 2;
