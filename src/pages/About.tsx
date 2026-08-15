@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Target, Eye, Lightbulb, Shield, Zap, Users } from "lucide-react";
 import { SEO } from "@/components/SEO";
+import { SITE_URL } from "@/lib/schema";
 
 const values = [
     {
@@ -55,6 +56,7 @@ const About = () => {
             <SEO
                 title="About Us"
                 description="Learn about Sun Robotics & AI's mission to democratize advanced robotics and AI for enterprises worldwide."
+                canonical={`${SITE_URL}/about`}
             />
 
             {/* Hero Section */}

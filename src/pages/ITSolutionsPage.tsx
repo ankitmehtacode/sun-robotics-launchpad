@@ -6,6 +6,33 @@ import { Code, BarChart3, Cloud, Brain, Server, Database, Shield, Cpu } from "lu
 import { CTABanner } from "@/components/CTABanner";
 import BorderGlow from "@/components/ui/BorderGlow";
 import ExplorerShowcase from "@/components/ExplorerShowcase";
+import { SEO } from "@/components/SEO";
+import { SITE_URL, serviceSchema, breadcrumbSchema } from "@/lib/schema";
+
+const structuredData = [
+  serviceSchema({
+    name: "Website Development",
+    description:
+      "Custom website design and development for businesses in Indore and across India, from marketing sites to enterprise web platforms.",
+    serviceType: "Website Development",
+  }),
+  serviceSchema({
+    name: "App Development",
+    description:
+      "Native and web app development covering enterprise dashboards, IoT-connected apps, and customer-facing products.",
+    serviceType: "App Development",
+  }),
+  serviceSchema({
+    name: "IT Solutions",
+    description:
+      "Custom enterprise APIs, cloud & IoT integration, and AI-powered dashboards built for industrial and enterprise operations.",
+    serviceType: "IT Consulting",
+  }),
+  breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "IT Solutions", path: "/it-solutions" },
+  ]),
+];
 
 const solutions = [
   {
@@ -109,6 +136,14 @@ const ITSolutionsPage = () => {
   return (
     <ReactLenis root>
     <div ref={pageRef}>
+      <SEO
+        title="IT Solutions in Indore — Website & App Development"
+        description="Custom website development, app development, and enterprise IT solutions from Sun Robotics & AI in Indore — APIs, cloud integration, and AI-powered dashboards built for growing businesses."
+        keywords="IT solutions Indore, website development Indore, app development Indore, custom software development, enterprise IT solutions"
+        canonical={`${SITE_URL}/it-solutions`}
+        structuredData={structuredData}
+      />
+
       {/* Page Header — revealed on scroll */}
       <section className="pt-32 pb-16 relative overflow-hidden" ref={headerRef}>
         <div className="absolute inset-0 hero-gradient" />

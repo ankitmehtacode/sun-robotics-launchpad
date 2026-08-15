@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { SEO } from "@/components/SEO";
+import { SITE_URL } from "@/lib/schema";
 
 const Privacy = () => {
   const ref = useRef(null);
@@ -11,6 +12,7 @@ const Privacy = () => {
       <SEO
         title="Privacy Policy"
         description="Learn how Sun Robotics & AI collects, uses, and protects your personal information."
+        canonical={`${SITE_URL}/privacy`}
       />
 
       <section className="pt-32 pb-24 relative overflow-hidden" ref={ref}>

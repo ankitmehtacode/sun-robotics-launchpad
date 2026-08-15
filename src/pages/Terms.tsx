@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { SEO } from "@/components/SEO";
+import { SITE_URL } from "@/lib/schema";
 
 const Terms = () => {
   const ref = useRef(null);
@@ -11,6 +12,7 @@ const Terms = () => {
       <SEO
         title="Terms of Service"
         description="Read the terms and conditions governing your use of Sun Robotics & AI products and services."
+        canonical={`${SITE_URL}/terms`}
       />
 
       <section className="pt-32 pb-24 relative overflow-hidden" ref={ref}>

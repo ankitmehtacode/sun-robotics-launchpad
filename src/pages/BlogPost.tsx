@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Calendar, Clock, User, ArrowLeft } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { api, Blog } from "@/lib/api";
+import { SITE_URL } from "@/lib/schema";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 
@@ -59,6 +60,7 @@ const BlogPost = () => {
             <SEO
                 title={blog.title}
                 description={blog.excerpt}
+                canonical={`${SITE_URL}/blog/${id}`}
             />
 
             <article className="min-h-screen pt-32 pb-20">

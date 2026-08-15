@@ -3,6 +3,8 @@ import { motion, useInView } from "framer-motion";
 import { Factory, Warehouse, Eye, Users, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CTABanner } from "@/components/CTABanner";
+import { SEO } from "@/components/SEO";
+import { SITE_URL, productListSchema } from "@/lib/schema";
 
 const products = [
   {
@@ -76,6 +78,14 @@ const Products = () => {
 
   return (
     <>
+      <SEO
+        title="Robotics & AI Products — SunBot Series"
+        description="Browse the SunBot product line from Sun Robotics & AI: industrial arms, autonomous logistics robots, AI vision inspection systems, and collaborative robots."
+        keywords="robotics products, industrial robot arm, autonomous mobile robot, AI vision inspection, collaborative robot"
+        canonical={`${SITE_URL}/products`}
+        structuredData={productListSchema(products)}
+      />
+
       {/* Page Header */}
       <section className="pt-32 pb-16 relative overflow-hidden" ref={headerRef}>
         <div className="absolute inset-0 hero-gradient" />

@@ -3,6 +3,8 @@ import { motion, useInView } from "framer-motion";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { ContactInfo } from "@/components/contact/ContactInfo";
 import { MapPlaceholder } from "@/components/contact/MapPlaceholder";
+import { SEO } from "@/components/SEO";
+import { SITE_URL, organizationSchema } from "@/lib/schema";
 
 const ContactPage = () => {
   const headerRef = useRef(null);
@@ -12,6 +14,14 @@ const ContactPage = () => {
 
   return (
     <>
+      <SEO
+        title="Contact Us — Indore"
+        description="Get in touch with Sun Robotics & AI at Indraprastha Tower, Rau, Indore. Call +91 8144426440 or email info@sunroboticsandai.in for AI, robotics, and IT solutions inquiries."
+        keywords="contact Sun Robotics, Sun Robotics Indore, AI robotics company contact"
+        canonical={`${SITE_URL}/contact`}
+        structuredData={organizationSchema()}
+      />
+
       {/* Page Header */}
       <section className="pt-32 pb-16 relative overflow-hidden" ref={headerRef}>
         <div className="absolute inset-0 hero-gradient" />

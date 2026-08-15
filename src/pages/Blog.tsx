@@ -3,6 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { api, Blog as BlogType } from "@/lib/api";
+import { SITE_URL } from "@/lib/schema";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useNavigate } from "react-router-dom";
 
@@ -35,6 +36,7 @@ const Blog = () => {
             <SEO
                 title="Blog"
                 description="Insights and updates from Sun Robotics & AI on industrial automation, AI research, and the future of robotics."
+                canonical={`${SITE_URL}/blog`}
             />
 
             {/* Hero Section */}

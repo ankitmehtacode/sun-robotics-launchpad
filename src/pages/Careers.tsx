@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/form";
 import { toast } from "sonner";
 import { SEO } from "@/components/SEO";
+import { SITE_URL } from "@/lib/schema";
 import { api, Job } from "@/lib/api";
 
 // Validation schema matching Backend ApplicationRequestDto
@@ -155,6 +156,7 @@ const Careers = () => {
             <SEO
                 title="Careers"
                 description="Join Sun Robotics & AI and build the future of industrial automation. Explore open positions in engineering, AI research, and more."
+                canonical={`${SITE_URL}/careers`}
             />
 
             {/* Hero Section */}

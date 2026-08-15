@@ -4,6 +4,21 @@ import { IndustrialRobotics } from "@/components/IndustrialRobotics";
 import { AIBrain } from "@/components/AIBrain";
 import { MultipurposeRobotics } from "@/components/MultipurposeRobotics";
 import { CTABanner } from "@/components/CTABanner";
+import { SEO } from "@/components/SEO";
+import { SITE_URL, serviceSchema, breadcrumbSchema } from "@/lib/schema";
+
+const structuredData = [
+  serviceSchema({
+    name: "Industrial Robotics & AI Automation",
+    description:
+      "Heavy-duty industrial robotic arms, AI-driven automation, and intelligent multipurpose robotics platforms engineered for manufacturing, logistics, and quality control.",
+    serviceType: "Industrial Automation",
+  }),
+  breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Robotics", path: "/robotics" },
+  ]),
+];
 
 const Robotics = () => {
   const headerRef = useRef(null);
@@ -11,6 +26,14 @@ const Robotics = () => {
 
   return (
     <>
+      <SEO
+        title="Industrial Robotics & AI Automation Solutions"
+        description="Explore Sun Robotics & AI's industrial robotic arms, AI-driven automation, and multipurpose robotics platforms engineered for manufacturing, logistics, and quality control."
+        keywords="industrial robotics, AI automation, robotics solutions India, robotic arms, multipurpose robotics"
+        canonical={`${SITE_URL}/robotics`}
+        structuredData={structuredData}
+      />
+
       {/* Page Header */}
       <section className="pt-32 pb-16 relative overflow-hidden" ref={headerRef}>
         <div className="absolute inset-0 hero-gradient" />
