@@ -7,19 +7,19 @@ const solutions = [
     icon: Code,
     title: "Custom Enterprise APIs",
     description: "Scalable backend solutions designed for high-throughput industrial operations.",
-    color: "from-primary to-cyan-400",
+    color: "from-primary to-amber-600",
   },
   {
     icon: BarChart3,
     title: "AI-Powered Dashboards",
     description: "Real-time KPI tracking with intelligent anomaly detection and insights.",
-    color: "from-cyan-400 to-teal-400",
+    color: "from-amber-500 to-orange-600",
   },
   {
     icon: Cloud,
     title: "Cloud & IoT Integration",
     description: "Edge computing solutions for low-latency robotic control systems.",
-    color: "from-teal-400 to-secondary",
+    color: "from-orange-500 to-secondary",
   },
   {
     icon: Brain,

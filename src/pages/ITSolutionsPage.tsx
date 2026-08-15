@@ -1,7 +1,11 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { ReactLenis, useLenis } from "lenis/react";
+import "lenis/dist/lenis.css";
 import { Code, BarChart3, Cloud, Brain, Server, Database, Shield, Cpu } from "lucide-react";
 import { CTABanner } from "@/components/CTABanner";
+import BorderGlow from "@/components/ui/BorderGlow";
+import ParallaxPortfolio from "@/components/ParallaxPortfolio";
 
 const solutions = [
   {
@@ -9,21 +13,27 @@ const solutions = [
     title: "Custom Enterprise APIs",
     description: "Scalable backend solutions designed for high-throughput industrial operations. Our APIs handle millions of requests with sub-millisecond latency.",
     features: ["RESTful & GraphQL", "Real-time WebSockets", "Auto-scaling", "99.99% Uptime SLA"],
-    color: "from-primary to-cyan-400",
+    color: "from-primary to-amber-600",
+    glowHSL: "32 95 55",
+    glowColors: ["#e8930c", "#d4a017", "#f5a623"],
   },
   {
     icon: BarChart3,
     title: "AI-Powered Dashboards",
     description: "Real-time KPI tracking with intelligent anomaly detection and predictive insights. Visualize your entire operation in one place.",
     features: ["Live Data Streaming", "Custom Widgets", "Role-based Access", "Export & Reports"],
-    color: "from-cyan-400 to-teal-400",
+    color: "from-amber-500 to-orange-600",
+    glowHSL: "30 90 55",
+    glowColors: ["#f59e0b", "#ea580c", "#fb923c"],
   },
   {
     icon: Cloud,
     title: "Cloud & IoT Integration",
     description: "Edge computing solutions for low-latency robotic control systems. Connect your entire fleet to the cloud seamlessly.",
     features: ["Multi-cloud Support", "Edge Processing", "Device Management", "OTA Updates"],
-    color: "from-teal-400 to-secondary",
+    color: "from-orange-500 to-secondary",
+    glowHSL: "20 80 50",
+    glowColors: ["#f97316", "#b34a20", "#e86c2c"],
   },
   {
     icon: Brain,
@@ -31,6 +41,8 @@ const solutions = [
     description: "ML-driven anomaly detection that prevents failures before they happen. Reduce downtime and maintenance costs by up to 70%.",
     features: ["Failure Prediction", "Maintenance Scheduling", "Parts Inventory", "Cost Optimization"],
     color: "from-secondary to-primary",
+    glowHSL: "14 75 42",
+    glowColors: ["#b34a20", "#e8930c", "#c05621"],
   },
 ];
 
@@ -69,6 +81,7 @@ const additionalServices = [
 ];
 
 const ITSolutionsPage = () => {
+  const pageRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef(null);
   const solutionsRef = useRef(null);
   const techRef = useRef(null);
@@ -79,15 +92,38 @@ const ITSolutionsPage = () => {
   const isTechInView = useInView(techRef, { once: true, margin: "-100px" });
   const isAdditionalInView = useInView(additionalRef, { once: true, margin: "-100px" });
 
+  // Locomotive Scroll's `data-scroll-speed` mechanic: on every Lenis scroll
+  // tick, drift each marked element by its own speed factor so the decorative
+  // layers read at different depths instead of moving 1:1 with the page.
+  useLenis(() => {
+    const container = pageRef.current;
+    if (!container) return;
+    const viewportCenter = window.innerHeight / 2;
+    container.querySelectorAll<HTMLElement>("[data-scroll-speed]").forEach((el) => {
+      const speed = parseFloat(el.dataset.scrollSpeed ?? "0");
+      const distance = el.getBoundingClientRect().top + el.offsetHeight / 2 - viewportCenter;
+      el.style.transform = `translate3d(0, ${(distance * speed).toFixed(2)}px, 0)`;
+    });
+  });
+
   return (
-    <>
-      {/* Page Header */}
+    <ReactLenis root>
+    <div ref={pageRef}>
+      {/* Page Header — revealed on scroll */}
       <section className="pt-32 pb-16 relative overflow-hidden" ref={headerRef}>
         <div className="absolute inset-0 hero-gradient" />
         <div className="absolute inset-0 grid-bg opacity-40" />
-        
-        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-[128px] animate-pulse-slow" />
-        
+        <div
+          aria-hidden
+          data-scroll-speed="-0.2"
+          className="absolute top-1/4 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-[128px] animate-pulse-slow"
+        />
+        <div
+          aria-hidden
+          data-scroll-speed="0.15"
+          className="absolute bottom-0 left-1/4 w-72 h-72 bg-primary/10 rounded-full blur-[100px]"
+        />
+
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -98,10 +134,10 @@ const ITSolutionsPage = () => {
             <span className="text-primary text-sm font-semibold tracking-wider uppercase">
               IT Solutions
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mt-4 mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-normal tracking-[-0.03em] leading-tight mt-4 mb-6">
               Enterprise-Grade IT for <span className="gradient-text">Smart Industries</span>
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto tracking-[-0.01em]">
               Custom APIs, Cloud Robotics, and ML-Driven Dashboards that power the factories of tomorrow.
             </p>
           </motion.div>
@@ -118,48 +154,60 @@ const ITSolutionsPage = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isSolutionsInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="glass-card p-8 glow-card group relative overflow-hidden"
               >
-                {/* Gradient overlay on hover */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${solution.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
-                
-                <div className="relative z-10">
-                  <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${solution.color} p-0.5 mb-6`}>
-                    <div className="w-full h-full rounded-xl bg-card flex items-center justify-center">
-                      <solution.icon className="w-8 h-8 text-primary" />
+                <BorderGlow
+                  className="group relative"
+                  borderRadius={16}
+                  glowColor={solution.glowHSL}
+                  colors={solution.glowColors}
+                  glowIntensity={0.8}
+                  fillOpacity={0.4}
+                >
+                  <div className="p-8">
+                    <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${solution.color} p-0.5 mb-6`}>
+                      <div className="w-full h-full rounded-xl bg-card flex items-center justify-center">
+                        <solution.icon className="w-8 h-8 text-primary" />
+                      </div>
+                    </div>
+                    
+                    <h3 className="text-2xl font-display font-medium tracking-[-0.03em] text-foreground mb-4">
+                      {solution.title}
+                    </h3>
+                    <p className="text-muted-foreground mb-6 leading-relaxed tracking-[-0.01em]">
+                      {solution.description}
+                    </p>
+
+                    {/* Features */}
+                    <div className="grid grid-cols-2 gap-3">
+                      {solution.features.map((feature) => (
+                        <div
+                          key={feature}
+                          className="flex items-center gap-2 text-sm text-muted-foreground"
+                        >
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                          {feature}
+                        </div>
+                      ))}
                     </div>
                   </div>
-                  
-                  <h3 className="text-2xl font-display font-semibold text-foreground mb-4">
-                    {solution.title}
-                  </h3>
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
-                    {solution.description}
-                  </p>
-
-                  {/* Features */}
-                  <div className="grid grid-cols-2 gap-3">
-                    {solution.features.map((feature) => (
-                      <div
-                        key={feature}
-                        className="flex items-center gap-2 text-sm text-muted-foreground"
-                      >
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                        {feature}
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                </BorderGlow>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
+      <ParallaxPortfolio />
+
       {/* Tech Stack */}
       <section className="py-24 relative overflow-hidden" ref={techRef}>
         <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
-        
+        <div
+          aria-hidden
+          data-scroll-speed="-0.1"
+          className="absolute top-8 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-[110px]"
+        />
+
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -167,10 +215,10 @@ const ITSolutionsPage = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-display font-normal tracking-[-0.03em] leading-none mb-4">
               Our <span className="gradient-text">Technology Stack</span>
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-muted-foreground max-w-2xl mx-auto tracking-[-0.01em]">
               Industry-leading tools and frameworks for enterprise-scale solutions.
             </p>
           </motion.div>
@@ -210,10 +258,10 @@ const ITSolutionsPage = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl font-display font-normal tracking-[-0.03em] leading-none mb-4">
               Additional <span className="gradient-text">Services</span>
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-muted-foreground max-w-2xl mx-auto tracking-[-0.01em]">
               Comprehensive IT services to support your automation journey.
             </p>
           </motion.div>
@@ -225,17 +273,27 @@ const ITSolutionsPage = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isAdditionalInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="glass-card p-6 text-center glow-card group"
               >
-                <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
-                  <service.icon className="w-7 h-7 text-primary" />
-                </div>
-                <h3 className="font-display font-semibold text-foreground mb-2">
-                  {service.title}
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  {service.description}
-                </p>
+                <BorderGlow
+                  className="group h-full"
+                  borderRadius={16}
+                  glowColor="32 95 55"
+                  colors={['#e8930c', '#d35400', '#f39c12']}
+                  glowIntensity={0.7}
+                  fillOpacity={0.3}
+                >
+                  <div className="p-6 text-center">
+                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
+                      <service.icon className="w-7 h-7 text-primary" />
+                    </div>
+                    <h3 className="font-display font-medium tracking-[-0.03em] text-foreground mb-2">
+                      {service.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground tracking-[-0.01em]">
+                      {service.description}
+                    </p>
+                  </div>
+                </BorderGlow>
               </motion.div>
             ))}
           </div>
@@ -244,7 +302,8 @@ const ITSolutionsPage = () => {
 
       {/* CTA */}
       <CTABanner />
-    </>
+    </div>
+    </ReactLenis>
   );
 };
 

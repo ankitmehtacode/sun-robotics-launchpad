@@ -92,7 +92,7 @@ export const MultipurposeRobotics = () => {
                       <motion.div
                         animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
                         transition={{ duration: 3, repeat: Infinity }}
-                        className="w-3/4 h-2 rounded-full bg-gradient-to-r from-primary via-cyan-400 to-primary bg-[length:200%_100%]"
+                        className="w-3/4 h-2 rounded-full bg-gradient-to-r from-primary via-amber-300 to-primary bg-[length:200%_100%]"
                       />
                     </div>
 

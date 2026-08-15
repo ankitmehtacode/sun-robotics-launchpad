@@ -1,30 +1,32 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { Bot, Code, Package } from "lucide-react";
+import { Bot, Code, Package, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 
 const services = [
   {
     icon: Bot,
+    number: "01",
     title: "Robotics",
-    description: "Industrial and multipurpose robotic systems engineered for maximum productivity and precision.",
+    description: "6-axis industrial arms and autonomous mobile platforms, engineered for continuous duty-cycle operation.",
+    spec: "500kg payload · ±0.02mm repeatability",
     href: "/robotics",
-    gradient: "from-primary to-cyan-400",
   },
   {
     icon: Code,
+    number: "02",
     title: "IT Solutions",
-    description: "Custom APIs, AI-powered dashboards, and cloud integration for smart industries.",
+    description: "Custom APIs, real-time telemetry dashboards, and cloud/edge integration for fleet-scale deployments.",
+    spec: "Sub-ms API latency · 99.99% uptime SLA",
     href: "/it-solutions",
-    gradient: "from-cyan-400 to-teal-400",
   },
   {
     icon: Package,
+    number: "03",
     title: "Products",
-    description: "Explore our full range of SunBot robots designed for every industrial need.",
+    description: "The full SunBot line — from heavy manufacturing arms to vision-guided inspection systems.",
+    spec: "4 platforms · built for 24/7 operation",
     href: "/products",
-    gradient: "from-teal-400 to-secondary",
   },
 ];
 
@@ -35,68 +37,56 @@ export const ServicesSummary = () => {
 
   return (
     <section className="py-24 relative overflow-hidden" ref={ref}>
-      {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="max-w-3xl mb-16"
         >
           <span className="text-primary text-sm font-semibold tracking-wider uppercase">
-            Our Expertise
+            Capabilities
           </span>
           <h2 className="text-4xl md:text-5xl font-display font-bold mt-4 mb-6">
-            Comprehensive <span className="gradient-text">Solutions</span>
+            Three Disciplines. <span className="gradient-text">One Platform.</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            From cutting-edge robotics to enterprise IT infrastructure, we deliver end-to-end automation solutions.
+            Hardware, software, and the systems that connect them — built and supported by one team.
           </p>
         </motion.div>
 
-        {/* Services Grid */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="max-w-4xl mx-auto border-y border-border">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="glass-card p-8 glow-card group cursor-pointer relative overflow-hidden"
               onClick={() => navigate(service.href)}
+              className={`group relative cursor-pointer py-8 md:py-10 flex flex-col md:flex-row md:items-center gap-3 md:gap-8 ${
+                index !== services.length - 1 ? "border-b border-border" : ""
+              }`}
             >
-              {/* Gradient overlay on hover */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+              <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-primary scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-center" />
 
-              <div className="relative z-10">
-                <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${service.gradient} p-0.5 mb-6`}>
-                  <div className="w-full h-full rounded-xl bg-card flex items-center justify-center">
-                    <service.icon className="w-8 h-8 text-primary" />
-                  </div>
-                </div>
+              <span className="font-mono text-sm text-muted-foreground/50 md:w-10 shrink-0">
+                {service.number}
+              </span>
 
-                <h3 className="text-xl font-display font-semibold text-foreground mb-3">
-                  {service.title}
-                </h3>
-                <p className="text-muted-foreground mb-6">
-                  {service.description}
-                </p>
-
-                <Button
-                  variant="ghost"
-                  className="text-primary hover:text-primary hover:bg-primary/10 p-0"
-                >
-                  Learn More →
-                </Button>
+              <div className="md:w-56 shrink-0 flex items-center gap-3">
+                <service.icon className="w-5 h-5 text-primary shrink-0" strokeWidth={1.5} />
+                <h3 className="text-xl font-display font-semibold text-foreground">{service.title}</h3>
               </div>
 
-              {/* Corner accent */}
-              <div className="absolute bottom-0 right-0 w-20 h-20">
-                <div className="absolute bottom-3 right-3 w-10 h-10 rounded-tl-lg border-l-2 border-t-2 border-primary/20 group-hover:border-primary/40 transition-colors" />
+              <p className="text-muted-foreground flex-1">{service.description}</p>
+
+              <div className="hidden lg:block font-mono text-xs text-muted-foreground/60 shrink-0 whitespace-nowrap">
+                {service.spec}
               </div>
+
+              <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all shrink-0 hidden md:block" />
             </motion.div>
           ))}
         </div>

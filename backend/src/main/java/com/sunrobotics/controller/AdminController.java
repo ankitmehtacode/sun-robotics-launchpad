@@ -1,11 +1,13 @@
 package com.sunrobotics.controller;
 
+import com.sunrobotics.dto.JobRequestDto;
 import com.sunrobotics.model.Application;
 import com.sunrobotics.model.ContactMessage;
 import com.sunrobotics.model.Job;
 import com.sunrobotics.service.ApplicationService;
 import com.sunrobotics.service.ContactService;
 import com.sunrobotics.service.JobService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,12 +37,12 @@ public class AdminController {
     }
 
     @PostMapping("/jobs")
-    public ResponseEntity<Job> createJob(@RequestBody Job job) {
+    public ResponseEntity<Job> createJob(@Valid @RequestBody JobRequestDto job) {
         return ResponseEntity.ok(jobService.createJob(job));
     }
 
     @PutMapping("/jobs/{id}")
-    public ResponseEntity<Job> updateJob(@PathVariable Long id, @RequestBody Job jobDetails) {
+    public ResponseEntity<Job> updateJob(@PathVariable Long id, @Valid @RequestBody JobRequestDto jobDetails) {
         return ResponseEntity.ok(jobService.updateJob(id, jobDetails));
     }
 

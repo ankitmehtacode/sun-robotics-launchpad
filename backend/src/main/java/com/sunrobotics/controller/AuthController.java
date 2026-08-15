@@ -1,5 +1,6 @@
 package com.sunrobotics.controller;
 
+import com.sunrobotics.exception.InvalidCredentialsException;
 import com.sunrobotics.model.User;
 import com.sunrobotics.repository.UserRepository;
 import com.sunrobotics.security.JwtUtil;
@@ -27,27 +28,15 @@ public class AuthController {
         String username = request.get("username");
         String password = request.get("password");
 
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepository.findByUsername(username).orElse(null);
 
-        if (!passwordEncoder.matches(password, user.getPassword())) {
-            throw new RuntimeException("Invalid credentials");
+        // Same generic failure for "no such user" and "wrong password" so the
+        // response can't be used to enumerate valid usernames.
+        if (user == null || !passwordEncoder.matches(password, user.getPassword())) {
+            throw new InvalidCredentialsException();
         }
 
-        String token = jwtUtil.generateToken(username);
+        String token = jwtUtil.generateToken(username, user.getRole());
         return Map.of("token", token);
     }
-
-    // Run this ONCE to create your admin user, then delete/comment it out!
-//    @PostMapping("/setup")
-//    public String setupAdmin() {
-//        if(userRepository.findByUsername("admin").isPresent()) return "Admin already exists";
-//
-//        User admin = new User();
-//        admin.setUsername("sunrobotics");
-//        admin.setPassword(passwordEncoder.encode("Sunrobotics@2025")); // CHANGE THIS PASSWORD
-//        admin.setRole("ROLE_ADMIN");
-//        userRepository.save(admin);
-//        return "Admin user created";
-//    }
 }

@@ -1,7 +1,9 @@
 package com.sunrobotics.controller;
 
+import com.sunrobotics.dto.BlogRequestDto;
 import com.sunrobotics.model.Blog;
 import com.sunrobotics.service.BlogService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,12 +33,12 @@ public class BlogController {
     // --- Admin Endpoints (Secured by /api/admin/** pattern) ---
 
     @PostMapping("/api/admin/blogs")
-    public Blog createBlog(@RequestBody Blog blog) {
+    public Blog createBlog(@Valid @RequestBody BlogRequestDto blog) {
         return blogService.createBlog(blog);
     }
 
     @PutMapping("/api/admin/blogs/{id}")
-    public ResponseEntity<Blog> updateBlog(@PathVariable Long id, @RequestBody Blog blog) {
+    public ResponseEntity<Blog> updateBlog(@PathVariable Long id, @Valid @RequestBody BlogRequestDto blog) {
         return ResponseEntity.ok(blogService.updateBlog(id, blog));
     }
 

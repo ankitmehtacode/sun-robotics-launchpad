@@ -1,9 +1,4 @@
-//
-// const API_BASE_URL = "http://localhost:8080/api";
-// export const API_BASE_URL = import.meta.env.PROD
-//     ? "http://13.233.200.234:8080/api"  // AWS IP
-//     : "http://localhost:8080/api";
-export const API_URL = "https://api.sunroboticsandai.in/api";
+export const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:8080/api";
 
 export interface Job {
     id?: number;

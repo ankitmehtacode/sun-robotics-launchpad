@@ -1,0 +1,120 @@
+/* Pure-CSS multiplane parallax (Keith Clark's perspective/translateZ technique:
+   https://keithclark.co.uk/articles/pure-css-parallax-websites/demo3/):
+   the scroller carries `perspective`, each layer sits at a different translateZ,
+   and scale(perspective - z / perspective) keeps it filling the viewport despite
+   the depth. No scroll listeners or JS animation — the browser's own 3D
+   projection does the parallax as the container scrolls.
+
+   Shared mechanics for any pure-CSS parallax section on the site — see
+   ParallaxHero.tsx and ParallaxPortfolio.tsx for the two current uses. */
+
+.parallax {
+  position: relative;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  perspective: 300px;
+  perspective-origin: 50% 50%;
+  background: #08090c;
+  scrollbar-width: none;
+}
+
+.parallax::-webkit-scrollbar {
+  display: none;
+}
+
+.parallax__group {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+/* Later groups must paint over earlier ones' still-lagging deep/back layers
+   (those move slower than scroll, so they linger in view during the
+   transition) — ascending z-index lets each new group cleanly arrive on top. */
+.parallax__group:nth-child(1) { z-index: 1; }
+.parallax__group:nth-child(2) { z-index: 2; }
+.parallax__group:nth-child(3) { z-index: 3; }
+.parallax__group:nth-child(4) { z-index: 4; }
+.parallax__group:nth-child(5) { z-index: 5; }
+.parallax__group:nth-child(6) { z-index: 6; }
+
+.parallax__layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.parallax__layer--deep {
+  transform: translateZ(-600px) scale(3);
+  z-index: 1;
+}
+
+.parallax__layer--back {
+  transform: translateZ(-300px) scale(2);
+  z-index: 2;
+}
+
+.parallax__layer--base {
+  transform: translateZ(0);
+  z-index: 3;
+}
+
+.parallax__layer--fore {
+  transform: translateZ(90px) scale(0.7);
+  z-index: 4;
+  pointer-events: none;
+}
+
+.parallax__scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.parallax__scroll-arrow {
+  width: 16px;
+  height: 16px;
+  border-right: 2px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  transform: rotate(45deg);
+  animation: parallax-bounce 2s ease-in-out infinite;
+}
+
+@keyframes parallax-bounce {
+  0%, 100% { transform: rotate(45deg) translateY(0); opacity: 0.5; }
+  50% { transform: rotate(45deg) translateY(6px); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parallax {
+    perspective: none;
+  }
+  .parallax__layer {
+    transform: none !important;
+  }
+  .parallax__scroll-arrow {
+    animation: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .parallax {
+    perspective: 180px;
+  }
+}

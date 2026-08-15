@@ -1,6 +1,7 @@
 package com.sunrobotics.service;
 
 import com.sunrobotics.dto.ContactMessageDto;
+import com.sunrobotics.exception.ResourceNotFoundException;
 import com.sunrobotics.model.ContactMessage;
 import com.sunrobotics.repository.ContactMessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class ContactService {
 
     public ContactMessage markAsRead(Long id) {
         ContactMessage msg = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Message not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Message not found"));
         msg.setRead(true);
         return repository.save(msg);
     }

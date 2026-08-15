@@ -1,6 +1,7 @@
 package com.sunrobotics.service;
 
 import com.sunrobotics.dto.ApplicationRequestDto;
+import com.sunrobotics.exception.ResourceNotFoundException;
 import com.sunrobotics.model.Application;
 import com.sunrobotics.model.Job;
 import com.sunrobotics.repository.ApplicationRepository;
@@ -20,7 +21,7 @@ public class ApplicationService {
 
     public Application submitApplication(ApplicationRequestDto dto) {
         Job job = jobRepository.findById(dto.getJobId())
-                .orElseThrow(() -> new RuntimeException("Job not found with ID: " + dto.getJobId()));
+                .orElseThrow(() -> new ResourceNotFoundException("Job not found with ID: " + dto.getJobId()));
 
         Application app = new Application();
         app.setJob(job);
@@ -42,7 +43,7 @@ public class ApplicationService {
 
     public Application updateApplicationStatus(Long id, String status) {
         Application app = applicationRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Application not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Application not found"));
         app.setStatus(status);
         return applicationRepository.save(app);
     }

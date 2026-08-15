@@ -18,7 +18,7 @@ const products = [
     },
     description: "Our flagship industrial robot designed for heavy-duty manufacturing. Built for 24/7 operation in demanding environments with unmatched precision and reliability.",
     features: ["6-axis articulation", "Collision detection", "Remote monitoring", "Predictive maintenance"],
-    gradient: "from-primary via-cyan-500 to-blue-600",
+    gradient: "from-primary via-amber-500 to-orange-600",
   },
   {
     id: 2,
@@ -33,7 +33,7 @@ const products = [
     },
     description: "Autonomous mobile robot for warehouse logistics. Features advanced navigation and fleet management capabilities for seamless operations.",
     features: ["Autonomous navigation", "Fleet coordination", "Dynamic obstacle avoidance", "Multi-floor support"],
-    gradient: "from-cyan-500 via-teal-500 to-emerald-500",
+    gradient: "from-amber-400 via-orange-500 to-red-500",
   },
   {
     id: 3,
@@ -48,7 +48,7 @@ const products = [
     },
     description: "AI-powered visual inspection system for quality control. Detects defects invisible to the human eye with industry-leading accuracy.",
     features: ["Deep learning detection", "Real-time analysis", "Defect classification", "Integration API"],
-    gradient: "from-secondary via-purple-500 to-pink-500",
+    gradient: "from-secondary via-orange-600 to-primary",
   },
   {
     id: 4,
@@ -63,7 +63,7 @@ const products = [
     },
     description: "Safe collaborative robot designed to work alongside humans. Features advanced force sensing and intuitive programming for quick deployment.",
     features: ["Force-torque sensing", "No-code programming", "Safety certified", "Quick tool change"],
-    gradient: "from-pink-500 via-rose-500 to-primary",
+    gradient: "from-orange-400 via-amber-500 to-secondary",
   },
 ];
 

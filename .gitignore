@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Source film — never ship the raw video, only the extracted public/frames/*.webp
+raw/
+
+# Playwright MCP tool artifacts (local debug screenshots, not project assets)
+.playwright-mcp/

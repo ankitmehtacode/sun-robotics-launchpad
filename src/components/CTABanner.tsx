@@ -29,7 +29,7 @@ export const CTABanner = () => {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-6"
             >
-              Ready to <span className="gradient-text">Transform</span> Your Operations?
+              Let's Spec Your <span className="gradient-text">Deployment</span>
             </motion.h2>
 
             <motion.p
@@ -38,7 +38,7 @@ export const CTABanner = () => {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8"
             >
-              Let's discuss how our AI-powered robotics solutions can revolutionize your business.
+              Talk to our engineering team about payload, reach, and integration timelines.
             </motion.p>
 
             <motion.div
@@ -51,7 +51,7 @@ export const CTABanner = () => {
                 onClick={() => navigate("/contact")}
                 className="glow-button bg-primary text-primary-foreground hover:bg-primary/90 text-base px-8 py-6"
               >
-                Start Your Journey
+                Request a Quote
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </motion.div>

@@ -1,5 +1,7 @@
 package com.sunrobotics.service;
 
+import com.sunrobotics.dto.JobRequestDto;
+import com.sunrobotics.exception.ResourceNotFoundException;
 import com.sunrobotics.model.Job;
 import com.sunrobotics.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,28 +30,32 @@ public class JobService {
         return jobRepository.findAll();
     }
 
-    public Job createJob(Job job) {
+    public Job createJob(JobRequestDto dto) {
+        Job job = new Job();
+        applyDto(job, dto);
         return jobRepository.save(job);
     }
 
-    public Job updateJob(Long id, Job jobDetails) {
+    public Job updateJob(Long id, JobRequestDto dto) {
         Job job = jobRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Job not found with id: " + id));
-
-        job.setTitle(jobDetails.getTitle());
-        job.setDepartment(jobDetails.getDepartment());
-        job.setLocation(jobDetails.getLocation());
-        job.setType(jobDetails.getType());
-        job.setDescription(jobDetails.getDescription());
-        job.setRequirements(jobDetails.getRequirements());
-        job.setActive(jobDetails.isActive());
-
+                .orElseThrow(() -> new ResourceNotFoundException("Job not found with id: " + id));
+        applyDto(job, dto);
         return jobRepository.save(job);
+    }
+
+    private void applyDto(Job job, JobRequestDto dto) {
+        job.setTitle(dto.getTitle());
+        job.setDepartment(dto.getDepartment());
+        job.setLocation(dto.getLocation());
+        job.setType(dto.getType());
+        job.setDescription(dto.getDescription());
+        job.setRequirements(dto.getRequirements());
+        job.setActive(dto.isActive());
     }
 
     public void deleteJob(Long id) {
         Job job = jobRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Job not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Job not found with id: " + id));
         jobRepository.delete(job);
     }
 }

@@ -1,5 +1,7 @@
 package com.sunrobotics.service;
 
+import com.sunrobotics.dto.BlogRequestDto;
+import com.sunrobotics.exception.ResourceNotFoundException;
 import com.sunrobotics.model.Blog;
 import com.sunrobotics.repository.BlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,28 +24,30 @@ public class BlogService {
         return blogRepository.findById(id);
     }
 
-    public Blog createBlog(Blog blog) {
-        if (blog.getCreatedAt() == null) {
-            blog.setCreatedAt(LocalDateTime.now());
-        }
+    public Blog createBlog(BlogRequestDto dto) {
+        Blog blog = new Blog();
+        applyDto(blog, dto);
+        blog.setCreatedAt(LocalDateTime.now());
         blog.setUpdatedAt(LocalDateTime.now());
         return blogRepository.save(blog);
     }
 
-    public Blog updateBlog(Long id, Blog blogDetails) {
+    public Blog updateBlog(Long id, BlogRequestDto dto) {
         Blog blog = blogRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Blog not found with id: " + id));
-
-        blog.setTitle(blogDetails.getTitle());
-        blog.setExcerpt(blogDetails.getExcerpt());
-        blog.setContent(blogDetails.getContent());
-        blog.setCategory(blogDetails.getCategory());
-        blog.setAuthor(blogDetails.getAuthor());
-        blog.setImageUrl(blogDetails.getImageUrl());
-        blog.setReadTime(blogDetails.getReadTime());
+                .orElseThrow(() -> new ResourceNotFoundException("Blog not found with id: " + id));
+        applyDto(blog, dto);
         blog.setUpdatedAt(LocalDateTime.now());
-
         return blogRepository.save(blog);
+    }
+
+    private void applyDto(Blog blog, BlogRequestDto dto) {
+        blog.setTitle(dto.getTitle());
+        blog.setExcerpt(dto.getExcerpt());
+        blog.setContent(dto.getContent());
+        blog.setCategory(dto.getCategory());
+        blog.setAuthor(dto.getAuthor());
+        blog.setImageUrl(dto.getImageUrl());
+        blog.setReadTime(dto.getReadTime());
     }
 
     public void deleteBlog(Long id) {
