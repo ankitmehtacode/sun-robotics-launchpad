@@ -19,7 +19,7 @@ export function InteractiveArmScene() {
                 Meet the arm, up close
               </h2>
               <p className="mt-4 text-neutral-300 max-w-lg tracking-[-0.01em]">
-                Drag to rotate our modular robotic arm and see every joint and
+                Drag to rotate our robotic arm and see every joint and
                 end-effector up close — the same platform reaching your factory floor.
               </p>
             </div>
