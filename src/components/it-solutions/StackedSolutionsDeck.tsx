@@ -563,26 +563,26 @@ export const StackedSolutionsDeck = () => {
         <div className="absolute inset-0 hero-gradient pointer-events-none opacity-40" />
         <div className="absolute inset-0 grid-bg opacity-25 pointer-events-none" />
 
-        {/* Floating Telemetry & Navigation Deck Controller (Clean Top Placement) */}
-        <div className="relative z-40 mb-3 flex items-center gap-1.5 p-1.5 rounded-full bg-[#0b0d14]/90 backdrop-blur-xl border border-white/10 shadow-2xl">
+        {/* Floating Telemetry & Navigation Deck Controller (Clean Top Placement & Mobile-scrollable) */}
+        <div className="relative z-40 mb-2 sm:mb-3 flex items-center gap-1 sm:gap-1.5 p-1 sm:p-1.5 rounded-full bg-[#0b0d14]/90 backdrop-blur-xl border border-white/10 shadow-2xl max-w-full overflow-x-auto no-scrollbar">
           {solutionPillars.map((pillar, idx) => (
             <button
               key={pillar.id}
               onClick={() => jumpToSlide(idx)}
-              className={`px-3 py-1 rounded-full text-[10px] font-mono transition-all flex items-center gap-1.5 cursor-pointer ${
+              className={`px-2.5 sm:px-3 py-1 rounded-full text-[9px] sm:text-[10px] font-mono transition-all flex items-center gap-1 sm:gap-1.5 cursor-pointer shrink-0 ${
                 activeCardIndex === idx
                   ? "bg-primary text-black font-bold shadow-[0_0_15px_rgba(245,158,11,0.5)]"
                   : "text-white/50 hover:text-white hover:bg-white/5"
               }`}
             >
               <span>{pillar.number}</span>
-              <span className="hidden sm:inline">{pillar.category.split(" ")[0]}</span>
+              <span className="hidden xs:inline sm:inline">{pillar.category.split(" ")[0]}</span>
             </button>
           ))}
         </div>
 
         {/* 3D Perspective Card Stage */}
-        <div className="relative w-full max-w-6xl h-[80vh] max-h-[660px] perspective-1200">
+        <div className="relative w-full max-w-6xl h-[84vh] sm:h-[80vh] max-h-[740px] sm:max-h-[660px] perspective-1200">
           {solutionPillars.map((item, index) => (
             <DeckCard
               key={item.id}
@@ -627,8 +627,6 @@ const DeckCard = ({
   const nextSegEnd = index === total - 1 ? 1.0 : (index + 1) / segments;
 
   // 1. Y Translation
-  // For index 0: stays at 0, recedes up slightly when next cards enter
-  // For other cards: enters from 110% to 0% during its segment, then recedes on subsequent cards
   const y = useTransform(
     scrollYProgress,
     index === 0
@@ -651,7 +649,6 @@ const DeckCard = ({
   );
 
   // 3. 3D Perspective Rotation (X-axis pitch):
-  // Enters at 18° tilt, straightens to 0° (90° upright view), and for the LAST card stays firmly at 0°!
   const rotateX = useTransform(
     scrollYProgress,
     index === 0
@@ -659,7 +656,7 @@ const DeckCard = ({
       : [segStart, segEnd, nextSegEnd],
     index === 0
       ? [0, -5]
-      : [18, 0, index === total - 1 ? 0 : -5]
+      : [14, 0, index === total - 1 ? 0 : -5]
   );
 
   // 4. Opacity
@@ -681,7 +678,7 @@ const DeckCard = ({
         rotateX,
         opacity,
         zIndex: index + 10,
-        top: `${index * 10}px`,
+        top: `${index * 8}px`,
         transformPerspective: 1200,
       }}
       className="absolute inset-0 w-full h-full will-change-transform preserve-3d"
@@ -694,54 +691,54 @@ const DeckCard = ({
         glowIntensity={isActive ? 0.95 : 0.4}
         fillOpacity={0.5}
       >
-        <div className="w-full h-full p-6 md:p-8 bg-[#080a0f]/95 backdrop-blur-2xl flex flex-col justify-between overflow-y-auto no-scrollbar relative">
+        <div className="w-full h-full p-4 sm:p-6 md:p-8 bg-[#080a0f]/95 backdrop-blur-2xl flex flex-col justify-between overflow-y-auto no-scrollbar relative">
           {/* Subtle Top Accent Laser Light Beam */}
           <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-70" />
 
           {/* Header Row */}
-          <div className="flex items-start justify-between gap-4 border-b border-white/10 pb-5">
+          <div className="flex items-start justify-between gap-3 border-b border-white/10 pb-3 sm:pb-5">
             <div>
-              <div className="flex items-center gap-3 text-[11px] font-mono text-primary font-bold tracking-widest uppercase mb-1">
+              <div className="flex items-center flex-wrap gap-2 sm:gap-3 text-[9px] sm:text-[11px] font-mono text-primary font-bold tracking-widest uppercase mb-1">
                 <span>// {item.category}</span>
                 <span className="text-white/20">|</span>
                 <span className="text-white/50">SOLUTION {item.number}</span>
-                <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 border border-primary/20 text-[9px] text-primary">
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 border border-primary/20 text-[8px] sm:text-[9px] text-primary">
                   <Sparkles className="w-2.5 h-2.5" />
                   {item.badge}
                 </span>
               </div>
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold tracking-tight text-white leading-tight">
+              <h3 className="text-xl sm:text-3xl lg:text-4xl font-display font-bold tracking-tight text-white leading-tight">
                 {item.title}
               </h3>
-              <p className="text-xs sm:text-sm text-primary/90 font-sans mt-1">
+              <p className="text-[11px] sm:text-xs md:text-sm text-primary/90 font-sans mt-0.5 sm:mt-1">
                 {item.headline}
               </p>
             </div>
 
-            <span className="text-4xl sm:text-6xl md:text-7xl font-display font-black text-white/5 select-none font-mono">
+            <span className="text-3xl sm:text-6xl md:text-7xl font-display font-black text-white/5 select-none font-mono shrink-0">
               {item.number}
             </span>
           </div>
 
           {/* Body: High-Density Specs & Live Visualizer */}
-          <div className="grid lg:grid-cols-12 gap-6 my-4 items-center flex-1">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 my-2 sm:my-4 items-center flex-1">
             {/* Left Column: Description, Specs & Tags */}
-            <div className="lg:col-span-6 space-y-4">
-              <p className="text-xs sm:text-sm text-white/70 leading-relaxed font-sans">
+            <div className="lg:col-span-6 space-y-2.5 sm:space-y-4">
+              <p className="text-xs sm:text-sm text-white/70 leading-relaxed font-sans line-clamp-3 sm:line-clamp-none">
                 {item.description}
               </p>
 
               {/* Live Spec Indicators */}
-              <div className="grid grid-cols-2 gap-2.5">
+              <div className="grid grid-cols-2 gap-1.5 sm:gap-2.5">
                 {item.specs.map((sp) => (
                   <div
                     key={sp.label}
-                    className="p-2.5 rounded-lg bg-white/[0.02] border border-white/5 hover:border-white/15 transition-colors"
+                    className="p-1.5 sm:p-2.5 rounded-lg bg-white/[0.02] border border-white/5 hover:border-white/15 transition-colors"
                   >
-                    <div className="text-[9px] font-mono text-primary font-semibold uppercase tracking-wider">
+                    <div className="text-[8px] sm:text-[9px] font-mono text-primary font-semibold uppercase tracking-wider">
                       {sp.label}
                     </div>
-                    <div className="text-xs font-sans font-bold text-white mt-0.5">
+                    <div className="text-[11px] sm:text-xs font-sans font-bold text-white mt-0.5">
                       {sp.value}
                     </div>
                   </div>
@@ -749,11 +746,11 @@ const DeckCard = ({
               </div>
 
               {/* Technology Tags */}
-              <div className="flex flex-wrap gap-1.5 pt-1">
+              <div className="flex flex-wrap gap-1 sm:gap-1.5 pt-0.5 sm:pt-1">
                 {item.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/10 text-[10px] font-mono text-white/75 hover:border-primary/40 hover:text-white transition-colors"
+                    className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md bg-white/[0.04] border border-white/10 text-[9px] sm:text-[10px] font-mono text-white/75 hover:border-primary/40 hover:text-white transition-colors"
                   >
                     {tag}
                   </span>
@@ -762,20 +759,20 @@ const DeckCard = ({
             </div>
 
             {/* Right Column: Next-Level Dynamic Visualizer */}
-            <div className="lg:col-span-6 h-full flex items-center">
+            <div className="lg:col-span-6 h-36 sm:h-52 lg:h-full flex items-center justify-center">
               <ArchitecturalVisual type={item.visual} />
             </div>
           </div>
 
           {/* Footer Action */}
-          <div className="flex items-center justify-between pt-3 border-t border-white/10 text-xs">
-            <div className="flex items-center gap-2 text-[11px] font-mono text-white/50">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              <span>PRODUCTION GRADE // READY FOR DEPLOYMENT</span>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pt-2 sm:pt-3 border-t border-white/10 text-xs">
+            <div className="flex items-center gap-2 text-[10px] sm:text-[11px] font-mono text-white/50">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
+              <span className="truncate">PRODUCTION GRADE // READY FOR DEPLOYMENT</span>
             </div>
             <a
               href="/contact"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 border border-primary/30 text-primary font-mono font-bold text-xs hover:bg-primary hover:text-black transition-all group"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-primary/10 border border-primary/30 text-primary font-mono font-bold text-xs hover:bg-primary hover:text-black transition-all group shrink-0"
             >
               <span>BUILD WITH US</span>
               <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />

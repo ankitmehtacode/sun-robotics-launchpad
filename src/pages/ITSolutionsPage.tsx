@@ -164,7 +164,7 @@ const ITSolutionsPage = () => {
         <section
           id="node-hero"
           ref={headerRef}
-          className="pt-36 pb-24 relative overflow-hidden min-h-[90vh] flex items-center justify-center"
+          className="pt-28 sm:pt-36 pb-16 sm:pb-24 relative overflow-hidden min-h-[100dvh] flex items-center justify-center"
         >
           {/* Gradient Blinds Dynamic Background */}
           <GradientBlinds
@@ -189,10 +189,10 @@ const ITSolutionsPage = () => {
           <div
             aria-hidden
             data-scroll-speed="-0.3"
-            className="absolute top-1/4 right-1/4 w-[450px] h-[450px] bg-primary/10 rounded-full blur-[140px] pointer-events-none"
+            className="absolute top-1/4 right-1/4 w-[280px] sm:w-[450px] h-[280px] sm:h-[450px] bg-primary/10 rounded-full blur-[100px] sm:blur-[140px] pointer-events-none"
           />
 
-          <div className="container mx-auto px-4 lg:px-8 relative z-10">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             {/* Kinetic Typography */}
             <div
               className="locomotive-skew text-center max-w-4xl mx-auto"
@@ -204,24 +204,24 @@ const ITSolutionsPage = () => {
                 heading={["Custom Software", "Built for Growth."]}
                 subhead="We build high-speed websites, mobile apps, custom APIs, and smart AI dashboards that help your business scale effortlessly."
                 as="h1"
-                className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.25rem] font-display font-semibold tracking-[-0.035em] text-white"
-                subheadClassName="text-base sm:text-lg text-white/65 font-normal tracking-[-0.01em] mb-8"
+                className="text-3xl xs:text-4xl sm:text-6xl md:text-7xl lg:text-[5.25rem] font-display font-semibold tracking-[-0.035em] text-white"
+                subheadClassName="text-sm sm:text-base md:text-lg text-white/65 font-normal tracking-[-0.01em] mb-6 sm:mb-8 max-w-xl mx-auto px-2 sm:px-0"
                 delay={0.15}
                 stagger={0.12}
                 duration={0.8}
                 interactive={true}
               />
 
-              {/* Action Buttons */}
+              {/* Action Buttons (Mobile-first responsive layout) */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={isHeaderInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.5, delay: 0.4 }}
-                className="flex flex-wrap items-center justify-center gap-4 mt-2"
+                className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mt-2 w-full max-w-sm sm:max-w-none mx-auto"
               >
                 <button
                   onClick={() => scrollToSection("node-pillars")}
-                  className="px-8 py-4 rounded-xl bg-primary text-black font-display font-bold text-xs uppercase tracking-wider hover:bg-amber-400 shadow-[0_0_30px_hsl(32,95%,55%,0.35)] transition-all flex items-center gap-2 cursor-pointer"
+                  className="w-full sm:w-auto px-7 py-3.5 sm:px-8 sm:py-4 rounded-xl bg-primary text-black font-display font-bold text-xs uppercase tracking-wider hover:bg-amber-400 shadow-[0_0_30px_hsl(32,95%,55%,0.35)] transition-all flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <span>Explore What We Build</span>
                   <ArrowDown className="w-4 h-4" />
@@ -229,7 +229,7 @@ const ITSolutionsPage = () => {
 
                 <a
                   href="/contact"
-                  className="px-8 py-4 rounded-xl bg-white/[0.03] border border-white/15 hover:border-primary/50 text-white font-display font-medium text-xs uppercase tracking-wider backdrop-blur-md hover:bg-white/[0.06] transition-all flex items-center gap-2"
+                  className="w-full sm:w-auto px-7 py-3.5 sm:px-8 sm:py-4 rounded-xl bg-white/[0.03] border border-white/15 hover:border-primary/50 text-white font-display font-medium text-xs uppercase tracking-wider backdrop-blur-md hover:bg-white/[0.06] transition-all flex items-center justify-center gap-2"
                 >
                   <span>Start a Project</span>
                   <ExternalLink className="w-3.5 h-3.5 text-muted-foreground" />

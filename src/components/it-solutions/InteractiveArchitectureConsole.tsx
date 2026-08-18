@@ -29,12 +29,12 @@ export const InteractiveArchitectureConsole = () => {
             See how modern cloud architecture delivers faster speeds, better reliability, and stronger security than outdated systems.
           </p>
 
-          {/* Mode Switcher */}
-          <div className="flex items-center justify-center mt-8">
-            <div className="p-1 rounded-xl bg-white/[0.03] border border-white/10 flex items-center gap-1">
+          {/* Mode Switcher (Mobile responsive) */}
+          <div className="flex items-center justify-center mt-6 sm:mt-8">
+            <div className="p-1 rounded-xl bg-white/[0.03] border border-white/10 flex flex-col xs:flex-row items-center gap-1 w-full max-w-sm xs:w-auto">
               <button
                 onClick={() => setMode("sun-robotics")}
-                className={`px-5 py-2 rounded-lg text-xs font-mono transition-all flex items-center gap-2 ${
+                className={`w-full xs:w-auto px-4 sm:px-5 py-2 rounded-lg text-xs font-mono transition-all flex items-center justify-center gap-2 ${
                   mode === "sun-robotics"
                     ? "bg-primary text-black font-bold shadow-[0_0_16px_hsl(32,95%,55%,0.4)]"
                     : "text-white/60 hover:text-white"
@@ -45,7 +45,7 @@ export const InteractiveArchitectureConsole = () => {
               </button>
               <button
                 onClick={() => setMode("legacy")}
-                className={`px-5 py-2 rounded-lg text-xs font-mono transition-all flex items-center gap-2 ${
+                className={`w-full xs:w-auto px-4 sm:px-5 py-2 rounded-lg text-xs font-mono transition-all flex items-center justify-center gap-2 ${
                   mode === "legacy"
                     ? "bg-white/15 text-white font-bold"
                     : "text-white/60 hover:text-white"
@@ -73,23 +73,23 @@ export const InteractiveArchitectureConsole = () => {
               }
               glowIntensity={0.8}
             >
-              <div className="p-8 h-full bg-[#090b10] flex flex-col justify-between">
+              <div className="p-4 sm:p-8 h-full bg-[#090b10] flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center justify-between text-[11px] font-mono text-white/50 border-b border-white/10 pb-3 mb-6">
-                    <span>
+                  <div className="flex flex-col xs:flex-row items-start xs:items-center justify-between gap-2 text-[10px] sm:text-[11px] font-mono text-white/50 border-b border-white/10 pb-3 mb-4 sm:mb-6">
+                    <span className="truncate">
                       SYSTEM FLOW // {mode === "sun-robotics" ? "DISTRIBUTED_CLOUD_NETWORK" : "SINGLE_SERVER"}
                     </span>
                     <button
                       onClick={handleSimulate}
                       disabled={isSimulatingBurst}
-                      className="px-3 py-1 rounded bg-primary/20 hover:bg-primary/30 text-primary border border-primary/40 transition-all cursor-pointer font-bold"
+                      className="px-3 py-1 rounded bg-primary/20 hover:bg-primary/30 text-primary border border-primary/40 transition-all cursor-pointer font-bold shrink-0"
                     >
                       {isSimulatingBurst ? "SENDING DATA..." : "TEST DATA FLOW"}
                     </button>
                   </div>
 
                   {/* SVG Topology Visualizer */}
-                  <div className="relative h-64 w-full flex items-center justify-center bg-black/40 rounded-xl border border-white/5 p-4">
+                  <div className="relative h-48 sm:h-64 w-full flex items-center justify-center bg-black/40 rounded-xl border border-white/5 p-2 sm:p-4">
                     {mode === "sun-robotics" ? (
                       <svg className="w-full h-full" viewBox="0 0 500 200">
                         {/* Mesh Nodes & Paths */}
@@ -154,7 +154,7 @@ export const InteractiveArchitectureConsole = () => {
           </div>
 
           {/* Right: Plain-English Comparison */}
-          <div className="lg:col-span-5 flex flex-col justify-between p-8 rounded-2xl bg-[#090b10] border border-white/10">
+          <div className="lg:col-span-5 flex flex-col justify-between p-5 sm:p-8 rounded-2xl bg-[#090b10] border border-white/10">
             <div>
               <div className="text-[11px] font-mono text-primary font-bold uppercase tracking-widest mb-2">
                 // SYSTEM COMPARISON
