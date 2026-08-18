@@ -6,7 +6,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { WhatsAppButton } from "@/components/WhatsAppButton"
 import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index";
 import Robotics from "./pages/Robotics";
@@ -50,7 +49,6 @@ const App = () => (
         <TooltipProvider>
             <Toaster />
             <Sonner />
-            <WhatsAppButton />
             <BrowserRouter>
                 <ScrollToTop />
                 <Routes>

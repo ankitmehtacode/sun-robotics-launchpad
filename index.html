@@ -35,24 +35,33 @@
     <script data-static-fallback type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "ProfessionalService",
+        "@type": ["ProfessionalService", "LocalBusiness"],
         "@id": "https://sunroboticsandai.in/#organization",
         "name": "Sun Robotics & AI",
-        "alternateName": "Sun Robotics",
+        "alternateName": ["Sun Robotics", "Sun Robotics Indore", "Sun Robotics & AI Labs"],
         "url": "https://sunroboticsandai.in",
         "logo": "https://sunroboticsandai.in/logo.png",
         "image": "https://sunroboticsandai.in/logo.png",
         "email": "info@sunroboticsandai.in",
         "telephone": "+91-8144426440",
+        "priceRange": "$$",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Indraprastha Tower, Rau",
           "addressLocality": "Indore",
           "addressRegion": "Madhya Pradesh",
+          "postalCode": "453331",
           "addressCountry": "IN"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 22.7196,
+          "longitude": 75.8577
         },
         "areaServed": [
           { "@type": "City", "name": "Indore" },
+          { "@type": "City", "name": "Bhopal" },
+          { "@type": "City", "name": "Ujjain" },
           { "@type": "State", "name": "Madhya Pradesh" },
           { "@type": "Country", "name": "India" }
         ],

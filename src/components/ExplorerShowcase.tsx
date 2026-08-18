@@ -3,36 +3,41 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import "./ExplorerShowcase.css";
 
-const projects = [
+export const portfolioProjects = [
   {
     index: "01",
-    name: "PRYME",
+    name: "PRYME Loans",
     category: "FinTech · Loan Matchmaking",
     description:
       "Bank-grade intelligent loan matchmaking platform connecting borrowers with 15+ lending partners.",
     image: "/portfolio/prymeloans.jpg",
     url: "https://prymeloans.in",
     displayUrl: "prymeloans.in",
+    attribution: "Engineered by Sun Robotics & AI · Indore",
   },
   {
     index: "02",
-    name: "ProtoDesign",
+    name: "ProtoDesign Studio",
     category: "E-Commerce · 3D Printing",
     description: "High-fidelity 3D printing storefront with instant custom-print quoting.",
     image: "/portfolio/protodesignstudio.jpg",
     url: "https://www.protodesignstudio.com/",
     displayUrl: "protodesignstudio.com",
+    attribution: "Engineered by Sun Robotics & AI · Indore",
   },
   {
     index: "03",
     name: "911 Fashion",
     category: "Retail · Fashion",
-    description: "Fashion & lifestyle e-commerce platform for a leading Israeli retail brand.",
+    description: "Fashion & lifestyle e-commerce platform for a leading retail brand.",
     image: "/portfolio/911fashion.jpg",
     url: "https://www.911fashion.co.il/",
     displayUrl: "911fashion.co.il",
+    attribution: "Engineered by Sun Robotics & AI · Indore",
   },
 ];
+
+const projects = portfolioProjects;
 
 // Scroll-jacked horizontal filmstrip: the section's own height reserves
 // enough vertical scroll distance to drag the track fully across, while a
@@ -64,16 +69,13 @@ const ExplorerShowcase = () => {
     <>
       {/* Desktop / tablet: pinned horizontal filmstrip */}
       <section
+        id="node-showcase"
         ref={sectionRef}
         className="hidden md:block relative"
         style={{ height: `calc(100vh + ${scrollDistance}px)` }}
       >
         <div className="sticky top-0 h-screen overflow-hidden explorer-stage">
           <div className="absolute inset-0 hero-gradient" />
-          <div className="absolute inset-0 grid-bg opacity-30" />
-
-          <span className="explorer-coordinate">( PORTFOLIO )</span>
-
           <motion.div ref={trackRef} style={{ x }} className="explorer-track">
             <div className="explorer-panel explorer-panel--intro">
               <span className="text-primary text-sm font-semibold tracking-wider uppercase">
@@ -88,10 +90,6 @@ const ExplorerShowcase = () => {
                 teams who refuse to stand still.
               </p>
             </div>
-
-            {projects.map((project) => (
-              <div className="explorer-connector" key={`${project.name}-tick`} aria-hidden />
-            ))}
 
             {projects.map((project) => (
               <div className="explorer-panel explorer-panel--project" key={project.name}>
@@ -115,15 +113,25 @@ const ExplorerShowcase = () => {
                 </a>
 
                 <div className="explorer-panel-info">
-                  <span className="text-xs font-semibold tracking-wider uppercase text-primary">
-                    {project.category}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-semibold tracking-wider uppercase text-primary">
+                      {project.category}
+                    </span>
+                    <span className="text-white/20">·</span>
+                    <span className="text-[10px] font-mono text-white/50">
+                      Indore Dev Lab
+                    </span>
+                  </div>
                   <h3 className="text-2xl font-display font-semibold text-foreground mt-1 mb-2">
                     {project.name}
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
                     {project.description}
                   </p>
+                  <div className="text-[10px] font-mono text-primary/80 mt-2 flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                    <span>{project.attribution}</span>
+                  </div>
                   <a
                     href={project.url}
                     target="_blank"
@@ -161,10 +169,6 @@ const ExplorerShowcase = () => {
               </a>
             </div>
           </motion.div>
-
-          <div className="explorer-progress">
-            <motion.div className="explorer-progress-fill" style={{ scaleX: scrollYProgress }} />
-          </div>
         </div>
       </section>
 

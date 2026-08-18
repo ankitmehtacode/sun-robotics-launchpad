@@ -1,343 +1,391 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { ReactLenis, useLenis } from "lenis/react";
+import { ReactLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
-import { Code, BarChart3, Cloud, Brain, Server, Database, Shield, Cpu } from "lucide-react";
+import { ArrowDown, ExternalLink } from "lucide-react";
 import { CTABanner } from "@/components/CTABanner";
 import BorderGlow from "@/components/ui/BorderGlow";
 import ExplorerShowcase from "@/components/ExplorerShowcase";
 import { SEO } from "@/components/SEO";
-import { SITE_URL, serviceSchema, breadcrumbSchema } from "@/lib/schema";
+import { SITE_URL, organizationSchema, serviceSchema, clientProjectSchema, faqSchema, breadcrumbSchema } from "@/lib/schema";
+import { portfolioProjects } from "@/components/ExplorerShowcase";
+import { useLocomotiveScroll } from "@/hooks/useLocomotiveScroll";
+import { LocomotiveHUD } from "@/components/it-solutions/LocomotiveHUD";
+import { StackedSolutionsDeck } from "@/components/it-solutions/StackedSolutionsDeck";
+import { KineticMarqueeStream } from "@/components/it-solutions/KineticMarqueeStream";
+import { InteractiveArchitectureConsole } from "@/components/it-solutions/InteractiveArchitectureConsole";
+import { GradientBlinds } from "@/components/ui/GradientBlinds";
+import { MaskedHeading } from "@/components/ui/MaskedHeading";
 
 const structuredData = [
+  organizationSchema(),
   serviceSchema({
-    name: "Website Development",
+    name: "Website Development in Indore",
     description:
-      "Custom website design and development for businesses in Indore and across India, from marketing sites to enterprise web platforms.",
+      "High-speed custom website design and development for businesses in Indore, Madhya Pradesh, and across India, from corporate platforms to responsive e-commerce stores.",
     serviceType: "Website Development",
   }),
   serviceSchema({
-    name: "App Development",
+    name: "Mobile App Development in Indore",
     description:
-      "Native and web app development covering enterprise dashboards, IoT-connected apps, and customer-facing products.",
-    serviceType: "App Development",
+      "Native iOS and Android mobile app development, hybrid web apps, and enterprise management dashboards built in Indore.",
+    serviceType: "Mobile Application Development",
   }),
   serviceSchema({
-    name: "IT Solutions",
+    name: "Custom Software & IT Solutions in Indore",
     description:
-      "Custom enterprise APIs, cloud & IoT integration, and AI-powered dashboards built for industrial and enterprise operations.",
-    serviceType: "IT Consulting",
+      "End-to-end custom software development, secure cloud infrastructure, high-throughput APIs, and smart AI dashboards engineered by Sun Robotics & AI in Indore.",
+    serviceType: "Custom Software Development",
   }),
+  clientProjectSchema(portfolioProjects),
+  faqSchema([
+    {
+      question: "Which is the best website development company in Indore?",
+      answer:
+        "Sun Robotics & AI is a leading website and software development company based in Indore, Madhya Pradesh, specializing in high-speed web apps, React/Next.js platforms, mobile apps, and custom enterprise software.",
+    },
+    {
+      question: "What software and web development services does Sun Robotics & AI provide in Indore?",
+      answer:
+        "Sun Robotics & AI provides custom website development, mobile application development (iOS & Android), smart AI dashboards, cloud hosting infrastructure, IoT device synchronization, and enterprise API engineering.",
+    },
+    {
+      question: "Can Sun Robotics & AI develop custom mobile apps and web platforms for my business in Indore?",
+      answer:
+        "Yes, Sun Robotics & AI engineers custom, end-to-end web and mobile applications tailored to your specific business requirements with 24/7 reliability, bank-grade encryption, and seamless scaling.",
+    },
+  ]),
   breadcrumbSchema([
     { name: "Home", path: "/" },
     { name: "IT Solutions", path: "/it-solutions" },
   ]),
 ];
 
-const solutions = [
-  {
-    icon: Code,
-    title: "Custom Enterprise APIs",
-    description: "Scalable backend solutions designed for high-throughput industrial operations. Our APIs handle millions of requests with sub-millisecond latency.",
-    features: ["RESTful & GraphQL", "Real-time WebSockets", "Auto-scaling", "99.99% Uptime SLA"],
-    color: "from-primary to-amber-600",
-    glowHSL: "32 95 55",
-    glowColors: ["#e8930c", "#d4a017", "#f5a623"],
-  },
-  {
-    icon: BarChart3,
-    title: "AI-Powered Dashboards",
-    description: "Real-time KPI tracking with intelligent anomaly detection and predictive insights. Visualize your entire operation in one place.",
-    features: ["Live Data Streaming", "Custom Widgets", "Role-based Access", "Export & Reports"],
-    color: "from-amber-500 to-orange-600",
-    glowHSL: "30 90 55",
-    glowColors: ["#f59e0b", "#ea580c", "#fb923c"],
-  },
-  {
-    icon: Cloud,
-    title: "Cloud & IoT Integration",
-    description: "Edge computing solutions for low-latency robotic control systems. Connect your entire fleet to the cloud seamlessly.",
-    features: ["Multi-cloud Support", "Edge Processing", "Device Management", "OTA Updates"],
-    color: "from-orange-500 to-secondary",
-    glowHSL: "20 80 50",
-    glowColors: ["#f97316", "#b34a20", "#e86c2c"],
-  },
-  {
-    icon: Brain,
-    title: "Predictive Maintenance",
-    description: "ML-driven anomaly detection that prevents failures before they happen. Reduce downtime and maintenance costs by up to 70%.",
-    features: ["Failure Prediction", "Maintenance Scheduling", "Parts Inventory", "Cost Optimization"],
-    color: "from-secondary to-primary",
-    glowHSL: "14 75 42",
-    glowColors: ["#b34a20", "#e8930c", "#c05621"],
-  },
-];
-
 const techStack = [
-  { name: "React", icon: "⚛️", category: "Frontend" },
-  { name: "Node.js", icon: "🟢", category: "Backend" },
-  { name: "Python", icon: "🐍", category: "AI/ML" },
-  { name: "Docker", icon: "🐳", category: "DevOps" },
-  { name: "Kubernetes", icon: "☸️", category: "Orchestration" },
-  { name: "AWS", icon: "☁️", category: "Cloud" },
-  { name: "TensorFlow", icon: "🧠", category: "AI/ML" },
-  { name: "PostgreSQL", icon: "🐘", category: "Database" },
+  { code: "SYS-01", name: "React & Next.js", domain: "Web Apps", desc: "Fast, modern websites and interactive web applications." },
+  { code: "SYS-02", name: "Node.js & Python", domain: "Backend", desc: "Secure backends and high-speed data processing engines." },
+  { code: "SYS-03", name: "iOS & Android", domain: "Mobile", desc: "Smooth, responsive mobile applications for all devices." },
+  { code: "SYS-04", name: "AI & Machine Learning", domain: "AI Core", desc: "Smart data analytics, predictions, and automated insights." },
+  { code: "SYS-05", name: "AWS & Google Cloud", domain: "Cloud", desc: "Reliable cloud hosting that keeps your services running 24/7." },
+  { code: "SYS-06", name: "PostgreSQL & Redis", domain: "Databases", desc: "Secure, high-speed data storage with automated daily backups." },
+  { code: "SYS-07", name: "Docker & Kubernetes", domain: "DevOps", desc: "Automated scaling to handle sudden traffic spikes smoothly." },
+  { code: "SYS-08", name: "IoT & Hardware Sync", domain: "IoT", desc: "Connecting physical sensors and machinery to cloud dashboards." },
 ];
 
-const additionalServices = [
+const categories = ["ALL", "Web Apps", "Backend", "Mobile", "AI Core", "Cloud", "Databases", "IoT"];
+
+const engineeringServices = [
   {
-    icon: Server,
-    title: "Infrastructure Management",
-    description: "Complete infrastructure setup and management for your robotics operations.",
+    serial: "SRV-01",
+    title: "Cloud Hosting & Management",
+    category: "CLOUD // HOSTING",
+    description:
+      "Complete server setup, round-the-clock monitoring, automated backups, and instant scaling to keep your business running smoothly.",
+    specs: ["24/7 Uptime Monitoring", "Automated Daily Backups", "Zero Setup Hassle"],
   },
   {
-    icon: Database,
-    title: "Data Warehousing",
-    description: "Centralized data storage with analytics-ready architecture.",
+    serial: "SRV-02",
+    title: "Database Design & Storage",
+    category: "DATA // STORAGE",
+    description:
+      "Fast, organized, and secure data storage built to handle customer records, transactions, and live business analytics.",
+    specs: ["Fast Search Queries", "Bank-Level Security", "Automated Archiving"],
   },
   {
-    icon: Shield,
-    title: "Security & Compliance",
-    description: "Enterprise-grade security with industry compliance certifications.",
+    serial: "SRV-03",
+    title: "Security & Data Protection",
+    category: "SECURITY // PRIVACY",
+    description:
+      "Complete data encryption, vulnerability assessments, and strict access controls to keep your customer data 100% safe.",
+    specs: ["End-to-End Encryption", "Access Control Rules", "Security Audited"],
   },
   {
-    icon: Cpu,
-    title: "Edge Computing",
-    description: "Process data at the edge for real-time robotic decision making.",
+    serial: "SRV-04",
+    title: "Connected Devices & IoT",
+    category: "DEVICES // HARDWARE",
+    description:
+      "Connect physical machines, smart devices, and sensors directly to clean mobile apps and management dashboards.",
+    specs: ["Real-Time Sync", "Remote Device Controls", "Live Notifications"],
   },
 ];
 
 const ITSolutionsPage = () => {
   const pageRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef(null);
-  const solutionsRef = useRef(null);
   const techRef = useRef(null);
   const additionalRef = useRef(null);
 
+  const [activeCategory, setActiveCategory] = useState("ALL");
+
   const isHeaderInView = useInView(headerRef, { once: true });
-  const isSolutionsInView = useInView(solutionsRef, { once: true, margin: "-100px" });
   const isTechInView = useInView(techRef, { once: true, margin: "-100px" });
   const isAdditionalInView = useInView(additionalRef, { once: true, margin: "-100px" });
 
-  // Locomotive Scroll's `data-scroll-speed` mechanic: on every Lenis scroll
-  // tick, drift each marked element by its own speed factor so the decorative
-  // layers read at different depths instead of moving 1:1 with the page.
-  useLenis(() => {
-    const container = pageRef.current;
-    if (!container) return;
-    const viewportCenter = window.innerHeight / 2;
-    container.querySelectorAll<HTMLElement>("[data-scroll-speed]").forEach((el) => {
-      const speed = parseFloat(el.dataset.scrollSpeed ?? "0");
-      const distance = el.getBoundingClientRect().top + el.offsetHeight / 2 - viewportCenter;
-      el.style.transform = `translate3d(0, ${(distance * speed).toFixed(2)}px, 0)`;
-    });
-  });
+  const {
+    velocity,
+    speed,
+    direction,
+    progress,
+    skew,
+    activeNode,
+    nodeIndex,
+    scrollToSection,
+  } = useLocomotiveScroll();
+
+  const filteredTech =
+    activeCategory === "ALL"
+      ? techStack
+      : techStack.filter((t) => t.domain === activeCategory);
 
   return (
-    <ReactLenis root>
-    <div ref={pageRef}>
-      <SEO
-        title="IT Solutions in Indore — Website & App Development"
-        description="Custom website development, app development, and enterprise IT solutions from Sun Robotics & AI in Indore — APIs, cloud integration, and AI-powered dashboards built for growing businesses."
-        keywords="IT solutions Indore, website development Indore, app development Indore, custom software development, enterprise IT solutions"
-        canonical={`${SITE_URL}/it-solutions`}
-        structuredData={structuredData}
-      />
-
-      {/* Page Header — revealed on scroll */}
-      <section className="pt-32 pb-16 relative overflow-hidden" ref={headerRef}>
-        <div className="absolute inset-0 hero-gradient" />
-        <div className="absolute inset-0 grid-bg opacity-40" />
-        <div
-          aria-hidden
-          data-scroll-speed="-0.2"
-          className="absolute top-1/4 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-[128px] animate-pulse-slow"
-        />
-        <div
-          aria-hidden
-          data-scroll-speed="0.15"
-          className="absolute bottom-0 left-1/4 w-72 h-72 bg-primary/10 rounded-full blur-[100px]"
+    <ReactLenis root options={{ lerp: 0.08, duration: 1.4, smoothWheel: true }}>
+      <div ref={pageRef} className="bg-[#050608] text-foreground selection:bg-primary selection:text-black">
+        <SEO
+          title="Best Website & App Development Company in Indore | Custom IT Solutions"
+          description="Sun Robotics & AI is Indore's top website and mobile app development company. We build high-speed web apps, AI dashboards, custom APIs, and secure cloud software for growing businesses."
+          keywords="website development indore, best website company indore, app development company in indore, mobile app developers indore, custom software development indore, IT company in indore, web design indore, AI dashboards indore, react nextjs developers indore"
+          canonical={`${SITE_URL}/it-solutions`}
+          structuredData={structuredData}
         />
 
-        <div className="container mx-auto px-4 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="text-center max-w-4xl mx-auto"
-          >
-            <span className="text-primary text-sm font-semibold tracking-wider uppercase">
-              IT Solutions
-            </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-normal tracking-[-0.03em] leading-tight mt-4 mb-6">
-              Enterprise-Grade IT for <span className="gradient-text">Smart Industries</span>
-            </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto tracking-[-0.01em]">
-              Custom APIs, Cloud Robotics, and ML-Driven Dashboards that power the factories of tomorrow.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+        {/* Floating Locomotive Telemetry Indicator */}
+        <LocomotiveHUD
+          velocity={velocity}
+          speed={speed}
+          progress={progress}
+          skew={skew}
+          activeNode={activeNode}
+          nodeIndex={nodeIndex}
+          direction={direction}
+          onJumpToNode={scrollToSection}
+        />
 
-      {/* Main Solutions Grid */}
-      <section className="py-24 relative overflow-hidden" ref={solutionsRef}>
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-8">
-            {solutions.map((solution, index) => (
+        {/* SECTION 1: HERO */}
+        <section
+          id="node-hero"
+          ref={headerRef}
+          className="pt-36 pb-24 relative overflow-hidden min-h-[90vh] flex items-center justify-center"
+        >
+          {/* Gradient Blinds Dynamic Background */}
+          <GradientBlinds
+            color1="#F97316"
+            color2="#534109"
+            colorBackdrop="#050608"
+            angle={35}
+            blindCount={18}
+            speed={0.6}
+            noise={0.08}
+            spotlightIntensity={1.25}
+            interactive={true}
+            className="opacity-75"
+          />
+
+          {/* Radial & Linear Contrast Masks to maintain razor-sharp text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#050608]/50 via-transparent to-[#050608] pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_35%,#050608_95%)] pointer-events-none" />
+          <div className="absolute inset-0 grid-bg opacity-20 pointer-events-none" />
+
+          {/* Parallax Floating Depth Orbs */}
+          <div
+            aria-hidden
+            data-scroll-speed="-0.3"
+            className="absolute top-1/4 right-1/4 w-[450px] h-[450px] bg-primary/10 rounded-full blur-[140px] pointer-events-none"
+          />
+
+          <div className="container mx-auto px-4 lg:px-8 relative z-10">
+            {/* Kinetic Typography */}
+            <div
+              className="locomotive-skew text-center max-w-4xl mx-auto"
+              style={{
+                transform: `skewY(${skew * 0.35}deg)`,
+              }}
+            >
+              <MaskedHeading
+                heading={["Custom Software", "Built for Growth."]}
+                subhead="We build high-speed websites, mobile apps, custom APIs, and smart AI dashboards that help your business scale effortlessly."
+                as="h1"
+                className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.25rem] font-display font-semibold tracking-[-0.035em] text-white"
+                subheadClassName="text-base sm:text-lg text-white/65 font-normal tracking-[-0.01em] mb-8"
+                delay={0.15}
+                stagger={0.12}
+                duration={0.8}
+                interactive={true}
+              />
+
+              {/* Action Buttons */}
               <motion.div
-                key={solution.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isSolutionsInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={isHeaderInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="flex flex-wrap items-center justify-center gap-4 mt-2"
               >
-                <BorderGlow
-                  className="group relative"
-                  borderRadius={16}
-                  glowColor={solution.glowHSL}
-                  colors={solution.glowColors}
-                  glowIntensity={0.8}
-                  fillOpacity={0.4}
+                <button
+                  onClick={() => scrollToSection("node-pillars")}
+                  className="px-8 py-4 rounded-xl bg-primary text-black font-display font-bold text-xs uppercase tracking-wider hover:bg-amber-400 shadow-[0_0_30px_hsl(32,95%,55%,0.35)] transition-all flex items-center gap-2 cursor-pointer"
                 >
-                  <div className="p-8">
-                    <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${solution.color} p-0.5 mb-6`}>
-                      <div className="w-full h-full rounded-xl bg-card flex items-center justify-center">
-                        <solution.icon className="w-8 h-8 text-primary" />
-                      </div>
-                    </div>
-                    
-                    <h3 className="text-2xl font-display font-medium tracking-[-0.03em] text-foreground mb-4">
-                      {solution.title}
-                    </h3>
-                    <p className="text-muted-foreground mb-6 leading-relaxed tracking-[-0.01em]">
-                      {solution.description}
-                    </p>
+                  <span>Explore What We Build</span>
+                  <ArrowDown className="w-4 h-4" />
+                </button>
 
-                    {/* Features */}
-                    <div className="grid grid-cols-2 gap-3">
-                      {solution.features.map((feature) => (
-                        <div
-                          key={feature}
-                          className="flex items-center gap-2 text-sm text-muted-foreground"
-                        >
-                          <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                          {feature}
-                        </div>
-                      ))}
+                <a
+                  href="/contact"
+                  className="px-8 py-4 rounded-xl bg-white/[0.03] border border-white/15 hover:border-primary/50 text-white font-display font-medium text-xs uppercase tracking-wider backdrop-blur-md hover:bg-white/[0.06] transition-all flex items-center gap-2"
+                >
+                  <span>Start a Project</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-muted-foreground" />
+                </a>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* SECTION 2: STACKED SOLUTIONS DECK */}
+        <StackedSolutionsDeck />
+
+        {/* KINETIC MARQUEE STREAM */}
+        <KineticMarqueeStream velocity={velocity} />
+
+        {/* SECTION 3: SHOWCASE RAIL */}
+        <ExplorerShowcase />
+
+        {/* SECTION 4: ARCHITECTURAL COMPARISON */}
+        <InteractiveArchitectureConsole />
+
+        {/* SECTION 5: TECH MATRIX (Editorial List) */}
+        <section id="node-tech" className="py-28 relative overflow-hidden" ref={techRef}>
+          <div className="container mx-auto px-4 lg:px-8 relative z-10 max-w-5xl">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isTechInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-16"
+            >
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-primary text-[10px] font-mono uppercase tracking-widest mb-4">
+                <span>[ 05 ] MODERN TOOLBOX</span>
+              </div>
+              <h2 className="text-3xl sm:text-5xl font-display font-semibold tracking-tight text-white mb-3">
+                Technologies We Use
+              </h2>
+              <p className="text-sm md:text-base text-white/60 max-w-xl mx-auto">
+                Industry-standard tools and frameworks chosen for speed, reliability, and security.
+              </p>
+
+              {/* Category Filter Chips */}
+              <div className="flex flex-wrap items-center justify-center gap-2 mt-8">
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(cat)}
+                    className={`px-4 py-1.5 rounded-full text-xs font-mono transition-all ${
+                      activeCategory === cat
+                        ? "bg-primary text-black font-bold shadow-[0_0_12px_hsl(32,95%,55%,0.5)]"
+                        : "bg-white/5 text-white/60 hover:text-white hover:bg-white/10"
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Sleek Editorial Rows */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isTechInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="divide-y divide-white/10 border-y border-white/10"
+            >
+              {filteredTech.map((tech) => (
+                <div
+                  key={tech.code}
+                  className="py-5 px-4 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-white/[0.02] transition-colors group"
+                >
+                  <div className="flex items-start md:items-center gap-4">
+                    <span className="text-[11px] font-mono text-primary font-bold w-16 shrink-0">
+                      {tech.code}
+                    </span>
+                    <div>
+                      <h3 className="text-lg font-display font-semibold text-white group-hover:text-primary transition-colors">
+                        {tech.name}
+                      </h3>
+                      <p className="text-xs text-white/50 mt-0.5">
+                        {tech.desc}
+                      </p>
                     </div>
                   </div>
-                </BorderGlow>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      <ExplorerShowcase />
-
-      {/* Tech Stack */}
-      <section className="py-24 relative overflow-hidden" ref={techRef}>
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
-        <div
-          aria-hidden
-          data-scroll-speed="-0.1"
-          className="absolute top-8 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-[110px]"
-        />
-
-        <div className="container mx-auto px-4 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isTechInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-display font-normal tracking-[-0.03em] leading-none mb-4">
-              Our <span className="gradient-text">Technology Stack</span>
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto tracking-[-0.01em]">
-              Industry-leading tools and frameworks for enterprise-scale solutions.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isTechInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="glass-card p-8 rounded-2xl"
-          >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {techStack.map((tech, index) => (
-                <motion.div
-                  key={tech.name}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={isTechInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  className="flex flex-col items-center gap-2 p-4 rounded-xl bg-muted/30 border border-border hover:border-primary/30 transition-colors cursor-default"
-                >
-                  <span className="text-3xl">{tech.icon}</span>
-                  <span className="text-sm font-medium text-foreground">{tech.name}</span>
-                  <span className="text-xs text-muted-foreground">{tech.category}</span>
-                </motion.div>
+                  <div className="flex items-center gap-4 self-end md:self-center shrink-0">
+                    <span className="px-2.5 py-1 rounded text-[10px] font-mono bg-white/5 text-white/60">
+                      {tech.domain}
+                    </span>
+                    <span className="text-[10px] font-mono text-emerald-400">
+                      READY
+                    </span>
+                  </div>
+                </div>
               ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
+            </motion.div>
+          </div>
+        </section>
 
-      {/* Additional Services */}
-      <section className="py-24 relative overflow-hidden" ref={additionalRef}>
-        <div className="container mx-auto px-4 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={isAdditionalInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-display font-normal tracking-[-0.03em] leading-none mb-4">
-              Additional <span className="gradient-text">Services</span>
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto tracking-[-0.01em]">
-              Comprehensive IT services to support your automation journey.
-            </p>
-          </motion.div>
+        {/* SECTION 6: SERVICES (Editorial Roster) */}
+        <section id="node-services" className="py-28 relative overflow-hidden bg-[#06070a]" ref={additionalRef}>
+          <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={isAdditionalInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-16"
+            >
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-primary text-[10px] font-mono uppercase tracking-widest mb-4">
+                <span>[ 06 ] INFRASTRUCTURE & SUPPORT</span>
+              </div>
+              <h2 className="text-3xl sm:text-5xl font-display font-semibold tracking-tight text-white mb-3">
+                Complete IT Services
+              </h2>
+              <p className="text-sm md:text-base text-white/60 max-w-xl mx-auto">
+                End-to-end technical support to keep your software fast, secure, and always operational.
+              </p>
+            </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {additionalServices.map((service, index) => (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={isAdditionalInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <BorderGlow
-                  className="group h-full"
-                  borderRadius={16}
-                  glowColor="32 95 55"
-                  colors={['#e8930c', '#d35400', '#f39c12']}
-                  glowIntensity={0.7}
-                  fillOpacity={0.3}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {engineeringServices.map((service, index) => (
+                <motion.div
+                  key={service.serial}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isAdditionalInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: index * 0.08 }}
+                  className="flex flex-col justify-between p-6 border-l border-white/15 hover:border-primary/60 transition-colors"
                 >
-                  <div className="p-6 text-center">
-                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-primary/20 transition-colors">
-                      <service.icon className="w-7 h-7 text-primary" />
+                  <div>
+                    <div className="text-[10px] font-mono text-primary font-bold mb-2">
+                      {service.serial} · {service.category}
                     </div>
-                    <h3 className="font-display font-medium tracking-[-0.03em] text-foreground mb-2">
+                    <h3 className="text-xl font-display font-semibold text-white mb-3">
                       {service.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground tracking-[-0.01em]">
+                    <p className="text-xs text-white/60 leading-relaxed mb-6">
                       {service.description}
                     </p>
                   </div>
-                </BorderGlow>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* CTA */}
-      <CTABanner />
-    </div>
+                  <div className="space-y-1.5 pt-4 border-t border-white/10 text-[10px] font-mono text-white/70">
+                    {service.specs.map((sp) => (
+                      <div key={sp} className="flex items-center gap-2">
+                        <span className="w-1 h-1 rounded-full bg-primary shrink-0" />
+                        <span>{sp}</span>
+                      </div>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA BANNER */}
+        <CTABanner />
+      </div>
     </ReactLenis>
   );
 };
