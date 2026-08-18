@@ -3,7 +3,6 @@ import { motion, useInView } from "framer-motion";
 import { IndustrialRobotics } from "@/components/IndustrialRobotics";
 import { AIBrain } from "@/components/AIBrain";
 import { MultipurposeRobotics } from "@/components/MultipurposeRobotics";
-import { CTABanner } from "@/components/CTABanner";
 import { SEO } from "@/components/SEO";
 import { SITE_URL, serviceSchema, breadcrumbSchema } from "@/lib/schema";
 
@@ -71,9 +70,6 @@ const Robotics = () => {
 
       {/* Multipurpose Robotics Section */}
       <MultipurposeRobotics />
-
-      {/* CTA */}
-      <CTABanner />
     </>
   );
 };

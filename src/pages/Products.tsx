@@ -2,7 +2,6 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Factory, Warehouse, Eye, Users, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CTABanner } from "@/components/CTABanner";
 import { SEO } from "@/components/SEO";
 import { SITE_URL, productListSchema } from "@/lib/schema";
 
@@ -260,9 +259,6 @@ const Products = () => {
           </motion.div>
         </div>
       </section>
-
-      {/* CTA */}
-      <CTABanner />
     </>
   );
 };

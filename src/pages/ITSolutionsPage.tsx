@@ -3,7 +3,6 @@ import { motion, useInView } from "framer-motion";
 import { ReactLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
 import { ArrowDown, ExternalLink } from "lucide-react";
-import { CTABanner } from "@/components/CTABanner";
 import BorderGlow from "@/components/ui/BorderGlow";
 import ExplorerShowcase from "@/components/ExplorerShowcase";
 import { SEO } from "@/components/SEO";
@@ -382,9 +381,6 @@ const ITSolutionsPage = () => {
             </div>
           </div>
         </section>
-
-        {/* CTA BANNER */}
-        <CTABanner />
       </div>
     </ReactLenis>
   );

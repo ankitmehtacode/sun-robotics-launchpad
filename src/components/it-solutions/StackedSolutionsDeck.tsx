@@ -34,6 +34,10 @@ interface SolutionItem {
   description: string;
   specs: { label: string; value: string }[];
   tags: string[];
+  image: string;
+  statusTag: string;
+  metricLabels: [string, string, string];
+  metricValues: [string, string, string];
   visual: "mesh" | "neural" | "edge" | "cloud";
   accentColor: string;
   gradient: string;
@@ -56,6 +60,10 @@ const solutionPillars: SolutionItem[] = [
       { label: "INTEGRATION", value: "REST · GraphQL · gRPC" },
     ],
     tags: ["React", "Next.js", "Node.js", "Mobile Apps", "Custom APIs", "PostgreSQL"],
+    image: "/solutions/web-platform.jpg",
+    statusTag: "NEXT.JS 15 // EDGE CLUSTER",
+    metricLabels: ["LATENCY", "PERFORMANCE", "ARCHITECTURE"],
+    metricValues: ["< 12ms", "100 / 100", "Serverless Edge"],
     visual: "mesh",
     accentColor: "#f59e0b",
     gradient: "from-amber-500 to-orange-600",
@@ -76,6 +84,10 @@ const solutionPillars: SolutionItem[] = [
       { label: "EXPORTS", value: "Automated Executive Reports" },
     ],
     tags: ["Live Telemetry", "Neural Models", "Predictive Alerts", "Custom Dashboards"],
+    image: "/solutions/ai-analytics.jpg",
+    statusTag: "NEURAL TELEMETRY // REAL-TIME INFERENCE",
+    metricLabels: ["EVENT STREAM", "ANOMALY CATCH", "ACCURACY"],
+    metricValues: ["2.4M / sec", "< 4ms Loop", "99.8% Model"],
     visual: "neural",
     accentColor: "#fb923c",
     gradient: "from-orange-500 to-amber-500",
@@ -96,6 +108,10 @@ const solutionPillars: SolutionItem[] = [
       { label: "OFFLINE SYNC", value: "Zero-Data-Loss Queues" },
     ],
     tags: ["IoT Fleets", "Edge Gateways", "Live Telemetry", "OTA Firmware"],
+    image: "/solutions/hardware-iot.jpg",
+    statusTag: "EDGE GATEWAY // TLS 1.3 CRYPTO",
+    metricLabels: ["RESPONSE", "PROTOCOL", "FIRMWARE"],
+    metricValues: ["Sub-5ms", "MQTT / WS", "Encrypted OTA"],
     visual: "edge",
     accentColor: "#ea580c",
     gradient: "from-orange-600 to-red-600",
@@ -116,6 +132,10 @@ const solutionPillars: SolutionItem[] = [
       { label: "OBSERVABILITY", value: "24/7 Automated Guard" },
     ],
     tags: ["AWS / GCP Cloud", "Auto-Scaling", "DDoS Shield", "Automated Backups"],
+    image: "/solutions/cloud-security.jpg",
+    statusTag: "ENTERPRISE FORTRESS // MULTI-AZ HA",
+    metricLabels: ["UPTIME SLA", "FAILOVER", "SECURITY"],
+    metricValues: ["99.99%", "< 30 Sec", "AES-256 / SOC2"],
     visual: "cloud",
     accentColor: "#d97706",
     gradient: "from-amber-600 to-yellow-500",
@@ -124,395 +144,79 @@ const solutionPillars: SolutionItem[] = [
 ];
 
 // ==========================================
-// 200-IQ Dynamic Visualizers with Live Motion
+// ==========================================
+// Silicon Valley Grade Real-World Showcase Stage
 // ==========================================
 
-const ArchitecturalVisual = ({ type }: { type: SolutionItem["visual"] }) => {
-  const [pulseIndex, setPulseIndex] = useState(0);
+const RealWorldShowcase = ({ item }: { item: SolutionItem }) => {
+  return (
+    <div className="relative w-full h-full min-h-[140px] sm:min-h-[220px] lg:min-h-[280px] rounded-xl bg-[#06080d] border border-white/15 overflow-hidden shadow-2xl group flex flex-col justify-between">
+      {/* Real-World Image with Parallax Hover and Ambient Scrim */}
+      <div className="absolute inset-0 overflow-hidden">
+        <img
+          src={item.image}
+          alt={item.title}
+          className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700 ease-out opacity-85"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#06080d] via-[#06080d]/40 to-[#06080d]/70" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,#06080d_95%)] pointer-events-none" />
+      </div>
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setPulseIndex((p) => (p + 1) % 4);
-    }, 1800);
-    return () => clearInterval(timer);
-  }, []);
-
-  if (type === "mesh") {
-    return (
-      <div className="relative w-full h-full min-h-[300px] lg:min-h-[340px] rounded-xl bg-[#06080d] border border-white/10 p-5 flex flex-col justify-between overflow-hidden shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]">
-        {/* Background Grid & Radial Glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(245,158,11,0.12),transparent_70%)] pointer-events-none" />
-        <div className="absolute inset-0 grid-bg opacity-20 pointer-events-none" />
-
-        {/* Top Telemetry Header */}
-        <div className="flex items-center justify-between text-[11px] font-mono text-white/60 border-b border-white/10 pb-3 relative z-10">
-          <div className="flex items-center gap-2">
-            <Globe className="w-3.5 h-3.5 text-primary animate-pulse" />
-            <span className="tracking-wider">HYBRID EDGE TOPOLOGY</span>
+      {/* Top Glass Telemetry Bar */}
+      <div className="relative z-10 p-2 sm:p-3 flex items-center justify-between border-b border-white/10 backdrop-blur-md bg-black/60">
+        <div className="flex items-center gap-1.5 sm:gap-2 text-[8px] sm:text-[11px] font-mono text-white/90">
+          <div className="flex items-center gap-1">
+            <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-red-500/80 inline-block" />
+            <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-amber-500/80 inline-block" />
+            <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-500/80 inline-block" />
           </div>
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-            <span className="text-emerald-400 font-bold tracking-tight">12ms • LIVE</span>
-          </div>
+          <span className="hidden xs:inline text-white/30">|</span>
+          <span className="font-semibold tracking-wider text-primary truncate max-w-[140px] sm:max-w-none">{item.statusTag}</span>
         </div>
-
-        {/* Animated Interactive Flow Diagram */}
-        <div className="relative my-auto py-2 h-44 flex items-center justify-center">
-          <svg className="w-full h-full" viewBox="0 0 460 160">
-            <defs>
-              <linearGradient id="flowGrad1" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.8" />
-                <stop offset="50%" stopColor="#fb923c" stopOpacity="1" />
-                <stop offset="100%" stopColor="#ea580c" stopOpacity="0.8" />
-              </linearGradient>
-              <filter id="glowFilter" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="3" result="blur" />
-                <feComposite in="SourceGraphic" in2="blur" operator="over" />
-              </filter>
-            </defs>
-
-            {/* Base Wireframe Paths */}
-            <path
-              d="M 60,80 C 130,25 180,25 230,80 C 280,135 330,135 400,80"
-              fill="none"
-              stroke="rgba(255,255,255,0.1)"
-              strokeWidth="2"
-              strokeDasharray="4 4"
-            />
-            <path
-              d="M 60,80 C 130,135 180,135 230,80 C 280,25 330,25 400,80"
-              fill="none"
-              stroke="rgba(255,255,255,0.1)"
-              strokeWidth="2"
-              strokeDasharray="4 4"
-            />
-
-            {/* Glowing Active Flow Path */}
-            <path
-              d="M 60,80 C 130,25 180,25 230,80 C 280,135 330,135 400,80"
-              fill="none"
-              stroke="url(#flowGrad1)"
-              strokeWidth="2.5"
-              filter="url(#glowFilter)"
-            />
-
-            {/* Kinetic Pulse Stream Particles */}
-            <motion.circle
-              r="4"
-              fill="#fff"
-              filter="url(#glowFilter)"
-              animate={{
-                offsetDistance: ["0%", "100%"],
-              }}
-              transition={{
-                duration: 2.2,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-              style={{
-                offsetPath: `path("M 60,80 C 130,25 180,25 230,80 C 280,135 330,135 400,80")`,
-              }}
-            />
-            <motion.circle
-              r="3.5"
-              fill="#f59e0b"
-              animate={{
-                offsetDistance: ["0%", "100%"],
-              }}
-              transition={{
-                duration: 2.8,
-                delay: 0.9,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-              style={{
-                offsetPath: `path("M 60,80 C 130,135 180,135 230,80 C 280,25 330,25 400,80")`,
-              }}
-            />
-
-            {/* Node 1: Client Devices */}
-            <g transform="translate(60, 80)">
-              <circle r="22" fill="#0d111a" stroke="#f59e0b" strokeWidth="2" />
-              <circle r="14" fill="rgba(245,158,11,0.15)" />
-              <Smartphone className="w-5 h-5 text-white -translate-x-2.5 -translate-y-2.5" />
-              <text y="36" fill="#fff" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">
-                CLIENT APPS
-              </text>
-              <text y="48" fill="rgba(255,255,255,0.4)" fontSize="8" fontFamily="monospace" textAnchor="middle">
-                iOS · ANDROID · WEB
-              </text>
-            </g>
-
-            {/* Node 2: Core Cloud Gateway */}
-            <g transform="translate(230, 80)">
-              <circle r="30" fill="#0d111a" stroke="#fb923c" strokeWidth="2.5" filter="url(#glowFilter)" />
-              <circle r="20" fill="rgba(251,146,60,0.2)" />
-              <Zap className="w-6 h-6 text-primary -translate-x-3 -translate-y-3" />
-              <text y="44" fill="#fff" fontSize="11" fontFamily="monospace" textAnchor="middle" fontWeight="bold">
-                API GATEWAY
-              </text>
-              <text y="56" fill="#fb923c" fontSize="8" fontFamily="monospace" textAnchor="middle">
-                NEXT.JS & NODE.JS
-              </text>
-            </g>
-
-            {/* Node 3: Distributed Database */}
-            <g transform="translate(400, 80)">
-              <circle r="22" fill="#0d111a" stroke="#ea580c" strokeWidth="2" />
-              <circle r="14" fill="rgba(234,88,12,0.15)" />
-              <Database className="w-5 h-5 text-white -translate-x-2.5 -translate-y-2.5" />
-              <text y="36" fill="#fff" fontSize="10" fontFamily="monospace" textAnchor="middle" fontWeight="bold">
-                DATABASE
-              </text>
-              <text y="48" fill="rgba(255,255,255,0.4)" fontSize="8" fontFamily="monospace" textAnchor="middle">
-                POSTGRES · REDIS
-              </text>
-            </g>
-          </svg>
-        </div>
-
-        {/* Bottom Status Bar */}
-        <div className="grid grid-cols-3 gap-2 pt-3 border-t border-white/10 text-center relative z-10">
-          <div className="p-1.5 rounded bg-white/[0.03] border border-white/5">
-            <span className="block text-[8px] font-mono text-white/40">THROUGHPUT</span>
-            <span className="text-[11px] font-mono font-bold text-white">45,000 req/s</span>
-          </div>
-          <div className="p-1.5 rounded bg-white/[0.03] border border-white/5">
-            <span className="block text-[8px] font-mono text-white/40">SSL CIPHER</span>
-            <span className="text-[11px] font-mono font-bold text-primary">TLS 1.3 AES</span>
-          </div>
-          <div className="p-1.5 rounded bg-white/[0.03] border border-white/5">
-            <span className="block text-[8px] font-mono text-white/40">GLOBAL CDNs</span>
-            <span className="text-[11px] font-mono font-bold text-emerald-400">300+ EDGES</span>
-          </div>
+        <div className="flex items-center gap-1 px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-[7px] sm:text-[9px] font-mono text-emerald-400 font-bold shrink-0">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+          <span>LIVE</span>
         </div>
       </div>
-    );
-  }
 
-  if (type === "neural") {
-    return (
-      <div className="relative w-full h-full min-h-[300px] lg:min-h-[340px] rounded-xl bg-[#06080d] border border-white/10 p-5 flex flex-col justify-between overflow-hidden shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_40%,rgba(249,115,22,0.12),transparent_70%)] pointer-events-none" />
-
-        <div className="flex items-center justify-between text-[11px] font-mono text-white/60 border-b border-white/10 pb-3">
-          <div className="flex items-center gap-2">
-            <Activity className="w-3.5 h-3.5 text-primary" />
-            <span className="tracking-wider">NEURAL TELEMETRY STREAM</span>
-          </div>
-          <span className="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 text-[9px] font-bold">
-            CONFIDENCE: 99.8%
+      {/* Center Subtle Interactive Badge */}
+      <div className="relative z-10 my-auto px-2.5 sm:px-3 py-1 flex justify-end">
+        <div className="p-1 sm:p-1.5 rounded-md sm:rounded-lg bg-black/70 backdrop-blur-xl border border-white/15 shadow-xl inline-flex items-center gap-1">
+          <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-primary" />
+          <span className="text-[8px] sm:text-[10px] font-mono font-bold text-white tracking-wide">
+            {item.badge}
           </span>
         </div>
-
-        {/* Oscillating Multi-Waveform */}
-        <div className="relative my-auto py-2 h-44 flex items-center justify-center">
-          <svg className="w-full h-full" viewBox="0 0 460 160">
-            <defs>
-              <linearGradient id="waveFill" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="#f59e0b" stopOpacity="0.3" />
-                <stop offset="100%" stopColor="#f59e0b" stopOpacity="0.0" />
-              </linearGradient>
-            </defs>
-
-            {/* Threshold limits */}
-            <line x1="20" y1="35" x2="440" y2="35" stroke="rgba(244,63,94,0.35)" strokeDasharray="3 3" strokeWidth="1.5" />
-            <line x1="20" y1="125" x2="440" y2="125" stroke="rgba(244,63,94,0.35)" strokeDasharray="3 3" strokeWidth="1.5" />
-            <text x="440" y="30" fill="rgba(244,63,94,0.75)" fontSize="8" fontFamily="monospace" textAnchor="end">
-              UPPER CRITICAL THRESHOLD
-            </text>
-
-            {/* Waveform underfill */}
-            <path
-              d="M 20,80 Q 60,30 100,80 T 180,80 T 260,40 T 340,110 T 420,80 L 420,150 L 20,150 Z"
-              fill="url(#waveFill)"
-            />
-
-            {/* Primary Live Sine Wave */}
-            <motion.path
-              d="M 20,80 C 60,20 80,140 120,80 C 160,20 180,140 220,80 C 260,10 280,150 320,80 C 360,30 380,130 440,80"
-              fill="none"
-              stroke="#f59e0b"
-              strokeWidth="2.5"
-              animate={{
-                d: [
-                  "M 20,80 C 60,20 80,140 120,80 C 160,20 180,140 220,80 C 260,10 280,150 320,80 C 360,30 380,130 440,80",
-                  "M 20,80 C 60,130 80,30 120,80 C 160,140 180,20 220,80 C 260,150 280,20 320,80 C 360,140 380,30 440,80",
-                  "M 20,80 C 60,20 80,140 120,80 C 160,20 180,140 220,80 C 260,10 280,150 320,80 C 360,30 380,130 440,80",
-                ],
-              }}
-              transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-            />
-
-            {/* Live Scan Radar Line */}
-            <motion.line
-              x1="20"
-              y1="10"
-              x2="20"
-              y2="150"
-              stroke="#fb923c"
-              strokeWidth="2"
-              opacity="0.8"
-              animate={{
-                x1: [20, 440, 20],
-                x2: [20, 440, 20],
-              }}
-              transition={{ duration: 3.5, repeat: Infinity, ease: "linear" }}
-            />
-
-            {/* Pulsing Hotspot */}
-            <circle cx="320" cy="80" r="7" fill="#ea580c" opacity="0.4" className="animate-ping" />
-            <circle cx="320" cy="80" r="4" fill="#fff" />
-          </svg>
-        </div>
-
-        <div className="grid grid-cols-3 gap-2 pt-3 border-t border-white/10 text-center">
-          <div className="p-1.5 rounded bg-white/[0.03] border border-white/5">
-            <span className="block text-[8px] font-mono text-white/40">SAMPLING RATE</span>
-            <span className="text-[11px] font-mono font-bold text-white">100,000 pts/s</span>
-          </div>
-          <div className="p-1.5 rounded bg-white/[0.03] border border-white/5">
-            <span className="block text-[8px] font-mono text-white/40">ANOMALIES DETECTED</span>
-            <span className="text-[11px] font-mono font-bold text-emerald-400">0 CRITICAL</span>
-          </div>
-          <div className="p-1.5 rounded bg-white/[0.03] border border-white/5">
-            <span className="block text-[8px] font-mono text-white/40">AI PREDICTION</span>
-            <span className="text-[11px] font-mono font-bold text-primary">OPTIMAL</span>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (type === "edge") {
-    return (
-      <div className="relative w-full h-full min-h-[300px] lg:min-h-[340px] rounded-xl bg-[#06080d] border border-white/10 p-5 flex flex-col justify-between overflow-hidden shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_60%,rgba(234,88,12,0.12),transparent_70%)] pointer-events-none" />
-
-        <div className="flex items-center justify-between text-[11px] font-mono text-white/60 border-b border-white/10 pb-3">
-          <div className="flex items-center gap-2">
-            <Radio className="w-3.5 h-3.5 text-primary animate-pulse" />
-            <span className="tracking-wider">HARDWARE IOT // FLEET MESH</span>
-          </div>
-          <span className="text-emerald-400 font-bold font-mono text-[10px]">ALL 256 NODES ACTIVE</span>
-        </div>
-
-        {/* Distributed Mesh Map */}
-        <div className="relative my-auto py-2 h-44 flex items-center justify-center">
-          <svg className="w-full h-full" viewBox="0 0 460 160">
-            {/* Concentric Radar Rings */}
-            <circle cx="230" cy="80" r="60" fill="none" stroke="rgba(255,255,255,0.06)" strokeDasharray="3 3" />
-            <circle cx="230" cy="80" r="35" fill="none" stroke="rgba(245,158,11,0.2)" />
-            
-            {/* Center Cloud Hub */}
-            <circle cx="230" cy="80" r="18" fill="#0f121d" stroke="#f59e0b" strokeWidth="2.5" />
-            <Cpu className="w-5 h-5 text-primary translate-x-[220px] translate-y-[70px]" />
-            <text x="230" y="112" fill="#fff" fontSize="9" fontFamily="monospace" textAnchor="middle" fontWeight="bold">
-              CENTRAL EDGE HUB
-            </text>
-
-            {/* Satellites */}
-            {[
-              { x: 90, y: 40, label: "ROBOTIC ARM", icon: "ARM" },
-              { x: 370, y: 40, label: "VISION CAMERA", icon: "CAM" },
-              { x: 100, y: 120, label: "PLC CONTROLLER", icon: "PLC" },
-              { x: 360, y: 120, label: "SENSOR FLEET", icon: "SEN" },
-            ].map((node, i) => (
-              <g key={node.label}>
-                <line
-                  x1="230"
-                  y1="80"
-                  x2={node.x}
-                  y2={node.y}
-                  stroke="rgba(245,158,11,0.3)"
-                  strokeWidth="1.5"
-                  strokeDasharray="4 4"
-                />
-                <circle cx={node.x} cy={node.y} r="14" fill="#0d111a" stroke="#fb923c" strokeWidth="1.5" />
-                <circle cx={node.x} cy={node.y} r="6" fill="#f59e0b" className="animate-pulse" />
-                <text x={node.x} y={node.y + 22} fill="rgba(255,255,255,0.8)" fontSize="8" fontFamily="monospace" textAnchor="middle">
-                  {node.label}
-                </text>
-              </g>
-            ))}
-          </svg>
-        </div>
-
-        <div className="grid grid-cols-3 gap-2 pt-3 border-t border-white/10 text-center">
-          <div className="p-1.5 rounded bg-white/[0.03] border border-white/5">
-            <span className="block text-[8px] font-mono text-white/40">PROTOCOL</span>
-            <span className="text-[11px] font-mono font-bold text-white">MQTT over TLS</span>
-          </div>
-          <div className="p-1.5 rounded bg-white/[0.03] border border-white/5">
-            <span className="block text-[8px] font-mono text-white/40">CONTROL JITTER</span>
-            <span className="text-[11px] font-mono font-bold text-emerald-400">&lt; 1.8ms</span>
-          </div>
-          <div className="p-1.5 rounded bg-white/[0.03] border border-white/5">
-            <span className="block text-[8px] font-mono text-white/40">OTA UPDATE</span>
-            <span className="text-[11px] font-mono font-bold text-primary">ENCRYPTED</span>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // Cloud & Security
-  return (
-    <div className="relative w-full h-full min-h-[300px] lg:min-h-[340px] rounded-xl bg-[#06080d] border border-white/10 p-5 flex flex-col justify-between overflow-hidden shadow-[inset_0_1px_1px_rgba(255,255,255,0.08)]">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(217,119,6,0.12),transparent_70%)] pointer-events-none" />
-
-      <div className="flex items-center justify-between text-[11px] font-mono text-white/60 border-b border-white/10 pb-3">
-        <div className="flex items-center gap-2">
-          <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-          <span className="tracking-wider">SECURITY FORTRESS // ZERO TRUST</span>
-        </div>
-        <span className="text-emerald-400 font-bold font-mono text-[10px]">99.99% UPTIME</span>
       </div>
 
-      {/* 3D Cloud Cluster */}
-      <div className="grid grid-cols-3 gap-3 my-auto py-2">
-        {[
-          { name: "Primary Region", sub: "Multi-Zone Cloud", status: "ONLINE", color: "#10b981" },
-          { name: "Failover Mirror", sub: "Hot Standby Sync", status: "SYNCED", color: "#f59e0b" },
-          { name: "Security Perimeter", sub: "DDoS & WAF Shield", status: "GUARDING", color: "#38bdf8" },
-        ].map((item, idx) => (
-          <motion.div
-            key={item.name}
-            whileHover={{ scale: 1.03 }}
-            className="p-3.5 rounded-xl bg-white/[0.02] border border-white/10 hover:border-primary/50 transition-all text-center relative group"
-          >
-            <div
-              className="w-2.5 h-2.5 rounded-full mx-auto mb-2 shadow-[0_0_12px_currentColor]"
-              style={{ backgroundColor: item.color, color: item.color }}
-            />
-            <div className="text-xs font-sans font-bold text-white mb-0.5">{item.name}</div>
-            <div className="text-[9px] font-sans text-white/50 mb-2">{item.sub}</div>
-            <span
-              className="px-2 py-0.5 rounded text-[8px] font-mono uppercase tracking-wider font-bold"
-              style={{
-                backgroundColor: `${item.color}15`,
-                color: item.color,
-                border: `1px solid ${item.color}30`,
-              }}
-            >
-              {item.status}
+      {/* Bottom Floating Glass HUD Metrics Strip */}
+      <div className="relative z-10 p-1.5 sm:p-3 border-t border-white/10 backdrop-blur-xl bg-[#06080d]/90">
+        <div className="grid grid-cols-3 gap-1 sm:gap-2 text-center">
+          <div className="p-1 sm:p-1.5 rounded bg-white/[0.04] border border-white/5">
+            <span className="block text-[6.5px] sm:text-[8px] font-mono text-white/40 uppercase truncate">
+              {item.metricLabels[0]}
             </span>
-          </motion.div>
-        ))}
-      </div>
-
-      <div className="grid grid-cols-3 gap-2 pt-3 border-t border-white/10 text-center">
-        <div className="p-1.5 rounded bg-white/[0.03] border border-white/5">
-          <span className="block text-[8px] font-mono text-white/40">SNAPSHOTS</span>
-          <span className="text-[11px] font-mono font-bold text-white">Daily Hourly</span>
-        </div>
-        <div className="p-1.5 rounded bg-white/[0.03] border border-white/5">
-          <span className="block text-[8px] font-mono text-white/40">RECOVERY TIME</span>
-          <span className="text-[11px] font-mono font-bold text-emerald-400">&lt; 30 SEC</span>
-        </div>
-        <div className="p-1.5 rounded bg-white/[0.03] border border-white/5">
-          <span className="block text-[8px] font-mono text-white/40">COMPLIANCE</span>
-          <span className="text-[11px] font-mono font-bold text-primary">ISO / SOC-2 READY</span>
+            <span className="text-[8px] sm:text-[11px] font-mono font-bold text-white truncate block">
+              {item.metricValues[0]}
+            </span>
+          </div>
+          <div className="p-1 sm:p-1.5 rounded bg-white/[0.04] border border-white/5">
+            <span className="block text-[6.5px] sm:text-[8px] font-mono text-white/40 uppercase truncate">
+              {item.metricLabels[1]}
+            </span>
+            <span className="text-[8px] sm:text-[11px] font-mono font-bold text-emerald-400 truncate block">
+              {item.metricValues[1]}
+            </span>
+          </div>
+          <div className="p-1 sm:p-1.5 rounded bg-white/[0.04] border border-white/5">
+            <span className="block text-[6.5px] sm:text-[8px] font-mono text-white/40 uppercase truncate">
+              {item.metricLabels[2]}
+            </span>
+            <span className="text-[8px] sm:text-[11px] font-mono font-bold text-primary truncate block">
+              {item.metricValues[2]}
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -532,11 +236,18 @@ export const StackedSolutionsDeck = () => {
     offset: ["start start", "end end"],
   });
 
+  // Buttery-smooth spring physics for mobile and desktop scroll progress
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 280,
+    damping: 32,
+    restDelta: 0.001,
+  });
+
   const total = solutionPillars.length;
-  const segments = total - 1; // 3 transition segments for 4 cards
+  const segments = total - 1;
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    const idx = Math.min(total - 1, Math.floor(latest * total));
+    const idx = Math.min(total - 1, Math.max(0, Math.floor(latest * total)));
     setActiveCardIndex(idx);
   });
 
@@ -557,13 +268,13 @@ export const StackedSolutionsDeck = () => {
       style={{ height: `${segments * 100 + 100}vh` }}
     >
       {/* Sticky pinned viewport */}
-      <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden px-4 md:px-8 py-4">
+      <div className="sticky top-0 h-[100dvh] w-full flex flex-col items-center justify-center overflow-hidden px-3 sm:px-6 md:px-8 py-2 sm:py-4">
         {/* Deep ambient backdrop */}
         <div className="absolute inset-0 bg-[#050608]" />
         <div className="absolute inset-0 hero-gradient pointer-events-none opacity-40" />
         <div className="absolute inset-0 grid-bg opacity-25 pointer-events-none" />
 
-        {/* Floating Telemetry & Navigation Deck Controller (Clean Top Placement & Mobile-scrollable) */}
+        {/* Floating Telemetry & Navigation Deck Controller (Pill tabs) */}
         <div className="relative z-40 mb-2 sm:mb-3 flex items-center gap-1 sm:gap-1.5 p-1 sm:p-1.5 rounded-full bg-[#0b0d14]/90 backdrop-blur-xl border border-white/10 shadow-2xl max-w-full overflow-x-auto no-scrollbar">
           {solutionPillars.map((pillar, idx) => (
             <button
@@ -576,13 +287,13 @@ export const StackedSolutionsDeck = () => {
               }`}
             >
               <span>{pillar.number}</span>
-              <span className="hidden xs:inline sm:inline">{pillar.category.split(" ")[0]}</span>
+              <span className="inline">{pillar.category.split(" ")[0]}</span>
             </button>
           ))}
         </div>
 
         {/* 3D Perspective Card Stage */}
-        <div className="relative w-full max-w-6xl h-[84vh] sm:h-[80vh] max-h-[740px] sm:max-h-[660px] perspective-1200">
+        <div className="relative w-full max-w-6xl h-[calc(100dvh-100px)] sm:h-[80vh] max-h-[640px] sm:max-h-[660px] perspective-1200">
           {solutionPillars.map((item, index) => (
             <DeckCard
               key={item.id}
@@ -590,7 +301,7 @@ export const StackedSolutionsDeck = () => {
               index={index}
               total={total}
               segments={segments}
-              scrollYProgress={scrollYProgress}
+              scrollYProgress={smoothProgress}
               isActive={activeCardIndex === index}
             />
           ))}
@@ -621,7 +332,6 @@ const DeckCard = ({
   scrollYProgress,
   isActive,
 }: DeckCardProps) => {
-  // Exactly 3 segments: [0 -> 1/3], [1/3 -> 2/3], [2/3 -> 1.0]
   const segStart = index === 0 ? 0 : (index - 1) / segments;
   const segEnd = index === 0 ? 0 : index / segments;
   const nextSegEnd = index === total - 1 ? 1.0 : (index + 1) / segments;
@@ -633,30 +343,30 @@ const DeckCard = ({
       ? [0, 1 / segments]
       : [segStart, segEnd, nextSegEnd],
     index === 0
-      ? ["0%", "-16px"]
-      : ["110%", "0%", index === total - 1 ? "0%" : `-${(total - index) * 16}px`]
+      ? ["0%", "-12px"]
+      : ["108%", "0%", index === total - 1 ? "0%" : `-${(total - index) * 12}px`]
   );
 
-  // 2. Scale: Enters at 0.90 -> 1.0, recedes on exit
+  // 2. Scale
   const scale = useTransform(
     scrollYProgress,
     index === 0
       ? [0, 1 / segments]
       : [segStart, segEnd, nextSegEnd],
     index === 0
-      ? [1, 0.95]
-      : [0.90, 1, index === total - 1 ? 1 : 0.95]
+      ? [1, 0.96]
+      : [0.92, 1, index === total - 1 ? 1 : 0.96]
   );
 
-  // 3. 3D Perspective Rotation (X-axis pitch):
+  // 3. 3D Perspective Rotation (Subtle on mobile for smooth GPU performance)
   const rotateX = useTransform(
     scrollYProgress,
     index === 0
       ? [0, 1 / segments]
       : [segStart, segEnd, nextSegEnd],
     index === 0
-      ? [0, -5]
-      : [14, 0, index === total - 1 ? 0 : -5]
+      ? [0, -4]
+      : [10, 0, index === total - 1 ? 0 : -4]
   );
 
   // 4. Opacity
@@ -666,8 +376,8 @@ const DeckCard = ({
       ? [0, 1 / segments]
       : [segStart, segStart + 0.05, segEnd, nextSegEnd],
     index === 0
-      ? [1, 0.4]
-      : [0, 1, 1, index === total - 1 ? 1 : 0.4]
+      ? [1, 0.35]
+      : [0, 1, 1, index === total - 1 ? 1 : 0.35]
   );
 
   return (
@@ -678,67 +388,67 @@ const DeckCard = ({
         rotateX,
         opacity,
         zIndex: index + 10,
-        top: `${index * 8}px`,
+        top: `${index * 6}px`,
         transformPerspective: 1200,
       }}
       className="absolute inset-0 w-full h-full will-change-transform preserve-3d"
     >
       <BorderGlow
-        className="w-full h-full rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.85)]"
-        borderRadius={20}
+        className="w-full h-full rounded-xl sm:rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.85)]"
+        borderRadius={16}
         glowColor="32 95 55"
         colors={["#f59e0b", "#ea580c", "#d97706"]}
         glowIntensity={isActive ? 0.95 : 0.4}
         fillOpacity={0.5}
       >
-        <div className="w-full h-full p-4 sm:p-6 md:p-8 bg-[#080a0f]/95 backdrop-blur-2xl flex flex-col justify-between overflow-y-auto no-scrollbar relative">
+        <div className="w-full h-full p-3.5 sm:p-6 md:p-8 bg-[#080a0f]/95 backdrop-blur-2xl flex flex-col justify-between overflow-hidden relative">
           {/* Subtle Top Accent Laser Light Beam */}
           <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-70" />
 
           {/* Header Row */}
-          <div className="flex items-start justify-between gap-3 border-b border-white/10 pb-3 sm:pb-5">
-            <div>
-              <div className="flex items-center flex-wrap gap-2 sm:gap-3 text-[9px] sm:text-[11px] font-mono text-primary font-bold tracking-widest uppercase mb-1">
+          <div className="flex items-start justify-between gap-2 sm:gap-3 border-b border-white/10 pb-2 sm:pb-4 shrink-0">
+            <div className="min-w-0">
+              <div className="flex items-center flex-wrap gap-1.5 sm:gap-3 text-[8px] sm:text-[11px] font-mono text-primary font-bold tracking-wider uppercase mb-0.5 sm:mb-1">
                 <span>// {item.category}</span>
                 <span className="text-white/20">|</span>
                 <span className="text-white/50">SOLUTION {item.number}</span>
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/10 border border-primary/20 text-[8px] sm:text-[9px] text-primary">
-                  <Sparkles className="w-2.5 h-2.5" />
+                <span className="hidden xs:inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-primary/10 border border-primary/20 text-[7.5px] sm:text-[9px] text-primary">
+                  <Sparkles className="w-2 h-2" />
                   {item.badge}
                 </span>
               </div>
-              <h3 className="text-xl sm:text-3xl lg:text-4xl font-display font-bold tracking-tight text-white leading-tight">
+              <h3 className="text-base sm:text-2xl lg:text-3xl font-display font-bold tracking-tight text-white leading-tight truncate">
                 {item.title}
               </h3>
-              <p className="text-[11px] sm:text-xs md:text-sm text-primary/90 font-sans mt-0.5 sm:mt-1">
+              <p className="text-[10px] sm:text-xs md:text-sm text-primary/90 font-sans mt-0.5 truncate sm:line-clamp-none">
                 {item.headline}
               </p>
             </div>
 
-            <span className="text-3xl sm:text-6xl md:text-7xl font-display font-black text-white/5 select-none font-mono shrink-0">
+            <span className="text-2xl sm:text-5xl md:text-6xl font-display font-black text-white/10 select-none font-mono shrink-0">
               {item.number}
             </span>
           </div>
 
-          {/* Body: High-Density Specs & Live Visualizer */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 my-2 sm:my-4 items-center flex-1">
+          {/* Body: Responsive Grid Layout */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 sm:gap-5 my-1.5 sm:my-3 items-center flex-1 min-h-0 overflow-hidden">
             {/* Left Column: Description, Specs & Tags */}
-            <div className="lg:col-span-6 space-y-2.5 sm:space-y-4">
-              <p className="text-xs sm:text-sm text-white/70 leading-relaxed font-sans line-clamp-3 sm:line-clamp-none">
+            <div className="lg:col-span-6 space-y-1.5 sm:space-y-3.5 flex flex-col justify-center">
+              <p className="hidden sm:block text-xs sm:text-sm text-white/70 leading-relaxed font-sans line-clamp-2 lg:line-clamp-3">
                 {item.description}
               </p>
 
-              {/* Live Spec Indicators */}
-              <div className="grid grid-cols-2 gap-1.5 sm:gap-2.5">
+              {/* Live Spec Indicators (2x2 Grid) */}
+              <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
                 {item.specs.map((sp) => (
                   <div
                     key={sp.label}
-                    className="p-1.5 sm:p-2.5 rounded-lg bg-white/[0.02] border border-white/5 hover:border-white/15 transition-colors"
+                    className="p-1 sm:p-2 rounded-md sm:rounded-lg bg-white/[0.02] border border-white/5 hover:border-white/15 transition-colors"
                   >
-                    <div className="text-[8px] sm:text-[9px] font-mono text-primary font-semibold uppercase tracking-wider">
+                    <div className="text-[7.5px] sm:text-[9px] font-mono text-primary font-semibold uppercase tracking-wider truncate">
                       {sp.label}
                     </div>
-                    <div className="text-[11px] sm:text-xs font-sans font-bold text-white mt-0.5">
+                    <div className="text-[10px] sm:text-xs font-sans font-bold text-white mt-0.5 truncate">
                       {sp.value}
                     </div>
                   </div>
@@ -746,11 +456,11 @@ const DeckCard = ({
               </div>
 
               {/* Technology Tags */}
-              <div className="flex flex-wrap gap-1 sm:gap-1.5 pt-0.5 sm:pt-1">
+              <div className="hidden sm:flex flex-wrap gap-1 sm:gap-1.5 pt-0.5">
                 {item.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md bg-white/[0.04] border border-white/10 text-[9px] sm:text-[10px] font-mono text-white/75 hover:border-primary/40 hover:text-white transition-colors"
+                    className="px-2 py-0.5 rounded-md bg-white/[0.04] border border-white/10 text-[8.5px] sm:text-[9.5px] font-mono text-white/75"
                   >
                     {tag}
                   </span>
@@ -758,24 +468,24 @@ const DeckCard = ({
               </div>
             </div>
 
-            {/* Right Column: Next-Level Dynamic Visualizer */}
-            <div className="lg:col-span-6 h-36 sm:h-52 lg:h-full flex items-center justify-center">
-              <ArchitecturalVisual type={item.visual} />
+            {/* Right Column: Silicon Valley Grade Real-World Showcase */}
+            <div className="lg:col-span-6 h-36 sm:h-48 lg:h-full flex items-center justify-center min-h-0">
+              <RealWorldShowcase item={item} />
             </div>
           </div>
 
           {/* Footer Action */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pt-2 sm:pt-3 border-t border-white/10 text-xs">
-            <div className="flex items-center gap-2 text-[10px] sm:text-[11px] font-mono text-white/50">
+          <div className="flex items-center justify-between gap-2 pt-1.5 sm:pt-3 border-t border-white/10 text-xs shrink-0">
+            <div className="flex items-center gap-1.5 text-[9px] sm:text-[11px] font-mono text-white/50">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
-              <span className="truncate">PRODUCTION GRADE // READY FOR DEPLOYMENT</span>
+              <span className="truncate">READY FOR DEPLOYMENT</span>
             </div>
             <a
               href="/contact"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-primary/10 border border-primary/30 text-primary font-mono font-bold text-xs hover:bg-primary hover:text-black transition-all group shrink-0"
+              className="inline-flex items-center justify-center gap-1.5 px-3 py-1 sm:px-4 sm:py-1.5 rounded-lg bg-primary/10 border border-primary/30 text-primary font-mono font-bold text-[10px] sm:text-xs hover:bg-primary hover:text-black transition-all group shrink-0"
             >
               <span>BUILD WITH US</span>
-              <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
           </div>
         </div>

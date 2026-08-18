@@ -1,8 +1,6 @@
 import { FilmHero } from "@/components/FilmHero";
 import { InteractiveArmScene } from "@/components/InteractiveArmScene";
 import { ServicesSummary } from "@/components/ServicesSummary";
-import { Testimonials } from "@/components/Testimonials";
-import { CTABanner } from "@/components/CTABanner";
 import { SEO } from "@/components/SEO";
 import { SITE_URL, organizationSchema, websiteSchema } from "@/lib/schema";
 
@@ -21,8 +19,6 @@ const Index = () => {
       <InteractiveArmScene />
 
       <ServicesSummary />
-      <Testimonials />
-      <CTABanner />
     </>
   );
 };
