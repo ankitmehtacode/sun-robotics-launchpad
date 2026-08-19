@@ -10,9 +10,10 @@ interface FooterLink {
 
 const footerLinks: Record<string, FooterLink[]> = {
   solutions: [
-    { name: "Industrial Robotics", href: "/robotics#industrial" },
+    { name: "Robotics Overview", href: "/robotics" },
+    { name: "AI Vision Systems", href: "/robotics#ai-brain" },
+    { name: "Multipurpose Robotics", href: "/robotics#multipurpose" },
     { name: "IT Solutions", href: "/sunitservices" },
-    { name: "AI Systems", href: "/robotics#ai-brain" },
     { name: "Products", href: "/products" },
   ],
   company: [

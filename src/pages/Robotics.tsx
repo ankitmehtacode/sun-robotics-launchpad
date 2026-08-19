@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { IndustrialRobotics } from "@/components/IndustrialRobotics";
 import { AIBrain } from "@/components/AIBrain";
 import { MultipurposeRobotics } from "@/components/MultipurposeRobotics";
 import { SEO } from "@/components/SEO";
@@ -61,9 +60,6 @@ const Robotics = () => {
           </motion.div>
         </div>
       </section>
-
-      {/* Industrial Robotics Section */}
-      <IndustrialRobotics />
 
       {/* AI Brain Section */}
       <AIBrain />

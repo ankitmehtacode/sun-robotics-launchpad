@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useMotionValueEvent, useScroll } from "framer-motion";
+import { motion, AnimatePresence, useMotionValueEvent, useScroll } from "framer-motion";
 import {
   FrameSource,
   formatTimecode,
@@ -311,18 +311,63 @@ function ScrubReveal() {
   return (
     <section ref={sectionRef} className="relative" style={{ height: pinDistance }}>
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#0B0C0E]">
-        {/* Loader */}
-        {!ready && (
-          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-4 bg-[#0B0C0E]">
-            <div className="w-48 h-px bg-[#23262D] overflow-hidden">
-              <div
-                className="h-full bg-[#F9931F] transition-[width] duration-200"
-                style={{ width: `${Math.round(loadProgress * 100)}%` }}
-              />
-            </div>
-            <span className="font-mono text-xs tracking-[0.2em] text-[#878D99]">LOADING REEL</span>
-          </div>
-        )}
+        {/* Glassmorphic Logo Loader */}
+        <AnimatePresence>
+          {!ready && (
+            <motion.div
+              initial={{ opacity: 1 }}
+              exit={{ opacity: 0, scale: 0.98 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+              className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-[#0B0C0E] px-4 pointer-events-none"
+            >
+              {/* Ambient Glow */}
+              <div className="absolute w-72 h-72 rounded-full bg-primary/20 blur-[100px] pointer-events-none animate-pulse-slow" />
+
+              {/* Glassmorphic Container Card */}
+              <motion.div
+                initial={{ scale: 0.92, opacity: 0, y: 10 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="relative z-10 flex flex-col items-center p-7 sm:p-9 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.7)] max-w-[280px] sm:max-w-xs w-full text-center"
+              >
+                {/* Logo with Glow Ring */}
+                <div className="relative mb-5 flex items-center justify-center">
+                  <div className="absolute inset-0 rounded-2xl bg-primary/30 blur-xl animate-pulse" />
+                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-black/60 border border-white/15 p-3 flex items-center justify-center backdrop-blur-xl shadow-inner">
+                    <img
+                      src="/logo.png"
+                      alt="Sun Robotics Logo"
+                      className="w-full h-full object-contain filter drop-shadow-[0_0_12px_rgba(249,147,31,0.5)]"
+                    />
+                  </div>
+                </div>
+
+                {/* Brand Title */}
+                <h2 className="text-base sm:text-lg font-display font-bold text-white tracking-tight mb-1">
+                  Sun <span className="text-primary">Robotics</span> & AI
+                </h2>
+                <p className="text-[10px] font-mono text-white/50 uppercase tracking-widest mb-6">
+                  INITIALIZING CORE
+                </p>
+
+                {/* Glass Progress Bar */}
+                <div className="w-full bg-white/5 border border-white/10 rounded-full h-1.5 overflow-hidden p-0.5 mb-3">
+                  <motion.div
+                    className="h-full bg-gradient-to-r from-amber-500 via-primary to-orange-400 rounded-full shadow-[0_0_8px_rgba(249,147,31,0.8)]"
+                    style={{ width: `${Math.max(6, Math.round(loadProgress * 100))}%` }}
+                    transition={{ ease: "easeOut", duration: 0.15 }}
+                  />
+                </div>
+
+                {/* Status Telemetry */}
+                <div className="w-full flex items-center justify-between font-mono text-[10px] text-white/45">
+                  <span className="tracking-wider uppercase">Loading Reel</span>
+                  <span className="text-primary font-bold">{Math.round(loadProgress * 100)}%</span>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Frame canvas */}
         <canvas ref={canvasRef} aria-hidden className="absolute inset-0 w-full h-full" />

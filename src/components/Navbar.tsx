@@ -16,8 +16,8 @@ const navLinks: NavItem[] = [
     name: "Robotics",
     href: "/robotics",
     dropdown: [
-      { name: "Industrial Robots", href: "/robotics#industrial" },
       { name: "AI Vision Systems", href: "/robotics#ai-brain" },
+      { name: "Multipurpose Platforms", href: "/robotics#multipurpose" },
     ],
   },
   { name: "IT Solutions", href: "/sunitservices" },
