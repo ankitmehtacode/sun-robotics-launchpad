@@ -18,7 +18,15 @@ export const organizationSchema = () => ({
   "@type": ["ProfessionalService", "LocalBusiness", "Corporation"],
   "@id": ORG_ID,
   name: ORG_NAME,
-  alternateName: ["Sun Robotics", "Sun Robotics Indore", "Sun Robotics & AI Labs"],
+  alternateName: [
+    "Sun IT Services",
+    "Sun IT Services Indore",
+    "Sun IT Solutions",
+    "Sun IT Solutions Indore",
+    "Sun Robotics",
+    "Sun Robotics Indore",
+    "Sun Robotics & AI Labs",
+  ],
   url: SITE_URL,
   logo: ORG_LOGO,
   image: ORG_LOGO,
@@ -174,6 +182,96 @@ export const faqSchema = (faqs: { question: string; answer: string }[]) => ({
   })),
 });
 
+export const itServicesSchema = () => ({
+  "@context": "https://schema.org",
+  "@type": ["ITService", "ProfessionalService"],
+  "@id": `${SITE_URL}/sunitservices#service`,
+  name: "Sun IT Services",
+  alternateName: [
+    "Sun IT Services Indore",
+    "Sun IT Solutions",
+    "Sun Robotics IT Services",
+    "Sun Robotics Web & App Development",
+  ],
+  description:
+    "Sun IT Services by Sun Robotics & AI is Indore's top IT company offering custom website development, iOS and Android mobile app development, high-throughput cloud APIs, AI-powered business analytics dashboards, and enterprise software engineering.",
+  provider: {
+    "@type": "Organization",
+    "@id": ORG_ID,
+    name: ORG_NAME,
+    url: SITE_URL,
+    logo: ORG_LOGO,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Indraprastha Tower, Rau",
+      addressLocality: "Indore",
+      addressRegion: "Madhya Pradesh",
+      postalCode: "453331",
+      addressCountry: "IN",
+    },
+    telephone: ORG_PHONE,
+    email: ORG_EMAIL,
+  },
+  serviceType: [
+    "Website Development",
+    "Web Application Development",
+    "Mobile App Development",
+    "Custom Software Development",
+    "Cloud Architecture & AWS Services",
+    "AI Dashboards & Machine Learning",
+    "UI/UX Design & Frontend Engineering",
+    "API Development & System Integrations",
+  ],
+  areaServed: [
+    { "@type": "City", name: "Indore" },
+    { "@type": "City", name: "Bhopal" },
+    { "@type": "City", name: "Ujjain" },
+    { "@type": "State", name: "Madhya Pradesh" },
+    { "@type": "Country", name: "India" },
+    { "@type": "Country", name: "United States" },
+    { "@type": "Country", name: "United Kingdom" },
+  ],
+  url: `${SITE_URL}/sunitservices`,
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Sun IT Services Service Catalog",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Website Design & Development in Indore",
+          description: "High-performance React, Next.js, and custom corporate websites.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Mobile App Development (iOS & Android)",
+          description: "Native and React Native cross-platform mobile apps with cloud syncing.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Enterprise Software & Cloud Systems",
+          description: "Custom ERP, CRM, scalable APIs, and database engineering.",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "AI Dashboards & Automation",
+          description: "Machine learning workflows, LLM agents, and business intelligence portals.",
+        },
+      },
+    ],
+  },
+});
+
 export const productListSchema = (
   products: { name: string; category: string; description: string }[]
 ) => ({
@@ -192,3 +290,5 @@ export const productListSchema = (
     },
   })),
 });
+
+

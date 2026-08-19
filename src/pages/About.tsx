@@ -31,25 +31,16 @@ const values = [
     },
 ];
 
-const stats = [
-    { value: "500+", label: "Robots Deployed" },
-    { value: "98%", label: "Client Retention" },
-    { value: "15+", label: "Countries Served" },
-    { value: "24/7", label: "Support Coverage" },
-];
-
 const About = () => {
     const heroRef = useRef(null);
     const visionRef = useRef(null);
     const valuesRef = useRef(null);
     const teamRef = useRef(null); // Added Ref for Team Section
-    const statsRef = useRef(null);
 
     const isHeroInView = useInView(heroRef, { once: true });
     const isVisionInView = useInView(visionRef, { once: true, margin: "-100px" });
     const isValuesInView = useInView(valuesRef, { once: true, margin: "-100px" });
-    const isTeamInView = useInView(teamRef, { once: true, margin: "-100px" }); // Added InView for Team
-    const isStatsInView = useInView(statsRef, { once: true, margin: "-100px" });
+    const isTeamInView = useInView(teamRef, { once: true, margin: "-100px" });
 
     return (
         <>
@@ -220,32 +211,6 @@ const About = () => {
                             </p>
                         </div>
                     </motion.div>
-                </div>
-            </section>
-
-            {/* Stats */}
-            <section className="py-24 relative" ref={statsRef}>
-                <div className="container mx-auto px-4 lg:px-8">
-                    <div className="glass-card p-8 md:p-12 max-w-5xl mx-auto">
-                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-                            {stats.map((stat, index) => (
-                                <motion.div
-                                    key={stat.label}
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    animate={isStatsInView ? { opacity: 1, scale: 1 } : {}}
-                                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                                    className="text-center"
-                                >
-                                    <div className="text-3xl md:text-4xl lg:text-5xl font-display font-bold neon-text mb-2">
-                                        {stat.value}
-                                    </div>
-                                    <div className="text-sm md:text-base text-muted-foreground">
-                                        {stat.label}
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </div>
                 </div>
             </section>
         </>

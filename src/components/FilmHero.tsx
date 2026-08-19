@@ -12,7 +12,7 @@ import {
 
 const FPS = 12;
 const MOBILE_BREAKPOINT = 820;
-const HEADLINE = "One arm. Every machine.";
+const HEADLINE_LINES = ["One arm.", "Every machine."];
 const SUBHEAD = "A modular robotic arm. Revealing soon.";
 
 function useReducedMotion() {
@@ -147,11 +147,12 @@ function StaticReveal() {
         <div className="max-w-2xl text-left">
           <MaskedHeading
             as="h1"
-            heading={HEADLINE}
+            heading={HEADLINE_LINES}
             subhead={SUBHEAD}
-            className="font-display font-medium tracking-[-0.02em] text-[clamp(2.6rem,7vw,6.4rem)] leading-[1.05] text-[#E8E6E1] items-start text-left"
+            className="font-display font-medium tracking-[-0.02em] text-[clamp(2.6rem,7vw,6.4rem)] leading-[1.02]"
             subheadClassName="font-mono text-sm text-[#878D99] mt-4 mb-10 text-left mx-0"
-            gradientSweep={false}
+            variant="white-gold"
+            gradientSweep={true}
           />
           <NotifyForm variant="static" />
         </div>
@@ -316,78 +317,84 @@ function ScrubReveal() {
   return (
     <section ref={sectionRef} className="relative" style={{ height: pinDistance }}>
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#0B0C0E]">
-        {/* Cinematic Aperture Brand Reveal */}
+        {/* Luxury 3D Glassmorphic Loader Module */}
         <AnimatePresence>
           {!ready && (
             <motion.div
               initial={{ opacity: 1 }}
-              exit={{ opacity: 0, scale: 1.05, filter: "blur(10px)" }}
-              transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-[#07080a] px-4 pointer-events-none overflow-hidden"
+              exit={{ opacity: 0, scale: 1.06, filter: "blur(16px)" }}
+              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-[#07080A] px-4 pointer-events-none overflow-hidden"
             >
-              {/* Ethereal Atmospheric Background Lights */}
-              <div className="absolute w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-amber-500/10 via-primary/15 to-transparent blur-[120px] pointer-events-none animate-pulse-slow" />
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#07080a_80%)] pointer-events-none" />
+              {/* Deep Cinematic Ambient Glows */}
+              <div className="absolute w-[600px] h-[600px] rounded-full bg-gradient-to-tr from-[#F9931F]/15 via-blue-500/5 to-transparent blur-[140px] pointer-events-none" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#07080A_85%)] pointer-events-none" />
 
-              {/* Centerpiece: Floating Glass Disc & Rotating Aperture Orbit */}
+              {/* Centerpiece: Luxury 3D Glassmorphic Emblem Pod */}
               <div className="relative flex flex-col items-center">
-                {/* Orbital Rings */}
-                <div className="relative w-28 h-28 sm:w-36 sm:h-36 flex items-center justify-center">
-                  {/* Outer Dashed Orbit */}
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ repeat: Infinity, duration: 24, ease: "linear" }}
-                    className="absolute inset-0 rounded-full border border-dashed border-amber-500/25"
-                  />
+                
+                {/* Floating 3D Optical Glass Tile */}
+                <motion.div
+                  initial={{ scale: 0.92, opacity: 0, y: 15 }}
+                  animate={{ scale: 1, opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                  className="relative w-32 h-32 sm:w-40 sm:h-40 flex items-center justify-center"
+                >
+                  {/* Outer Ambient Caustics Aura */}
+                  <div className="absolute inset-0 rounded-[32px] bg-gradient-to-tr from-[#F9931F]/30 via-transparent to-blue-500/20 blur-2xl pointer-events-none" />
 
-                  {/* Secondary Counter-Rotating Ring with Accent Dot */}
-                  <motion.div
-                    animate={{ rotate: -360 }}
-                    transition={{ repeat: Infinity, duration: 16, ease: "linear" }}
-                    className="absolute inset-2 rounded-full border border-white/10"
-                  >
-                    <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_#f59e0b]" />
-                  </motion.div>
+                  {/* Refractive Glassmorphic Chassis */}
+                  <div className="relative w-full h-full rounded-[28px] p-5 sm:p-6 bg-gradient-to-br from-white/[0.12] via-white/[0.04] to-black/40 border border-white/25 backdrop-blur-3xl shadow-[0_25px_60px_rgba(0,0,0,0.85),inset_0_1px_2px_rgba(255,255,255,0.4),0_0_35px_rgba(249,147,31,0.25)] overflow-hidden flex items-center justify-center">
+                    
+                    {/* Inner Warm Amber Radial Core Glow */}
+                    <div className="absolute inset-4 rounded-full bg-[#F9931F]/20 blur-xl pointer-events-none" />
 
-                  {/* Core Glassmorphic Lens Pod */}
-                  <motion.div
-                    initial={{ scale: 0.88, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
-                    className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white/[0.04] border border-white/20 backdrop-blur-2xl flex items-center justify-center shadow-[0_0_50px_rgba(245,158,11,0.25)] p-4"
-                  >
-                    {/* Inner Golden Radial Glow */}
-                    <div className="absolute inset-2 rounded-full bg-primary/20 blur-md pointer-events-none" />
+                    {/* Prismatic Corner Reflections */}
+                    <div className="absolute -top-10 -left-10 w-24 h-24 bg-[#F9931F]/30 rounded-full blur-xl pointer-events-none" />
+                    <div className="absolute -bottom-10 -right-10 w-24 h-24 bg-blue-500/20 rounded-full blur-xl pointer-events-none" />
 
-                    {/* Brand Logo */}
+                    {/* Official Sun Robotics Logo */}
                     <img
                       src="/logo.png"
-                      alt="Sun Robotics Logo"
-                      className="relative z-10 w-full h-full object-contain filter drop-shadow-[0_0_16px_rgba(249,147,31,0.6)]"
+                      alt="Sun Robotics & AI Logo"
+                      className="relative z-10 w-full h-full object-contain filter drop-shadow-[0_4px_16px_rgba(249,147,31,0.5)]"
                     />
-                  </motion.div>
-                </div>
 
-                {/* Minimalist Masked Brandmark */}
-                <div className="mt-8 flex flex-col items-center text-center">
-                  <MaskedHeading
-                    as="span"
-                    heading="SUN ROBOTICS & AI"
-                    delay={0.15}
-                    duration={0.8}
-                    className="font-mono text-xs sm:text-sm tracking-[0.4em] uppercase font-bold"
-                    gradientSweep={true}
-                  />
-
-                  {/* Hairline Luminous Shimmer Line */}
-                  <div className="mt-4 w-28 h-[1.5px] bg-white/10 relative overflow-hidden rounded-full">
+                    {/* Dynamic Specular Shimmer Glint */}
                     <motion.div
-                      animate={{ x: ["-100%", "100%"] }}
-                      transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
-                      className="w-14 h-full bg-gradient-to-r from-transparent via-primary to-transparent shadow-[0_0_10px_#f59e0b]"
+                      animate={{ x: ["-150%", "200%"] }}
+                      transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut", repeatDelay: 0.8 }}
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12 pointer-events-none"
+                    />
+
+                    {/* Edge Glass Bevel Glint */}
+                    <div className="absolute inset-0 rounded-[28px] border border-white/20 pointer-events-none" />
+                  </div>
+                </motion.div>
+
+                {/* Minimalist Hardware Telemetry & Progress Track */}
+                <div className="mt-8 flex flex-col items-center text-center">
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-xs tracking-[0.35em] text-[#E8E6E1] uppercase font-bold">
+                      SUN ROBOTICS & AI
+                    </span>
+                  </div>
+
+                  {/* High-Precision Progress Bar */}
+                  <div className="mt-4 w-36 h-[2px] bg-white/[0.08] relative overflow-hidden rounded-full">
+                    <motion.div
+                      initial={{ width: "0%" }}
+                      animate={{ width: `${Math.round(Math.max(loadProgress * 100, 15))}%` }}
+                      transition={{ ease: "easeOut", duration: 0.2 }}
+                      className="h-full bg-gradient-to-r from-[#F9931F] to-[#ffd188] shadow-[0_0_12px_#F9931F]"
                     />
                   </div>
+
+                  <div className="mt-2.5 font-mono text-[10px] tracking-[0.25em] text-[#878D99] uppercase">
+                    INITIALIZING // {Math.round(Math.max(loadProgress * 100, 15))}%
+                  </div>
                 </div>
+
               </div>
             </motion.div>
           )}
@@ -451,11 +458,13 @@ function ScrubReveal() {
             <div className="max-w-2xl text-left">
               <MaskedHeading
                 as="h1"
-                heading={HEADLINE}
+                heading={HEADLINE_LINES}
                 subhead={SUBHEAD}
-                className="font-display font-medium tracking-[-0.02em] text-[clamp(2.6rem,7vw,6.4rem)] leading-[1.05] text-[#E8E6E1] items-start text-left"
+                forceAnimate={showTitleCard}
+                className="font-display font-medium tracking-[-0.02em] text-[clamp(2.6rem,7vw,6.4rem)] leading-[1.02]"
                 subheadClassName="font-mono text-sm text-[#878D99] mt-4 mb-10 text-left mx-0"
-                gradientSweep={false}
+                variant="white-gold"
+                gradientSweep={true}
               />
               <NotifyForm variant="overlay" />
             </div>

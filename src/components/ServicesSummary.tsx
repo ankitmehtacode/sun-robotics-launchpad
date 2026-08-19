@@ -15,9 +15,9 @@ const services = [
   {
     icon: Code,
     number: "02",
-    title: "IT Solutions",
-    description: "Custom APIs, real-time telemetry dashboards, and cloud/edge integration for fleet-scale deployments.",
-    spec: "Sub-ms API latency · 99.99% uptime SLA",
+    title: "Sun IT Services",
+    description: "Custom website development, iOS/Android apps, scalable cloud APIs, and AI business intelligence portals.",
+    spec: "Sub-second load · Bank-grade security",
     href: "/sunitservices",
   },
   {

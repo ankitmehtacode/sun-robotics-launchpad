@@ -20,7 +20,7 @@ const navLinks: NavItem[] = [
       { name: "Multipurpose Platforms", href: "/robotics#multipurpose" },
     ],
   },
-  { name: "IT Solutions", href: "/sunitservices" },
+  { name: "IT Services", href: "/sunitservices" },
   { name: "Products", href: "/products" },
   { name: "Careers", href: "/careers" },
   { name: "Contact", href: "/contact" },

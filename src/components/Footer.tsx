@@ -13,7 +13,7 @@ const footerLinks: Record<string, FooterLink[]> = {
     { name: "Robotics Overview", href: "/robotics" },
     { name: "AI Vision Systems", href: "/robotics#ai-brain" },
     { name: "Multipurpose Robotics", href: "/robotics#multipurpose" },
-    { name: "IT Solutions", href: "/sunitservices" },
+    { name: "Sun IT Services", href: "/sunitservices" },
     { name: "Products", href: "/products" },
   ],
   company: [

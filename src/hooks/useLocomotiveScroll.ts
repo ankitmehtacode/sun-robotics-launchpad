@@ -20,6 +20,7 @@ export const SECTION_NODES = [
   { id: "node-benchmarks", label: "04 · ARCHITECTURE", short: "04 ARCH" },
   { id: "node-tech", label: "05 · TECHNOLOGIES", short: "05 TECH" },
   { id: "node-services", label: "06 · SERVICES", short: "06 SERVICES" },
+  { id: "node-faqs", label: "07 · FAQS", short: "07 FAQS" },
 ];
 
 export const useLocomotiveScroll = () => {

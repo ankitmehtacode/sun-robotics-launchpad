@@ -2,11 +2,12 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { ReactLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
-import { ArrowDown, ExternalLink, Smartphone, Server, Database, Cloud, Sparkles, Layers } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowDown, ExternalLink, Smartphone, Server, Database, Cloud, Sparkles, Layers, HelpCircle, MessageCircle, ArrowRight } from "lucide-react";
 import BorderGlow from "@/components/ui/BorderGlow";
 import ExplorerShowcase from "@/components/ExplorerShowcase";
 import { SEO } from "@/components/SEO";
-import { SITE_URL, organizationSchema, serviceSchema, clientProjectSchema, faqSchema, breadcrumbSchema } from "@/lib/schema";
+import { SITE_URL, organizationSchema, itServicesSchema, serviceSchema, clientProjectSchema, faqSchema, breadcrumbSchema } from "@/lib/schema";
 import { portfolioProjects } from "@/components/ExplorerShowcase";
 import { useLocomotiveScroll } from "@/hooks/useLocomotiveScroll";
 import { LocomotiveHUD } from "@/components/it-solutions/LocomotiveHUD";
@@ -15,52 +16,94 @@ import { KineticMarqueeStream } from "@/components/it-solutions/KineticMarqueeSt
 import { InteractiveArchitectureConsole } from "@/components/it-solutions/InteractiveArchitectureConsole";
 import { GradientBlinds } from "@/components/ui/GradientBlinds";
 import { MaskedHeading } from "@/components/ui/MaskedHeading";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+
+const itFaqs = [
+  {
+    id: "faq-1",
+    question: "What is Sun IT Services and how does it connect with Sun Robotics?",
+    answer:
+      "Sun IT Services is the specialized software engineering and digital technology division of Sun Robotics & AI, headquartered in Indore, India. While our robotics wing develops advanced hardware automation and industrial platforms, Sun IT Services engineers custom web applications, native & cross-platform mobile apps, cloud backends, and AI analytics portals for businesses worldwide.",
+  },
+  {
+    id: "faq-2",
+    question: "What custom website development services does Sun IT Services offer in Indore?",
+    answer:
+      "We build high-performance, responsive custom websites ranging from SaaS portals and enterprise corporate platforms to high-converting eCommerce stores. We specialize in modern frameworks like React 19, Next.js 15, TypeScript, and Tailwind CSS with sub-second page load times, bank-grade security, and top-tier SEO architecture.",
+  },
+  {
+    id: "faq-3",
+    question: "Can Sun IT Services build custom iOS and Android mobile apps?",
+    answer:
+      "Yes. We engineer production-ready mobile applications using React Native and Flutter for universal iOS and Android deployment, as well as native Swift and Kotlin for hardware-intensive applications. Every mobile app features offline caching, real-time cloud sync, push notifications, and biometric authentication.",
+  },
+  {
+    id: "faq-4",
+    question: "Do you provide custom ERP, CRM, and API integration for existing businesses?",
+    answer:
+      "Absolutely. We develop bespoke enterprise resource planning (ERP) systems, customer management (CRM) portals, automated billing systems, and high-throughput REST / GraphQL / gRPC APIs that seamlessly integrate with your existing databases, third-party services (payment gateways, WhatsApp API, logistics), and internal workflows.",
+  },
+  {
+    id: "faq-5",
+    question: "How does Sun IT Services incorporate AI and Machine Learning into software?",
+    answer:
+      "We integrate custom AI automation pipelines, intelligent LLM assistants, natural language processing tools, predictive analytics dashboards, and real-time computer vision models tailored to automate repetitive tasks, elevate customer support, and extract actionable intelligence from your business data.",
+  },
+  {
+    id: "faq-6",
+    question: "What is your software development process and typical timeline?",
+    answer:
+      "We follow an agile sprint-based engineering workflow: Discovery & Architecture Planning → UI/UX Prototyping in Figma → Full-Stack Engineering → Automated QA & Security Audits → Deployment & Post-Launch Support. Timelines range from 2–4 weeks for fast-launch web applications to 8–12 weeks for complex multi-platform enterprise ecosystems.",
+  },
+  {
+    id: "faq-7",
+    question: "Do you offer ongoing cloud hosting, server management, and 24/7 technical support?",
+    answer:
+      "Yes. Sun IT Services provides complete DevOps, AWS/GCP cloud infrastructure management, 24/7 uptime monitoring, automated daily database backups, security patches, and continuous feature updates to keep your software fast, secure, and scalable.",
+  },
+  {
+    id: "faq-8",
+    question: "Where is Sun IT Services located, and how can we start a project?",
+    answer:
+      "Sun IT Services is located at Indraprastha Tower, Rau, Indore, Madhya Pradesh, India (453331). You can start a project by clicking 'Start a Project', filling out our contact form, or reaching out via WhatsApp to schedule a free technical discovery call with our engineering team.",
+  },
+];
 
 const structuredData = [
   organizationSchema(),
+  itServicesSchema(),
   serviceSchema({
-    name: "Website Development in Indore",
+    name: "Sun IT Services - Website Development in Indore",
     description:
       "High-speed custom website design and development for businesses in Indore, Madhya Pradesh, and across India, from corporate platforms to responsive e-commerce stores.",
     serviceType: "Website Development",
-    provider: "Sun Robotics & AI",
+    provider: "Sun IT Services",
     areaServed: "Indore, Madhya Pradesh, India",
     url: `${SITE_URL}/sunitservices`,
   }),
   serviceSchema({
-    name: "App Development in Indore",
+    name: "Sun IT Services - App Development in Indore",
     description:
       "Native iOS and Android mobile app development with high performance, offline support, and seamless cloud integration.",
     serviceType: "Mobile App Development",
-    provider: "Sun Robotics & AI",
+    provider: "Sun IT Services",
     areaServed: "Indore, Madhya Pradesh, India",
     url: `${SITE_URL}/sunitservices`,
   }),
   serviceSchema({
-    name: "Custom Software & AI Solutions in Indore",
+    name: "Sun IT Services - Custom Software & AI Solutions in Indore",
     description:
       "Custom enterprise software, API integrations, real-time IoT dashboards, and AI automation built to streamline your operations.",
     serviceType: "Software Development",
-    provider: "Sun Robotics & AI",
+    provider: "Sun IT Services",
     areaServed: "Indore, Madhya Pradesh, India",
     url: `${SITE_URL}/sunitservices`,
   }),
   clientProjectSchema(portfolioProjects),
-  faqSchema([
-    {
-      question: "What IT and software development services do you offer in Indore?",
-      answer:
-        "Sun Robotics & AI provides end-to-end IT solutions including custom website development, iOS and Android mobile app development, high-throughput backend APIs, AI-powered business analytics dashboards, cloud hosting, and IoT hardware integration.",
-    },
-    {
-      question: "Can Sun Robotics & AI develop custom mobile apps and web platforms for my business in Indore?",
-      answer:
-        "Yes, Sun Robotics & AI engineers custom, end-to-end web and mobile applications tailored to your specific business requirements with 24/7 reliability, bank-grade encryption, and seamless scaling.",
-    },
-  ]),
+  faqSchema(itFaqs),
   breadcrumbSchema([
     { name: "Home", path: "/" },
-    { name: "IT Solutions", path: "/sunitservices" },
+    { name: "Sun IT Services", path: "/sunitservices" },
   ]),
 ];
 
@@ -184,9 +227,9 @@ const ITSolutionsPage = () => {
     <ReactLenis root options={{ lerp: 0.08, duration: 1.4, smoothWheel: true }}>
       <div ref={pageRef} className="bg-[#050608] text-foreground selection:bg-primary selection:text-black">
         <SEO
-          title="Best Website & App Development Company in Indore | Custom IT Solutions"
-          description="Sun Robotics & AI is Indore's top website and mobile app development company. We build high-speed web apps, AI dashboards, custom APIs, and secure cloud software for growing businesses."
-          keywords="website development indore, best website company indore, app development company in indore, mobile app developers indore, custom software development indore, IT company in indore, web design indore, AI dashboards indore, react nextjs developers indore"
+          title="Sun IT Services | Best Website & App Development Company in Indore"
+          description="Sun IT Services by Sun Robotics & AI is Indore's leading IT company for custom website development, iOS & Android mobile apps, AI dashboards, and enterprise cloud software."
+          keywords="Sun IT Services, Sun IT Services Indore, sun it services, best website development company in indore, best IT company in indore, app development company indore, mobile app developers indore, custom software development indore, web design indore, React Next.js developers indore, Sun Robotics IT services"
           canonical={`${SITE_URL}/sunitservices`}
           structuredData={structuredData}
         />
@@ -435,6 +478,100 @@ const ITSolutionsPage = () => {
                 </motion.div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* SECTION 7: FREQUENTLY ASKED QUESTIONS */}
+        <section id="node-faqs" className="py-28 relative overflow-hidden bg-[#050608] border-t border-white/5">
+          <div className="container mx-auto px-4 lg:px-8 max-w-4xl relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6 }}
+              className="text-center mb-16"
+            >
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-primary text-[10px] font-mono uppercase tracking-widest mb-4">
+                <HelpCircle className="w-3 h-3 text-primary" />
+                <span>[ 07 ] FREQUENTLY ASKED QUESTIONS</span>
+              </div>
+              <h2 className="text-3xl sm:text-5xl font-display font-semibold tracking-tight text-white mb-3">
+                Questions & Answers
+              </h2>
+              <p className="text-sm md:text-base text-white/60 max-w-xl mx-auto">
+                Everything you need to know about Sun IT Services, custom software engineering, technologies, and partnering with us.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="space-y-4"
+            >
+              <Accordion type="single" collapsible className="w-full space-y-3">
+                {itFaqs.map((faq, index) => (
+                  <AccordionItem
+                    key={faq.id}
+                    value={faq.id}
+                    className="group border border-white/10 rounded-2xl bg-white/[0.02] backdrop-blur-sm px-6 py-1 transition-all duration-300 hover:border-primary/40 hover:bg-white/[0.04] data-[state=open]:border-primary/50 data-[state=open]:bg-white/[0.05]"
+                  >
+                    <AccordionTrigger className="text-left text-base sm:text-lg font-display font-medium text-white hover:no-underline py-5 group-hover:text-primary transition-colors">
+                      <span className="flex items-center gap-3 pr-4">
+                        <span className="font-mono text-xs text-primary/70 shrink-0">
+                          {String(index + 1).padStart(2, "0")}.
+                        </span>
+                        <span>{faq.question}</span>
+                      </span>
+                    </AccordionTrigger>
+                    <AccordionContent className="text-sm sm:text-base text-white/70 leading-relaxed pb-5 pl-7 pt-1 font-sans">
+                      {faq.answer}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </motion.div>
+
+            {/* Direct Project Consultation Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="mt-16 p-8 rounded-3xl border border-primary/30 bg-gradient-to-br from-primary/10 via-black/60 to-black/90 backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-6"
+            >
+              <div>
+                <div className="text-[10px] font-mono uppercase tracking-widest text-primary font-bold mb-1">
+                  // NEED A CUSTOM ARCHITECTURE?
+                </div>
+                <h3 className="text-xl sm:text-2xl font-display font-semibold text-white">
+                  Have a specific question or custom requirement?
+                </h3>
+                <p className="text-sm text-white/60 mt-1 max-w-lg">
+                  Speak directly with our senior software engineers in Indore to discuss scoping, technology stacks, or architecture design.
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full sm:w-auto">
+                <Link
+                  to="/contact"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-primary text-black font-semibold text-sm hover:brightness-110 active:scale-95 transition-all shadow-[0_0_25px_rgba(249,115,22,0.3)]"
+                >
+                  <span>Start a Project</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <a
+                  href="https://wa.me/918144426440"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-white/5 border border-white/15 text-white text-sm font-medium hover:bg-white/10 hover:border-white/30 active:scale-95 transition-all"
+                >
+                  <MessageCircle className="w-4 h-4 text-[#25D366]" />
+                  <span>WhatsApp</span>
+                </a>
+              </div>
+            </motion.div>
           </div>
         </section>
       </div>
