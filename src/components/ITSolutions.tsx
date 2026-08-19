@@ -153,7 +153,7 @@ export const ITSolutions = () => {
         {/* Action Link to Full Locomotive IT Experience */}
         <div className="text-center mb-16">
           <Link
-            to="/it-solutions"
+            to="/sunitservices"
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-primary text-black font-display font-bold text-sm hover:bg-amber-400 shadow-[0_0_24px_hsl(32,95%,55%,0.35)] transition-all group"
           >
             <span>Launch Locomotive Architecture Deck</span>

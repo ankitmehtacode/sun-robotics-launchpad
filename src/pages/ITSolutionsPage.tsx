@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { ReactLenis } from "lenis/react";
 import "lenis/dist/lenis.css";
-import { ArrowDown, ExternalLink } from "lucide-react";
+import { ArrowDown, ExternalLink, Smartphone, Server, Database, Cloud, Sparkles, Layers } from "lucide-react";
 import BorderGlow from "@/components/ui/BorderGlow";
 import ExplorerShowcase from "@/components/ExplorerShowcase";
 import { SEO } from "@/components/SEO";
@@ -23,30 +23,34 @@ const structuredData = [
     description:
       "High-speed custom website design and development for businesses in Indore, Madhya Pradesh, and across India, from corporate platforms to responsive e-commerce stores.",
     serviceType: "Website Development",
+    provider: "Sun Robotics & AI",
+    areaServed: "Indore, Madhya Pradesh, India",
+    url: `${SITE_URL}/sunitservices`,
   }),
   serviceSchema({
-    name: "Mobile App Development in Indore",
+    name: "App Development in Indore",
     description:
-      "Native iOS and Android mobile app development, hybrid web apps, and enterprise management dashboards built in Indore.",
-    serviceType: "Mobile Application Development",
+      "Native iOS and Android mobile app development with high performance, offline support, and seamless cloud integration.",
+    serviceType: "Mobile App Development",
+    provider: "Sun Robotics & AI",
+    areaServed: "Indore, Madhya Pradesh, India",
+    url: `${SITE_URL}/sunitservices`,
   }),
   serviceSchema({
-    name: "Custom Software & IT Solutions in Indore",
+    name: "Custom Software & AI Solutions in Indore",
     description:
-      "End-to-end custom software development, secure cloud infrastructure, high-throughput APIs, and smart AI dashboards engineered by Sun Robotics & AI in Indore.",
-    serviceType: "Custom Software Development",
+      "Custom enterprise software, API integrations, real-time IoT dashboards, and AI automation built to streamline your operations.",
+    serviceType: "Software Development",
+    provider: "Sun Robotics & AI",
+    areaServed: "Indore, Madhya Pradesh, India",
+    url: `${SITE_URL}/sunitservices`,
   }),
   clientProjectSchema(portfolioProjects),
   faqSchema([
     {
-      question: "Which is the best website development company in Indore?",
+      question: "What IT and software development services do you offer in Indore?",
       answer:
-        "Sun Robotics & AI is a leading website and software development company based in Indore, Madhya Pradesh, specializing in high-speed web apps, React/Next.js platforms, mobile apps, and custom enterprise software.",
-    },
-    {
-      question: "What software and web development services does Sun Robotics & AI provide in Indore?",
-      answer:
-        "Sun Robotics & AI provides custom website development, mobile application development (iOS & Android), smart AI dashboards, cloud hosting infrastructure, IoT device synchronization, and enterprise API engineering.",
+        "Sun Robotics & AI provides end-to-end IT solutions including custom website development, iOS and Android mobile app development, high-throughput backend APIs, AI-powered business analytics dashboards, cloud hosting, and IoT hardware integration.",
     },
     {
       question: "Can Sun Robotics & AI develop custom mobile apps and web platforms for my business in Indore?",
@@ -56,22 +60,69 @@ const structuredData = [
   ]),
   breadcrumbSchema([
     { name: "Home", path: "/" },
-    { name: "IT Solutions", path: "/it-solutions" },
+    { name: "IT Solutions", path: "/sunitservices" },
   ]),
 ];
 
-const techStack = [
-  { code: "SYS-01", name: "React & Next.js", domain: "Web Apps", desc: "Fast, modern websites and interactive web applications." },
-  { code: "SYS-02", name: "Node.js & Python", domain: "Backend", desc: "Secure backends and high-speed data processing engines." },
-  { code: "SYS-03", name: "iOS & Android", domain: "Mobile", desc: "Smooth, responsive mobile applications for all devices." },
-  { code: "SYS-04", name: "AI & Machine Learning", domain: "AI Core", desc: "Smart data analytics, predictions, and automated insights." },
-  { code: "SYS-05", name: "AWS & Google Cloud", domain: "Cloud", desc: "Reliable cloud hosting that keeps your services running 24/7." },
-  { code: "SYS-06", name: "PostgreSQL & Redis", domain: "Databases", desc: "Secure, high-speed data storage with automated daily backups." },
-  { code: "SYS-07", name: "Docker & Kubernetes", domain: "DevOps", desc: "Automated scaling to handle sudden traffic spikes smoothly." },
-  { code: "SYS-08", name: "IoT & Hardware Sync", domain: "IoT", desc: "Connecting physical sensors and machinery to cloud dashboards." },
+const modernTechPillars = [
+  {
+    serial: "01",
+    category: "FRONTEND & MOBILE",
+    title: "Client & Mobile Platforms",
+    desc: "Sub-second SSR, native mobile runtimes, and silky 120 FPS component architecture.",
+    metric: "< 12ms TTFB",
+    icon: Smartphone,
+    tools: [
+      { name: "Next.js 15", tag: "App Router / SSR" },
+      { name: "React 19", tag: "Concurrent UI" },
+      { name: "TypeScript", tag: "Strict Types" },
+      { name: "React Native", tag: "iOS & Android" },
+      { name: "Tailwind CSS", tag: "Design Tokens" },
+    ],
+  },
+  {
+    serial: "02",
+    category: "BACKEND & CORE",
+    title: "High-Throughput Services",
+    desc: "Non-blocking event loops, type-safe API contracts, and low-latency microservices.",
+    metric: "45,000 req/s",
+    icon: Server,
+    tools: [
+      { name: "Node.js & Bun", tag: "Async Runtimes" },
+      { name: "Python / FastAPI", tag: "AI Inference" },
+      { name: "GraphQL & REST", tag: "Strict Schema" },
+      { name: "gRPC", tag: "Protobuf RPC" },
+    ],
+  },
+  {
+    serial: "03",
+    category: "DATA & PERSISTENCE",
+    title: "Relational & Real-Time Storage",
+    desc: "ACID-compliant storage, sub-millisecond in-memory caching, and vector search embeddings.",
+    metric: "Sub-ms Cache",
+    icon: Database,
+    tools: [
+      { name: "PostgreSQL", tag: "Relational Core" },
+      { name: "Redis", tag: "In-Memory Cache" },
+      { name: "Vector DBs", tag: "AI Embeddings" },
+      { name: "Prisma & Drizzle", tag: "Type-Safe ORM" },
+    ],
+  },
+  {
+    serial: "04",
+    category: "CLOUD & EDGE",
+    title: "Cloud Security & IoT Telemetry",
+    desc: "Multi-region serverless deployment, automated Docker orchestration, and deterministic IoT control.",
+    metric: "99.99% Uptime",
+    icon: Cloud,
+    tools: [
+      { name: "AWS & GCP", tag: "Multi-AZ Cloud" },
+      { name: "Cloudflare", tag: "Global CDN Edge" },
+      { name: "Docker", tag: "Micro-Containers" },
+      { name: "MQTT & WebSockets", tag: "Hardware Sync" },
+    ],
+  },
 ];
-
-const categories = ["ALL", "Web Apps", "Backend", "Mobile", "AI Core", "Cloud", "Databases", "IoT"];
 
 const engineeringServices = [
   {
@@ -114,8 +165,6 @@ const ITSolutionsPage = () => {
   const techRef = useRef(null);
   const additionalRef = useRef(null);
 
-  const [activeCategory, setActiveCategory] = useState("ALL");
-
   const isHeaderInView = useInView(headerRef, { once: true });
   const isTechInView = useInView(techRef, { once: true, margin: "-100px" });
   const isAdditionalInView = useInView(additionalRef, { once: true, margin: "-100px" });
@@ -131,11 +180,6 @@ const ITSolutionsPage = () => {
     scrollToSection,
   } = useLocomotiveScroll();
 
-  const filteredTech =
-    activeCategory === "ALL"
-      ? techStack
-      : techStack.filter((t) => t.domain === activeCategory);
-
   return (
     <ReactLenis root options={{ lerp: 0.08, duration: 1.4, smoothWheel: true }}>
       <div ref={pageRef} className="bg-[#050608] text-foreground selection:bg-primary selection:text-black">
@@ -143,7 +187,7 @@ const ITSolutionsPage = () => {
           title="Best Website & App Development Company in Indore | Custom IT Solutions"
           description="Sun Robotics & AI is Indore's top website and mobile app development company. We build high-speed web apps, AI dashboards, custom APIs, and secure cloud software for growing businesses."
           keywords="website development indore, best website company indore, app development company in indore, mobile app developers indore, custom software development indore, IT company in indore, web design indore, AI dashboards indore, react nextjs developers indore"
-          canonical={`${SITE_URL}/it-solutions`}
+          canonical={`${SITE_URL}/sunitservices`}
           structuredData={structuredData}
         />
 
@@ -250,79 +294,91 @@ const ITSolutionsPage = () => {
         {/* SECTION 4: ARCHITECTURAL COMPARISON */}
         <InteractiveArchitectureConsole />
 
-        {/* SECTION 5: TECH MATRIX (Editorial List) */}
-        <section id="node-tech" className="py-28 relative overflow-hidden" ref={techRef}>
-          <div className="container mx-auto px-4 lg:px-8 relative z-10 max-w-5xl">
+        {/* SECTION 5: MODERN TOOLBOX & TECH ECOSYSTEM */}
+        <section id="node-tech" className="py-24 sm:py-32 relative overflow-hidden" ref={techRef}>
+          <div className="container mx-auto px-4 lg:px-8 relative z-10 max-w-6xl">
+            {/* Header */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={isTechInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6 }}
-              className="text-center mb-16"
+              className="text-center mb-12 sm:mb-16"
             >
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-primary text-[10px] font-mono uppercase tracking-widest mb-4">
                 <span>[ 05 ] MODERN TOOLBOX</span>
               </div>
               <h2 className="text-3xl sm:text-5xl font-display font-semibold tracking-tight text-white mb-3">
-                Technologies We Use
+                Modern Tech Ecosystem
               </h2>
-              <p className="text-sm md:text-base text-white/60 max-w-xl mx-auto">
-                Industry-standard tools and frameworks chosen for speed, reliability, and security.
+              <p className="text-sm md:text-base text-white/60 max-w-xl mx-auto font-sans">
+                Curated, industry-standard frameworks and distributed cloud tools chosen for deterministic speed and security.
               </p>
-
-              {/* Category Filter Chips */}
-              <div className="flex flex-wrap items-center justify-center gap-2 mt-8">
-                {categories.map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => setActiveCategory(cat)}
-                    className={`px-4 py-1.5 rounded-full text-xs font-mono transition-all ${
-                      activeCategory === cat
-                        ? "bg-primary text-black font-bold shadow-[0_0_12px_hsl(32,95%,55%,0.5)]"
-                        : "bg-white/5 text-white/60 hover:text-white hover:bg-white/10"
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div>
             </motion.div>
 
-            {/* Sleek Editorial Rows */}
+            {/* 2x2 Bento Grid */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isTechInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="divide-y divide-white/10 border-y border-white/10"
+              className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6"
             >
-              {filteredTech.map((tech) => (
-                <div
-                  key={tech.code}
-                  className="py-5 px-4 flex flex-col md:flex-row md:items-center justify-between gap-4 hover:bg-white/[0.02] transition-colors group"
-                >
-                  <div className="flex items-start md:items-center gap-4">
-                    <span className="text-[11px] font-mono text-primary font-bold w-16 shrink-0">
-                      {tech.code}
-                    </span>
-                    <div>
-                      <h3 className="text-lg font-display font-semibold text-white group-hover:text-primary transition-colors">
-                        {tech.name}
-                      </h3>
-                      <p className="text-xs text-white/50 mt-0.5">
-                        {tech.desc}
-                      </p>
-                    </div>
-                  </div>
+              {modernTechPillars.map((pillar) => {
+                const IconComponent = pillar.icon;
+                return (
+                  <BorderGlow
+                    key={pillar.serial}
+                    className="rounded-2xl overflow-hidden shadow-xl"
+                    borderRadius={16}
+                    glowColor="32 95 55"
+                    colors={["#f59e0b", "#ea580c", "#d97706"]}
+                    glowIntensity={0.5}
+                    fillOpacity={0.4}
+                  >
+                    <div className="p-5 sm:p-7 bg-[#080a0f]/90 backdrop-blur-xl h-full flex flex-col justify-between relative group hover:bg-[#0a0d14] transition-colors">
+                      {/* Top Row: Category + Metric badge */}
+                      <div>
+                        <div className="flex items-center justify-between gap-2 mb-4">
+                          <div className="flex items-center gap-2.5">
+                            <div className="w-8 h-8 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                              <IconComponent className="w-4 h-4" />
+                            </div>
+                            <span className="text-[10px] sm:text-[11px] font-mono text-primary font-bold uppercase tracking-wider">
+                              // {pillar.category}
+                            </span>
+                          </div>
+                          <span className="px-2.5 py-0.5 rounded-full bg-white/[0.04] border border-white/10 text-[9px] sm:text-[10px] font-mono text-emerald-400 font-semibold">
+                            {pillar.metric}
+                          </span>
+                        </div>
 
-                  <div className="flex items-center gap-4 self-end md:self-center shrink-0">
-                    <span className="px-2.5 py-1 rounded text-[10px] font-mono bg-white/5 text-white/60">
-                      {tech.domain}
-                    </span>
-                    <span className="text-[10px] font-mono text-emerald-400">
-                      READY
-                    </span>
-                  </div>
-                </div>
-              ))}
+                        <h3 className="text-xl sm:text-2xl font-display font-bold text-white mb-2 tracking-tight">
+                          {pillar.title}
+                        </h3>
+                        <p className="text-xs sm:text-sm text-white/65 font-sans leading-relaxed mb-6">
+                          {pillar.desc}
+                        </p>
+                      </div>
+
+                      {/* Tool Tags */}
+                      <div className="flex flex-wrap gap-2 pt-4 border-t border-white/10">
+                        {pillar.tools.map((tool) => (
+                          <div
+                            key={tool.name}
+                            className="px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/8 hover:border-primary/40 hover:bg-white/[0.06] transition-all flex items-center gap-1.5"
+                          >
+                            <span className="text-xs font-sans font-medium text-white">
+                              {tool.name}
+                            </span>
+                            <span className="text-[9px] font-mono text-white/40">
+                              · {tool.tag}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </BorderGlow>
+                );
+              })}
             </motion.div>
           </div>
         </section>

@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet, Navigate } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -56,7 +56,8 @@ const App = () => (
                     <Route element={<PublicLayout />}>
                         <Route path="/" element={<Index />} />
                         <Route path="/robotics" element={<Robotics />} />
-                        <Route path="/it-solutions" element={<ITSolutionsPage />} />
+                        <Route path="/sunitservices" element={<ITSolutionsPage />} />
+                        <Route path="/it-solutions" element={<Navigate to="/sunitservices" replace />} />
                         <Route path="/products" element={<Products />} />
                         <Route path="/contact" element={<ContactPage />} />
                         <Route path="/about" element={<About />} />

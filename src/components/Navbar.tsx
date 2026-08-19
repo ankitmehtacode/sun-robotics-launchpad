@@ -20,7 +20,7 @@ const navLinks: NavItem[] = [
       { name: "AI Vision Systems", href: "/robotics#ai-brain" },
     ],
   },
-  { name: "IT Solutions", href: "/it-solutions" },
+  { name: "IT Solutions", href: "/sunitservices" },
   { name: "Products", href: "/products" },
   { name: "Careers", href: "/careers" },
   { name: "Contact", href: "/contact" },

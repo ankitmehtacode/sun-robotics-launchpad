@@ -18,7 +18,7 @@ const services = [
     title: "IT Solutions",
     description: "Custom APIs, real-time telemetry dashboards, and cloud/edge integration for fleet-scale deployments.",
     spec: "Sub-ms API latency · 99.99% uptime SLA",
-    href: "/it-solutions",
+    href: "/sunitservices",
   },
   {
     icon: Package,
