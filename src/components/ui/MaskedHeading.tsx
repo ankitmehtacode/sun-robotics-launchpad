@@ -9,7 +9,7 @@ export interface MaskedHeadingProps {
   /** Subheading or descriptive text */
   subhead?: string;
   /** HTML heading tag to render (default 'h1') */
-  as?: "h1" | "h2" | "h3" | "h4" | "div";
+  as?: "h1" | "h2" | "h3" | "h4" | "div" | "span";
   /** Delay before animation begins (in seconds) */
   delay?: number;
   /** Stagger time between lines/words */
@@ -18,6 +18,8 @@ export interface MaskedHeadingProps {
   duration?: number;
   /** Enable mouse parallax mask drift */
   interactive?: boolean;
+  /** Enable dynamic gradient light sweep across masked text */
+  gradientSweep?: boolean;
   /** Custom heading class names */
   className?: string;
   /** Custom subhead class names */
@@ -35,6 +37,7 @@ export const MaskedHeading: React.FC<MaskedHeadingProps> = ({
   stagger = 0.12,
   duration = 0.85,
   interactive = true,
+  gradientSweep = true,
   className = "",
   subheadClassName = "",
   accentClassName = "",
@@ -76,13 +79,14 @@ export const MaskedHeading: React.FC<MaskedHeadingProps> = ({
             className="overflow-hidden py-1 px-2 -my-1 inline-flex items-center justify-center flex-wrap"
           >
             <motion.span
-              initial={{ y: "115%", opacity: 0, rotateX: 20 }}
+              initial={{ y: "120%", opacity: 0, rotateX: 25, filter: "blur(6px)" }}
               animate={
                 isInView
                   ? {
                       y: "0%",
                       opacity: 1,
                       rotateX: 0,
+                      filter: "blur(0px)",
                       x: mouseOffset.x * ((lineIndex + 1) * 0.4),
                     }
                   : {}
@@ -93,7 +97,11 @@ export const MaskedHeading: React.FC<MaskedHeadingProps> = ({
                 ease: [0.16, 1, 0.3, 1],
                 x: { duration: 0.3, ease: "easeOut" },
               }}
-              className="inline-block transform-gpu will-change-transform leading-[1.08]"
+              className={`inline-block transform-gpu will-change-transform leading-[1.08] ${
+                gradientSweep
+                  ? "bg-gradient-to-r from-white via-[#fcd34d] via-primary to-white bg-[length:200%_auto] animate-text-gradient bg-clip-text text-transparent"
+                  : ""
+              }`}
             >
               {line}
             </motion.span>
@@ -103,13 +111,14 @@ export const MaskedHeading: React.FC<MaskedHeadingProps> = ({
         {accentText && (
           <div className="overflow-hidden py-1 px-2 -my-1 inline-flex items-center justify-center">
             <motion.span
-              initial={{ y: "115%", opacity: 0, rotateX: 20 }}
+              initial={{ y: "120%", opacity: 0, rotateX: 25, filter: "blur(6px)" }}
               animate={
                 isInView
                   ? {
                       y: "0%",
                       opacity: 1,
                       rotateX: 0,
+                      filter: "blur(0px)",
                       x: mouseOffset.x * 0.8,
                     }
                   : {}
@@ -131,8 +140,8 @@ export const MaskedHeading: React.FC<MaskedHeadingProps> = ({
       {subhead && (
         <div className="overflow-hidden pt-4 max-w-2xl mx-auto">
           <motion.p
-            initial={{ y: "100%", opacity: 0 }}
-            animate={isInView ? { y: "0%", opacity: 1 } : {}}
+            initial={{ y: "100%", opacity: 0, filter: "blur(4px)" }}
+            animate={isInView ? { y: "0%", opacity: 1, filter: "blur(0px)" } : {}}
             transition={{
               duration: 0.7,
               delay: delay + (lines.length + (accentText ? 1 : 0)) * stagger + 0.1,

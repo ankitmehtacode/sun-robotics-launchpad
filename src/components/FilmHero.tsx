@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence, useMotionValueEvent, useScroll } from "framer-motion";
+import { MaskedHeading } from "@/components/ui/MaskedHeading";
 import {
   FrameSource,
   formatTimecode,
@@ -143,11 +144,15 @@ function StaticReveal() {
       )}
       <div className="absolute inset-0 bg-gradient-to-t from-[#0B0C0E] via-[#0B0C0E]/40 to-[#0B0C0E]/70" />
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
-        <div className="max-w-2xl">
-          <h1 className="font-display font-medium tracking-[-0.02em] text-[clamp(2.6rem,7vw,6.4rem)] leading-[1.05] text-[#E8E6E1]">
-            {HEADLINE}
-          </h1>
-          <p className="font-mono text-sm text-[#878D99] mt-4 mb-10">{SUBHEAD}</p>
+        <div className="max-w-2xl text-left">
+          <MaskedHeading
+            as="h1"
+            heading={HEADLINE}
+            subhead={SUBHEAD}
+            className="font-display font-medium tracking-[-0.02em] text-[clamp(2.6rem,7vw,6.4rem)] leading-[1.05] text-[#E8E6E1] items-start text-left"
+            subheadClassName="font-mono text-sm text-[#878D99] mt-4 mb-10 text-left mx-0"
+            gradientSweep={false}
+          />
           <NotifyForm variant="static" />
         </div>
       </div>
@@ -311,60 +316,79 @@ function ScrubReveal() {
   return (
     <section ref={sectionRef} className="relative" style={{ height: pinDistance }}>
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#0B0C0E]">
-        {/* Glassmorphic Logo Loader */}
+        {/* Cinematic Aperture Brand Reveal */}
         <AnimatePresence>
           {!ready && (
             <motion.div
               initial={{ opacity: 1 }}
-              exit={{ opacity: 0, scale: 0.98 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-[#0B0C0E] px-4 pointer-events-none"
+              exit={{ opacity: 0, scale: 1.05, filter: "blur(10px)" }}
+              transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-[#07080a] px-4 pointer-events-none overflow-hidden"
             >
-              {/* Ambient Glow */}
-              <div className="absolute w-72 h-72 rounded-full bg-primary/20 blur-[100px] pointer-events-none animate-pulse-slow" />
+              {/* Ethereal Atmospheric Background Lights */}
+              <div className="absolute w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-amber-500/10 via-primary/15 to-transparent blur-[120px] pointer-events-none animate-pulse-slow" />
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#07080a_80%)] pointer-events-none" />
 
-              {/* Glassmorphic Container Card */}
-              <motion.div
-                initial={{ scale: 0.92, opacity: 0, y: 10 }}
-                animate={{ scale: 1, opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-                className="relative z-10 flex flex-col items-center p-7 sm:p-9 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.7)] max-w-[280px] sm:max-w-xs w-full text-center"
-              >
-                {/* Logo with Glow Ring */}
-                <div className="relative mb-5 flex items-center justify-center">
-                  <div className="absolute inset-0 rounded-2xl bg-primary/30 blur-xl animate-pulse" />
-                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-black/60 border border-white/15 p-3 flex items-center justify-center backdrop-blur-xl shadow-inner">
+              {/* Centerpiece: Floating Glass Disc & Rotating Aperture Orbit */}
+              <div className="relative flex flex-col items-center">
+                {/* Orbital Rings */}
+                <div className="relative w-28 h-28 sm:w-36 sm:h-36 flex items-center justify-center">
+                  {/* Outer Dashed Orbit */}
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ repeat: Infinity, duration: 24, ease: "linear" }}
+                    className="absolute inset-0 rounded-full border border-dashed border-amber-500/25"
+                  />
+
+                  {/* Secondary Counter-Rotating Ring with Accent Dot */}
+                  <motion.div
+                    animate={{ rotate: -360 }}
+                    transition={{ repeat: Infinity, duration: 16, ease: "linear" }}
+                    className="absolute inset-2 rounded-full border border-white/10"
+                  >
+                    <span className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-primary shadow-[0_0_10px_#f59e0b]" />
+                  </motion.div>
+
+                  {/* Core Glassmorphic Lens Pod */}
+                  <motion.div
+                    initial={{ scale: 0.88, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white/[0.04] border border-white/20 backdrop-blur-2xl flex items-center justify-center shadow-[0_0_50px_rgba(245,158,11,0.25)] p-4"
+                  >
+                    {/* Inner Golden Radial Glow */}
+                    <div className="absolute inset-2 rounded-full bg-primary/20 blur-md pointer-events-none" />
+
+                    {/* Brand Logo */}
                     <img
                       src="/logo.png"
                       alt="Sun Robotics Logo"
-                      className="w-full h-full object-contain filter drop-shadow-[0_0_12px_rgba(249,147,31,0.5)]"
+                      className="relative z-10 w-full h-full object-contain filter drop-shadow-[0_0_16px_rgba(249,147,31,0.6)]"
+                    />
+                  </motion.div>
+                </div>
+
+                {/* Minimalist Masked Brandmark */}
+                <div className="mt-8 flex flex-col items-center text-center">
+                  <MaskedHeading
+                    as="span"
+                    heading="SUN ROBOTICS & AI"
+                    delay={0.15}
+                    duration={0.8}
+                    className="font-mono text-xs sm:text-sm tracking-[0.4em] uppercase font-bold"
+                    gradientSweep={true}
+                  />
+
+                  {/* Hairline Luminous Shimmer Line */}
+                  <div className="mt-4 w-28 h-[1.5px] bg-white/10 relative overflow-hidden rounded-full">
+                    <motion.div
+                      animate={{ x: ["-100%", "100%"] }}
+                      transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
+                      className="w-14 h-full bg-gradient-to-r from-transparent via-primary to-transparent shadow-[0_0_10px_#f59e0b]"
                     />
                   </div>
                 </div>
-
-                {/* Brand Title */}
-                <h2 className="text-base sm:text-lg font-display font-bold text-white tracking-tight mb-1">
-                  Sun <span className="text-primary">Robotics</span> & AI
-                </h2>
-                <p className="text-[10px] font-mono text-white/50 uppercase tracking-widest mb-6">
-                  INITIALIZING CORE
-                </p>
-
-                {/* Glass Progress Bar */}
-                <div className="w-full bg-white/5 border border-white/10 rounded-full h-1.5 overflow-hidden p-0.5 mb-3">
-                  <motion.div
-                    className="h-full bg-gradient-to-r from-amber-500 via-primary to-orange-400 rounded-full shadow-[0_0_8px_rgba(249,147,31,0.8)]"
-                    style={{ width: `${Math.max(6, Math.round(loadProgress * 100))}%` }}
-                    transition={{ ease: "easeOut", duration: 0.15 }}
-                  />
-                </div>
-
-                {/* Status Telemetry */}
-                <div className="w-full flex items-center justify-between font-mono text-[10px] text-white/45">
-                  <span className="tracking-wider uppercase">Loading Reel</span>
-                  <span className="text-primary font-bold">{Math.round(loadProgress * 100)}%</span>
-                </div>
-              </motion.div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -424,11 +448,15 @@ function ScrubReveal() {
         >
           <div className="absolute inset-0 bg-gradient-to-t from-[#0B0C0E] via-[#0B0C0E]/50 to-transparent pointer-events-none" />
           <div className="container mx-auto px-4 lg:px-8 relative z-10">
-            <div className="max-w-2xl">
-              <h1 className="font-display font-medium tracking-[-0.02em] text-[clamp(2.6rem,7vw,6.4rem)] leading-[1.05] text-[#E8E6E1]">
-                {HEADLINE}
-              </h1>
-              <p className="font-mono text-sm text-[#878D99] mt-4 mb-10">{SUBHEAD}</p>
+            <div className="max-w-2xl text-left">
+              <MaskedHeading
+                as="h1"
+                heading={HEADLINE}
+                subhead={SUBHEAD}
+                className="font-display font-medium tracking-[-0.02em] text-[clamp(2.6rem,7vw,6.4rem)] leading-[1.05] text-[#E8E6E1] items-start text-left"
+                subheadClassName="font-mono text-sm text-[#878D99] mt-4 mb-10 text-left mx-0"
+                gradientSweep={false}
+              />
               <NotifyForm variant="overlay" />
             </div>
           </div>
