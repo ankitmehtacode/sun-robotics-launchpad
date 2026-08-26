@@ -251,6 +251,20 @@ function ScrubReveal() {
     setReady(false);
     setLoadProgress(0);
 
+    // Safety-net: if loading hasn't completed within 8 s, force the hero
+    // visible so the page is never permanently stuck on the splash screen.
+    let safetyFired = false;
+    const safetyTimer = setTimeout(() => {
+      safetyFired = true;
+      setReady((prev) => {
+        if (!prev) {
+          resizeCanvas();
+          return true;
+        }
+        return prev;
+      });
+    }, 8_000);
+
     (async () => {
       try {
         const res = await fetch("/frames/frames.json", { signal: controller.signal });
@@ -269,16 +283,21 @@ function ScrubReveal() {
             setLoadProgress(loadedCount / total);
           },
           onSparseReady: () => {
+            if (!safetyFired) clearTimeout(safetyTimer);
             setReady(true);
             resizeCanvas();
           },
         });
       } catch {
         // Aborted (component unmounted / viewport switched) — nothing to do.
+        // If the fetch itself failed, the safety timer will rescue us.
       }
     })();
 
-    return () => controller.abort();
+    return () => {
+      controller.abort();
+      clearTimeout(safetyTimer);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMobile]);
 
