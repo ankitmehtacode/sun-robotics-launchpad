@@ -21,7 +21,7 @@ export function MapPlaceholder({
     // t = Map Type (m = map)
     // z = Zoom Level (14 is good for street/area view)
     // output = embed (CRITICAL: This makes it work in iframe)
-    const mapSrc = "https://maps.google.com/maps?q=Sun+ Robotics + And + Ai + Indraprastha+Tower,+Rau,+Indore&t=m&z=14&ie=UTF8&iwloc=&output=embed";
+    const mapSrc = "https://maps.google.com/maps?q=22.696969,75.78662(Sun+Robotics+And+AI)&t=m&z=16&ie=UTF8&iwloc=&output=embed";
 
     const content = (
         <div className={`w-full h-full rounded-xl overflow-hidden shadow-lg border border-border bg-muted ${heightClass} ${className}`}>

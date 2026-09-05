@@ -227,7 +227,7 @@ export const Hero3D = () => {
       {/* Minimalist Telemetry HUD */}
       <div className="relative z-20 font-mono text-[#878D99] py-4 px-4 lg:px-8 border-t border-[#1a1d24]">
         <div className="container mx-auto flex items-center justify-between text-[10px] tracking-[0.2em] uppercase">
-          <span>SR-01 // CONFIDENTIAL</span>
+          <span>SR-01 · CONFIDENTIAL</span>
           <span className="text-[#F9931F]">REVEAL IMMINENT</span>
         </div>
       </div>

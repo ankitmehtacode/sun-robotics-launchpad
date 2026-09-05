@@ -8,9 +8,9 @@ const Index = () => {
   return (
     <>
       <SEO
-        title="AI & Robotics Company in Indore, India"
-        description="Sun Robotics & AI builds industrial robotics, AI automation, and enterprise IT solutions — including website and app development — for businesses in Indore and across India."
-        keywords="AI and robotics, robotics company Indore, AI company India, industrial automation, IT solutions Indore, website development, app development"
+        title="India's Humanoid & Industrial Robotics Company"
+        description="Sun Robotics & AI is building India's next generation of humanoid and industrial robots — precision robotic arms, computer-vision inspection, and enterprise IT solutions, engineered from Indore."
+        keywords="humanoid robot India, humanoid robotics company, industrial robotics India, robotic arm manufacturer Indore, AI robotics company India, Make in India robotics, IT solutions Indore"
         canonical={`${SITE_URL}/`}
         structuredData={[organizationSchema(), websiteSchema()]}
       />

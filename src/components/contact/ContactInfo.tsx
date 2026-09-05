@@ -24,8 +24,8 @@ const defaultContactInfo: ContactInfoItem[] = [
   {
     icon: MapPin,
     label: "Address",
-    value: "Indraprastha Tower, Rau, Indore, India",
-    href: "https://maps.google.com/?q=Sun+Robotics+And+AI+Indraprastha+Tower+Rau+Indore+India",
+    value: "Jawahar Tekri, Sinhasa, Indore, India",
+    href: "https://www.google.com/maps/place/Sun+Robotics+And+AI/@22.696969,75.78662,17z/data=!3m1!4b1!4m6!3m5!1s0x3962fb12cafca601:0x786226d5dd84df3e!8m2!3d22.696969!4d75.78662!16s%2Fg%2F11xvsdzpc2",
   },
 ];
 

@@ -1,33 +1,35 @@
 # Sun Robotics & AI
 
-> Sun Robotics & AI is an industrial robotics, AI automation, and enterprise IT
-> solutions company based in Indore, Madhya Pradesh, India.
+> Sun Robotics & AI is an Indore, India-based robotics company building
+> humanoid and industrial robots, alongside an enterprise IT Services
+> practice.
 
-Sun Robotics & AI designs and builds industrial robotic arms, AI-driven
-automation systems, and multipurpose robotics platforms for manufacturing,
-logistics, and quality-control use cases. Alongside its robotics products
-(the SunBot line), the company runs an IT Solutions practice offering custom
-website development, app development, enterprise APIs, cloud/IoT integration,
-and AI-powered dashboards for businesses in Indore and across India.
+Sun Robotics & AI designs and builds industrial robotic arms and is
+developing a humanoid robotics platform, engineered for manufacturing,
+logistics, and quality-control use cases. Its SunBot Vision AI product uses
+computer vision for automated visual inspection. Alongside its robotics work,
+the company runs an IT Solutions practice offering custom website
+development, app development, enterprise APIs, and cloud/IoT integration for
+businesses in Indore and across India.
 
 ## Company
 
-- [Homepage](https://sunroboticsandai.in/): Overview of AI & robotics + IT solutions offerings.
+- [Homepage](https://sunroboticsandai.in/): Overview of the humanoid and industrial robotics platform, plus IT Services.
 - [About](https://sunroboticsandai.in/about): Company mission, values, and team.
 - [Contact](https://sunroboticsandai.in/contact): Address, phone, email, and contact form.
 - [Careers](https://sunroboticsandai.in/careers): Open positions.
 
 ## Robotics & AI
 
-- [Robotics](https://sunroboticsandai.in/robotics): Industrial robotic arms, AI automation, and multipurpose robotics platforms.
-- [Products](https://sunroboticsandai.in/products): The SunBot product line — industrial arms, autonomous logistics robots, AI vision inspection, and collaborative robots.
+- [Robotics](https://sunroboticsandai.in/robotics): Industrial robotic arms and multipurpose robotics platforms engineered for manufacturing, logistics, and quality control.
+- [Products](https://sunroboticsandai.in/products): SunBot Vision AI, an AI-powered visual inspection system for quality control.
 
 ## Sun IT Services
 
-- [Sun IT Services](https://sunroboticsandai.in/sunitservices): Indore's leading IT services and custom software company. Specializes in custom website development (React, Next.js), mobile app development (iOS, Android, React Native, Flutter), enterprise backend APIs, cloud hosting (AWS), AI automation dashboards, and IoT system integration.
+- [Sun IT Services](https://sunroboticsandai.in/sunitservices): Indore's leading IT services and custom software company. Specializes in custom website development (React, Next.js), mobile app development (iOS, Android, React Native, Flutter), enterprise backend APIs, cloud hosting (AWS), and IoT system integration.
 
 ## Contact
 
 - Email: info@sunroboticsandai.in
 - Phone: +91 8144426440
-- Address: Indraprastha Tower, Rau, Indore, Madhya Pradesh, India
+- Address: 01, Jawahar Tekri, Sinhasa, Indore, Madhya Pradesh 452009, India

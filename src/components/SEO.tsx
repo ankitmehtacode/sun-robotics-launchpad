@@ -14,7 +14,7 @@ interface SEOProps {
 
 const defaultTitle = "Sun Robotics & AI";
 const defaultDescription =
-  "Building the future of industrial automation with cutting-edge AI and robotics solutions for enterprises worldwide.";
+  "Sun Robotics & AI is building India's next generation of humanoid and industrial robots, engineered from Indore for the world.";
 
 export const SEO = ({
   title,

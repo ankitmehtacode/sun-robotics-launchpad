@@ -14,6 +14,7 @@ import { LocomotiveHUD } from "@/components/it-solutions/LocomotiveHUD";
 import { StackedSolutionsDeck } from "@/components/it-solutions/StackedSolutionsDeck";
 import { KineticMarqueeStream } from "@/components/it-solutions/KineticMarqueeStream";
 import { InteractiveArchitectureConsole } from "@/components/it-solutions/InteractiveArchitectureConsole";
+import { InfrastructureConsole } from "@/components/it-solutions/InfrastructureConsole";
 import { GradientBlinds } from "@/components/ui/GradientBlinds";
 import { MaskedHeading } from "@/components/ui/MaskedHeading";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
@@ -23,7 +24,7 @@ const itFaqs = [
     id: "faq-1",
     question: "What is Sun IT Services and how does it connect with Sun Robotics?",
     answer:
-      "Sun IT Services is the specialized software engineering and digital technology division of Sun Robotics & AI, headquartered in Indore, India. While our robotics wing develops advanced hardware automation and industrial platforms, Sun IT Services engineers custom web applications, native & cross-platform mobile apps, cloud backends, and AI analytics portals for businesses worldwide.",
+      "Sun IT Services is the specialized software engineering and digital technology division of Sun Robotics & AI, headquartered in Indore, India. While our robotics wing develops advanced hardware automation and industrial platforms, Sun IT Services engineers custom web applications, native & cross-platform mobile apps, cloud backends, and enterprise data portals for businesses worldwide.",
   },
   {
     id: "faq-2",
@@ -45,9 +46,9 @@ const itFaqs = [
   },
   {
     id: "faq-5",
-    question: "How does Sun IT Services incorporate AI and Machine Learning into software?",
+    question: "Do you offer dedicated development teams, staff augmentation, or fixed-scope contracts?",
     answer:
-      "We integrate custom AI automation pipelines, intelligent LLM assistants, natural language processing tools, predictive analytics dashboards, and real-time computer vision models tailored to automate repetitive tasks, elevate customer support, and extract actionable intelligence from your business data.",
+      "Yes. We offer three engagement models: dedicated development teams embedded with your in-house staff for long-term roadmaps, staff augmentation to fill specific skill gaps on existing teams, and fixed-scope contracts for well-defined projects with clear deliverables. Every engagement includes a signed NDA and full IP transfer.",
   },
   {
     id: "faq-6",
@@ -65,7 +66,7 @@ const itFaqs = [
     id: "faq-8",
     question: "Where is Sun IT Services located, and how can we start a project?",
     answer:
-      "Sun IT Services is located at Indraprastha Tower, Rau, Indore, Madhya Pradesh, India (453331). You can start a project by clicking 'Start a Project', filling out our contact form, or reaching out via WhatsApp to schedule a free technical discovery call with our engineering team.",
+      "Sun IT Services is located at 01, Jawahar Tekri, Sinhasa, Indore, Madhya Pradesh, India (452009). You can start a project by clicking 'Start a Project', filling out our contact form, or reaching out via WhatsApp to schedule a free technical discovery call with our engineering team.",
   },
 ];
 
@@ -91,9 +92,9 @@ const structuredData = [
     url: `${SITE_URL}/sunitservices`,
   }),
   serviceSchema({
-    name: "Sun IT Services - Custom Software & AI Solutions in Indore",
+    name: "Sun IT Services - Custom Software Solutions in Indore",
     description:
-      "Custom enterprise software, API integrations, real-time IoT dashboards, and AI automation built to streamline your operations.",
+      "Custom enterprise software, API integrations, and real-time IoT dashboards built to streamline your operations.",
     serviceType: "Software Development",
     provider: "Sun IT Services",
     areaServed: "Indore, Madhya Pradesh, India",
@@ -132,7 +133,7 @@ const modernTechPillars = [
     icon: Server,
     tools: [
       { name: "Node.js & Bun", tag: "Async Runtimes" },
-      { name: "Python / FastAPI", tag: "AI Inference" },
+      { name: "Python / FastAPI", tag: "Async Microservices" },
       { name: "GraphQL & REST", tag: "Strict Schema" },
       { name: "gRPC", tag: "Protobuf RPC" },
     ],
@@ -141,13 +142,12 @@ const modernTechPillars = [
     serial: "03",
     category: "DATA & PERSISTENCE",
     title: "Relational & Real-Time Storage",
-    desc: "ACID-compliant storage, sub-millisecond in-memory caching, and vector search embeddings.",
+    desc: "ACID-compliant storage, sub-millisecond in-memory caching, and type-safe query layers.",
     metric: "Sub-ms Cache",
     icon: Database,
     tools: [
       { name: "PostgreSQL", tag: "Relational Core" },
       { name: "Redis", tag: "In-Memory Cache" },
-      { name: "Vector DBs", tag: "AI Embeddings" },
       { name: "Prisma & Drizzle", tag: "Type-Safe ORM" },
     ],
   },
@@ -167,50 +167,13 @@ const modernTechPillars = [
   },
 ];
 
-const engineeringServices = [
-  {
-    serial: "SRV-01",
-    title: "Cloud Hosting & Management",
-    category: "CLOUD // HOSTING",
-    description:
-      "Complete server setup, round-the-clock monitoring, automated backups, and instant scaling to keep your business running smoothly.",
-    specs: ["24/7 Uptime Monitoring", "Automated Daily Backups", "Zero Setup Hassle"],
-  },
-  {
-    serial: "SRV-02",
-    title: "Database Design & Storage",
-    category: "DATA // STORAGE",
-    description:
-      "Fast, organized, and secure data storage built to handle customer records, transactions, and live business analytics.",
-    specs: ["Fast Search Queries", "Bank-Level Security", "Automated Archiving"],
-  },
-  {
-    serial: "SRV-03",
-    title: "Security & Data Protection",
-    category: "SECURITY // PRIVACY",
-    description:
-      "Complete data encryption, vulnerability assessments, and strict access controls to keep your customer data 100% safe.",
-    specs: ["End-to-End Encryption", "Access Control Rules", "Security Audited"],
-  },
-  {
-    serial: "SRV-04",
-    title: "Connected Devices & IoT",
-    category: "DEVICES // HARDWARE",
-    description:
-      "Connect physical machines, smart devices, and sensors directly to clean mobile apps and management dashboards.",
-    specs: ["Real-Time Sync", "Remote Device Controls", "Live Notifications"],
-  },
-];
-
 const ITSolutionsPage = () => {
   const pageRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef(null);
   const techRef = useRef(null);
-  const additionalRef = useRef(null);
 
   const isHeaderInView = useInView(headerRef, { once: true });
   const isTechInView = useInView(techRef, { once: true, margin: "-100px" });
-  const isAdditionalInView = useInView(additionalRef, { once: true, margin: "-100px" });
 
   const {
     velocity,
@@ -228,7 +191,7 @@ const ITSolutionsPage = () => {
       <div ref={pageRef} className="bg-[#050608] text-foreground selection:bg-primary selection:text-black">
         <SEO
           title="Sun IT Services | Best Website & App Development Company in Indore"
-          description="Sun IT Services by Sun Robotics & AI is Indore's leading IT company for custom website development, iOS & Android mobile apps, AI dashboards, and enterprise cloud software."
+          description="Sun IT Services by Sun Robotics & AI is Indore's leading IT company for custom website development, iOS & Android mobile apps, and enterprise cloud software."
           keywords="Sun IT Services, Sun IT Services Indore, sun it services, best website development company in indore, best IT company in indore, app development company indore, mobile app developers indore, custom software development indore, web design indore, React Next.js developers indore, Sun Robotics IT services"
           canonical={`${SITE_URL}/sunitservices`}
           structuredData={structuredData}
@@ -288,7 +251,7 @@ const ITSolutionsPage = () => {
             >
               <MaskedHeading
                 heading={["Custom Software", "Built for Growth."]}
-                subhead="We build high-speed websites, mobile apps, custom APIs, and smart AI dashboards that help your business scale effortlessly."
+                subhead="We build high-speed websites, mobile apps, custom APIs, and real-time systems that help your business scale effortlessly."
                 as="h1"
                 className="text-3xl xs:text-4xl sm:text-6xl md:text-7xl lg:text-[5.25rem] font-display font-semibold tracking-[-0.035em] text-white"
                 subheadClassName="text-sm sm:text-base md:text-lg text-white/65 font-normal tracking-[-0.01em] mb-6 sm:mb-8 max-w-xl mx-auto px-2 sm:px-0"
@@ -386,7 +349,7 @@ const ITSolutionsPage = () => {
                               <IconComponent className="w-4 h-4" />
                             </div>
                             <span className="text-[10px] sm:text-[11px] font-mono text-primary font-bold uppercase tracking-wider">
-                              // {pillar.category}
+                              {pillar.category}
                             </span>
                           </div>
                           <span className="px-2.5 py-0.5 rounded-full bg-white/[0.04] border border-white/10 text-[9px] sm:text-[10px] font-mono text-emerald-400 font-semibold">
@@ -426,60 +389,8 @@ const ITSolutionsPage = () => {
           </div>
         </section>
 
-        {/* SECTION 6: SERVICES (Editorial Roster) */}
-        <section id="node-services" className="py-28 relative overflow-hidden bg-[#06070a]" ref={additionalRef}>
-          <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={isAdditionalInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
-            >
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-primary text-[10px] font-mono uppercase tracking-widest mb-4">
-                <span>[ 06 ] INFRASTRUCTURE & SUPPORT</span>
-              </div>
-              <h2 className="text-3xl sm:text-5xl font-display font-semibold tracking-tight text-white mb-3">
-                Complete IT Services
-              </h2>
-              <p className="text-sm md:text-base text-white/60 max-w-xl mx-auto">
-                End-to-end technical support to keep your software fast, secure, and always operational.
-              </p>
-            </motion.div>
-
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {engineeringServices.map((service, index) => (
-                <motion.div
-                  key={service.serial}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isAdditionalInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.5, delay: index * 0.08 }}
-                  className="flex flex-col justify-between p-6 border-l border-white/15 hover:border-primary/60 transition-colors"
-                >
-                  <div>
-                    <div className="text-[10px] font-mono text-primary font-bold mb-2">
-                      {service.serial} · {service.category}
-                    </div>
-                    <h3 className="text-xl font-display font-semibold text-white mb-3">
-                      {service.title}
-                    </h3>
-                    <p className="text-xs text-white/60 leading-relaxed mb-6">
-                      {service.description}
-                    </p>
-                  </div>
-
-                  <div className="space-y-1.5 pt-4 border-t border-white/10 text-[10px] font-mono text-white/70">
-                    {service.specs.map((sp) => (
-                      <div key={sp} className="flex items-center gap-2">
-                        <span className="w-1 h-1 rounded-full bg-primary shrink-0" />
-                        <span>{sp}</span>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* SECTION 6: SERVICES (Interactive Infrastructure Console) */}
+        <InfrastructureConsole />
 
         {/* SECTION 7: FREQUENTLY ASKED QUESTIONS */}
         <section id="node-faqs" className="py-28 relative overflow-hidden bg-[#050608] border-t border-white/5">
@@ -543,7 +454,7 @@ const ITSolutionsPage = () => {
             >
               <div>
                 <div className="text-[10px] font-mono uppercase tracking-widest text-primary font-bold mb-1">
-                  // NEED A CUSTOM ARCHITECTURE?
+                  NEED A CUSTOM ARCHITECTURE?
                 </div>
                 <h3 className="text-xl sm:text-2xl font-display font-semibold text-white">
                   Have a specific question or custom requirement?

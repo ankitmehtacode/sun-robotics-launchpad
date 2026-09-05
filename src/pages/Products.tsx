@@ -1,44 +1,10 @@
 import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
-import { Factory, Warehouse, Eye, Users, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Eye } from "lucide-react";
 import { SEO } from "@/components/SEO";
 import { SITE_URL, productListSchema } from "@/lib/schema";
-import { ProductViewer3D, preloadProductModel } from "@/components/ProductViewer3D";
-
-preloadProductModel("/models/robot-arm-25kg.glb");
 
 const products = [
-  {
-    id: 1,
-    name: "SunBot Industrial X1",
-    category: "Heavy Manufacturing",
-    icon: Factory,
-    specs: {
-      payload: "500kg",
-      reach: "3.2m",
-      speed: "2.5m/s",
-      accuracy: "±0.02mm",
-    },
-    description: "Our flagship industrial robot designed for heavy-duty manufacturing. Built for 24/7 operation in demanding environments with unmatched precision and reliability.",
-    features: ["6-axis articulation", "Collision detection", "Remote monitoring", "Predictive maintenance"],
-    gradient: "from-primary via-amber-500 to-orange-600",
-  },
-  {
-    id: 2,
-    name: "SunBot Logistics Pro",
-    category: "Warehouse Automation",
-    icon: Warehouse,
-    specs: {
-      payload: "200kg",
-      battery: "12h",
-      speed: "3.0m/s",
-      navigation: "SLAM",
-    },
-    description: "Autonomous mobile robot for warehouse logistics. Features advanced navigation and fleet management capabilities for seamless operations.",
-    features: ["Autonomous navigation", "Fleet coordination", "Dynamic obstacle avoidance", "Multi-floor support"],
-    gradient: "from-amber-400 via-orange-500 to-red-500",
-  },
   {
     id: 3,
     name: "SunBot Vision AI",
@@ -54,21 +20,6 @@ const products = [
     features: ["Deep learning detection", "Real-time analysis", "Defect classification", "Integration API"],
     gradient: "from-secondary via-orange-600 to-primary",
   },
-  {
-    id: 4,
-    name: "SunBot Collaborative",
-    category: "Human-Robot Interaction",
-    icon: Users,
-    specs: {
-      payload: "15kg",
-      certified: "ISO 10218",
-      sensing: "Force",
-      setup: "5 min",
-    },
-    description: "Safe collaborative robot designed to work alongside humans. Features advanced force sensing and intuitive programming for quick deployment.",
-    features: ["Force-torque sensing", "No-code programming", "Safety certified", "Quick tool change"],
-    gradient: "from-orange-400 via-amber-500 to-secondary",
-  },
 ];
 
 const Products = () => {
@@ -82,8 +33,8 @@ const Products = () => {
     <>
       <SEO
         title="Robotics & AI Products — SunBot Series"
-        description="Browse the SunBot product line from Sun Robotics & AI: industrial arms, autonomous logistics robots, AI vision inspection systems, and collaborative robots."
-        keywords="robotics products, industrial robot arm, autonomous mobile robot, AI vision inspection, collaborative robot"
+        description="SunBot Vision AI from Sun Robotics & AI: an AI-powered visual inspection system for quality control on the production line."
+        keywords="robotics products, AI vision inspection, quality control, defect detection"
         canonical={`${SITE_URL}/products`}
         structuredData={productListSchema(products)}
       />
@@ -109,54 +60,16 @@ const Products = () => {
               Innovation in <span className="gradient-text">Motion</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-              Explore our complete range of cutting-edge robotic solutions designed for every industry need.
+              AI-powered visual inspection, engineered to catch what the human eye can't.
             </p>
           </motion.div>
-        </div>
-      </section>
-
-      {/* 3D Product Viewer */}
-      <section className="py-16 relative overflow-hidden border-y border-border/50 bg-muted/10">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-10 items-center">
-            <div className="h-[380px] sm:h-[460px] lg:h-[520px] w-full order-2 lg:order-1 rounded-2xl overflow-hidden bg-gradient-to-b from-muted/30 to-transparent">
-              <ProductViewer3D modelPath="/models/robot-arm-25kg.glb" />
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.6 }}
-              className="order-1 lg:order-2"
-            >
-              <span className="text-primary text-sm font-semibold tracking-wider uppercase">
-                Interactive 3D Preview
-              </span>
-              <h2 className="text-3xl md:text-4xl font-display font-bold mt-3 mb-4">
-                {products[0].name}
-              </h2>
-              <p className="text-muted-foreground mb-6 max-w-lg">
-                Rotate and inspect the SunBot Industrial X1 in real time. Drag to orbit, scroll or pinch to
-                zoom in on the 6-axis joint architecture.
-              </p>
-              <div className="grid grid-cols-2 gap-3 max-w-md">
-                {Object.entries(products[0].specs).map(([key, value]) => (
-                  <div key={key} className="bg-card/50 border border-border/50 rounded-lg p-3">
-                    <div className="text-xs text-muted-foreground uppercase tracking-wider">{key}</div>
-                    <div className="text-lg font-display font-semibold text-foreground">{value}</div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </div>
         </div>
       </section>
 
       {/* Products Grid */}
       <section className="py-24 relative overflow-hidden" ref={gridRef}>
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid gap-8 max-w-xl mx-auto">
             {products.map((product, index) => (
               <motion.div
                 key={product.id}
@@ -242,62 +155,6 @@ const Products = () => {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Comparison Section */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
-        
-        <div className="container mx-auto px-4 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-              Find Your <span className="gradient-text">Perfect Fit</span>
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Not sure which robot is right for you? Contact our team for a personalized consultation.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="glass-card p-8 rounded-2xl overflow-x-auto"
-          >
-            <table className="w-full min-w-[600px]">
-              <thead>
-                <tr className="border-b border-border">
-                  <th className="text-left py-4 px-4 text-foreground font-display font-semibold">Model</th>
-                  <th className="text-left py-4 px-4 text-foreground font-display font-semibold">Best For</th>
-                  <th className="text-left py-4 px-4 text-foreground font-display font-semibold">Payload</th>
-                  <th className="text-left py-4 px-4 text-foreground font-display font-semibold">Key Strength</th>
-                </tr>
-              </thead>
-              <tbody>
-                {products.map((product) => (
-                  <tr key={product.id} className="border-b border-border/50 hover:bg-muted/20 transition-colors">
-                    <td className="py-4 px-4">
-                      <div className="flex items-center gap-3">
-                        <product.icon className="w-5 h-5 text-primary" />
-                        <span className="font-medium text-foreground">{product.name}</span>
-                      </div>
-                    </td>
-                    <td className="py-4 px-4 text-muted-foreground">{product.category}</td>
-                    <td className="py-4 px-4 text-muted-foreground">{product.specs.payload || product.specs.resolution || "-"}</td>
-                    <td className="py-4 px-4 text-muted-foreground">{product.features[0]}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </motion.div>
         </div>
       </section>
     </>

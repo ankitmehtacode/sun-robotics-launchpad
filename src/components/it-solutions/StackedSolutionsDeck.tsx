@@ -40,20 +40,20 @@ const solutionPillars: SolutionItem[] = [
     caption: "Custom Web & Mobile Architecture",
   },
   {
-    id: "ai-dashboards",
+    id: "data-dashboards",
     number: "02",
-    category: "SMART ANALYTICS",
-    title: "AI Analytics & Live Dashboards",
+    category: "DATA & BUSINESS INTELLIGENCE",
+    title: "Real-Time Analytics & Live Dashboards",
     description:
-      "Transform complex data streams into clean, actionable real-time visualizations with predictive AI alerts.",
+      "Transform complex data streams into clean, actionable real-time visualizations your team can act on instantly.",
     highlights: [
       "Real-time telemetry & executive dashboards",
-      "Automated anomaly detection & forecasting",
+      "Automated threshold alerts & monitoring",
       "Instant data export & scheduled reporting",
     ],
-    tags: ["Live Telemetry", "Neural Models", "Predictive Alerts"],
+    tags: ["Live Telemetry", "ETL Pipelines", "Custom Reporting"],
     image: "/solutions/ai-analytics.jpg",
-    caption: "Real-Time Telemetry & AI Stream",
+    caption: "Real-Time Telemetry & Live Dashboards",
   },
   {
     id: "cloud-iot",
@@ -297,7 +297,7 @@ const DeckCard = ({
           <div className="flex items-start justify-between gap-2 sm:gap-3 border-b border-white/10 pb-2 sm:pb-4 shrink-0">
             <div className="min-w-0">
               <div className="text-[9px] sm:text-xs font-mono text-primary font-bold tracking-widest uppercase mb-1">
-                // {item.category}
+                {item.category}
               </div>
               <h3 className="text-lg sm:text-2xl lg:text-3xl font-display font-bold tracking-tight text-white leading-tight truncate">
                 {item.title}

@@ -1,5 +1,6 @@
-import { useEffect, useState, useRef } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import { useLenis } from "lenis/react";
+import type Lenis from "lenis";
 
 export interface LocomotiveScrollState {
   velocity: number;
@@ -40,8 +41,15 @@ export const useLocomotiveScroll = () => {
   const lastTime = useRef(Date.now());
   const smoothedVelocity = useRef(0);
 
-  // Hook into Lenis if present, updating physics on every frame
-  const lenis = useLenis((lenisInstance) => {
+  // Hook into Lenis if present, updating physics on every frame.
+  // Memoized with an empty dep array: lenis-react's useLenis calls this
+  // callback synchronously inside an effect keyed partly on the callback's
+  // own identity, so a fresh function reference every render (as this was
+  // before) re-fires that effect -> calls setScrollState -> re-renders ->
+  // new reference -> infinite loop ("Maximum update depth exceeded"). Only
+  // refs and the (referentially stable) setState setter are used below, so
+  // an empty dep array is safe.
+  const onLenisScroll = useCallback((lenisInstance: Lenis) => {
     const scroll = lenisInstance.scroll;
     const limit = lenisInstance.limit || (document.documentElement.scrollHeight - window.innerHeight);
     const progress = limit > 0 ? Math.min(Math.max(scroll / limit, 0), 1) : 0;
@@ -85,7 +93,9 @@ export const useLocomotiveScroll = () => {
       nodeIndex: currentNodeIndex,
       totalNodes: SECTION_NODES.length,
     });
-  });
+  }, []);
+
+  const lenis = useLenis(onLenisScroll);
 
   // Fallback if Lenis is not wrapped
   useEffect(() => {

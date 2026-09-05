@@ -25,9 +25,9 @@ const Robotics = () => {
   return (
     <>
       <SEO
-        title="Industrial Robotics & AI Automation Solutions"
-        description="Explore Sun Robotics & AI's industrial robotic arms, AI-driven automation, and multipurpose robotics platforms engineered for manufacturing, logistics, and quality control."
-        keywords="industrial robotics, AI automation, robotics solutions India, robotic arms, multipurpose robotics"
+        title="Industrial Robotic Arms & Automation Solutions"
+        description="Sun Robotics & AI engineers heavy-duty industrial robotic arms and multipurpose robotics platforms for manufacturing, logistics, and quality control — built and supported from Indore, India."
+        keywords="industrial robotic arms India, robotic arm manufacturer Indore, multipurpose robotics platform, industrial automation India, robotics company Indore"
         canonical={`${SITE_URL}/robotics`}
         structuredData={structuredData}
       />

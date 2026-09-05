@@ -11,6 +11,7 @@ export const ORG_SAME_AS = [
   "https://www.linkedin.com/company/sunroboticsandai/",
   "https://twitter.com/SunRoboticsAI",
   "https://github.com/sunrobotics",
+  "https://www.google.com/maps/place/Sun+Robotics+And+AI/@22.696969,75.78662,17z/data=!3m1!4b1!4m6!3m5!1s0x3962fb12cafca601:0x786226d5dd84df3e!8m2!3d22.696969!4d75.78662!16s%2Fg%2F11xvsdzpc2",
 ];
 
 export const organizationSchema = () => ({
@@ -37,18 +38,18 @@ export const organizationSchema = () => ({
   paymentAccepted: "Cash, Credit Card, Bank Transfer, UPI",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Indraprastha Tower, Rau",
+    streetAddress: "01, Marg, Jawahar Tekri, Sinhasa",
     addressLocality: "Indore",
     addressRegion: "Madhya Pradesh",
-    postalCode: "453331",
+    postalCode: "452009",
     addressCountry: "IN",
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: 22.7196,
-    longitude: 75.8577,
+    latitude: 22.696969,
+    longitude: 75.78662,
   },
-  hasMap: "https://maps.google.com/?q=Sun+Robotics+and+AI+Indore",
+  hasMap: "https://www.google.com/maps/place/Sun+Robotics+And+AI/@22.696969,75.78662,17z/data=!3m1!4b1!4m6!3m5!1s0x3962fb12cafca601:0x786226d5dd84df3e!8m2!3d22.696969!4d75.78662!16s%2Fg%2F11xvsdzpc2",
   areaServed: [
     { "@type": "City", name: "Indore" },
     { "@type": "City", name: "Bhopal" },
@@ -64,8 +65,8 @@ export const organizationSchema = () => ({
     "Mobile App Development",
     "Custom Software Development in Indore",
     "UI/UX Design & Frontend Engineering",
-    "AI Dashboards & Machine Learning",
-    "Industrial Robotics & Automation",
+    "Humanoid & Industrial Robotics",
+    "Computer Vision & Industrial AI",
     "IoT & Hardware Telemetry",
     "Cloud Architecture & AWS Services",
   ],
@@ -194,7 +195,7 @@ export const itServicesSchema = () => ({
     "Sun Robotics Web & App Development",
   ],
   description:
-    "Sun IT Services by Sun Robotics & AI is Indore's top IT company offering custom website development, iOS and Android mobile app development, high-throughput cloud APIs, AI-powered business analytics dashboards, and enterprise software engineering.",
+    "Sun IT Services by Sun Robotics & AI is Indore's top IT company offering custom website development, iOS and Android mobile app development, high-throughput cloud APIs, and enterprise software engineering.",
   provider: {
     "@type": "Organization",
     "@id": ORG_ID,
@@ -203,10 +204,10 @@ export const itServicesSchema = () => ({
     logo: ORG_LOGO,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "Indraprastha Tower, Rau",
+      streetAddress: "01, Marg, Jawahar Tekri, Sinhasa",
       addressLocality: "Indore",
       addressRegion: "Madhya Pradesh",
-      postalCode: "453331",
+      postalCode: "452009",
       addressCountry: "IN",
     },
     telephone: ORG_PHONE,
@@ -218,7 +219,7 @@ export const itServicesSchema = () => ({
     "Mobile App Development",
     "Custom Software Development",
     "Cloud Architecture & AWS Services",
-    "AI Dashboards & Machine Learning",
+    "IoT & Connected Device Integration",
     "UI/UX Design & Frontend Engineering",
     "API Development & System Integrations",
   ],
@@ -264,8 +265,8 @@ export const itServicesSchema = () => ({
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "AI Dashboards & Automation",
-          description: "Machine learning workflows, LLM agents, and business intelligence portals.",
+          name: "IoT & Connected Device Integration",
+          description: "Real-time device sync, remote controls, and hardware telemetry dashboards.",
         },
       },
     ],

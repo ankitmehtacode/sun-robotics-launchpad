@@ -16,7 +16,7 @@ const ContactPage = () => {
     <>
       <SEO
         title="Contact Us — Indore"
-        description="Get in touch with Sun Robotics & AI at Indraprastha Tower, Rau, Indore. Call +91 8144426440 or email info@sunroboticsandai.in for AI, robotics, and IT solutions inquiries."
+        description="Get in touch with Sun Robotics & AI at Jawahar Tekri, Sinhasa, Indore. Call +91 8144426440 or email info@sunroboticsandai.in for AI, robotics, and IT solutions inquiries."
         keywords="contact Sun Robotics, Sun Robotics Indore, AI robotics company contact"
         canonical={`${SITE_URL}/contact`}
         structuredData={organizationSchema()}

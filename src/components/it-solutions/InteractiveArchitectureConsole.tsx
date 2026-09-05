@@ -77,7 +77,7 @@ export const InteractiveArchitectureConsole = () => {
                 <div>
                   <div className="flex flex-col xs:flex-row items-start xs:items-center justify-between gap-2 text-[10px] sm:text-[11px] font-mono text-white/50 border-b border-white/10 pb-3 mb-4 sm:mb-6">
                     <span className="truncate">
-                      SYSTEM FLOW // {mode === "sun-robotics" ? "DISTRIBUTED_CLOUD_NETWORK" : "SINGLE_SERVER"}
+                      SYSTEM FLOW: {mode === "sun-robotics" ? "DISTRIBUTED_CLOUD_NETWORK" : "SINGLE_SERVER"}
                     </span>
                     <button
                       onClick={handleSimulate}
@@ -157,7 +157,7 @@ export const InteractiveArchitectureConsole = () => {
           <div className="lg:col-span-5 flex flex-col justify-between p-5 sm:p-8 rounded-2xl bg-[#090b10] border border-white/10">
             <div>
               <div className="text-[11px] font-mono text-primary font-bold uppercase tracking-widest mb-2">
-                // SYSTEM COMPARISON
+                SYSTEM COMPARISON
               </div>
               <h3 className="text-2xl font-display font-bold text-white mb-6">
                 {mode === "sun-robotics"
