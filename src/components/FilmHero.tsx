@@ -3,14 +3,12 @@ import { motion, AnimatePresence, useMotionValueEvent, useScroll } from "framer-
 import { MaskedHeading } from "@/components/ui/MaskedHeading";
 import {
   FrameSource,
-  formatTimecode,
   frameHeight,
   frameWidth,
   loadFrameSequence,
   nearestLoadedIndex,
 } from "@/lib/filmReel";
 
-const FPS = 12;
 const MOBILE_BREAKPOINT = 820;
 const HEADLINE_LINES = ["One arm.", "Every machine."];
 const SUBHEAD = "A modular robotic arm. Revealing soon.";
@@ -336,84 +334,37 @@ function ScrubReveal() {
   return (
     <section ref={sectionRef} className="relative" style={{ height: pinDistance }}>
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-[#0B0C0E]">
-        {/* Luxury 3D Glassmorphic Loader Module */}
+        {/* Loading screen */}
         <AnimatePresence>
           {!ready && (
             <motion.div
               initial={{ opacity: 1 }}
-              exit={{ opacity: 0, scale: 1.06, filter: "blur(16px)" }}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-[#07080A] px-4 pointer-events-none overflow-hidden"
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-[#0B0C0E] px-4 pointer-events-none"
             >
-              {/* Deep Cinematic Ambient Glows */}
-              <div className="absolute w-[600px] h-[600px] rounded-full bg-gradient-to-tr from-[#F9931F]/15 via-blue-500/5 to-transparent blur-[140px] pointer-events-none" />
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#07080A_85%)] pointer-events-none" />
+              <motion.img
+                src="/logo.png"
+                alt="Sun Robotics & AI"
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="w-14 h-14 sm:w-16 sm:h-16 object-contain"
+              />
 
-              {/* Centerpiece: Luxury 3D Glassmorphic Emblem Pod */}
-              <div className="relative flex flex-col items-center">
-                
-                {/* Floating 3D Optical Glass Tile */}
-                <motion.div
-                  initial={{ scale: 0.92, opacity: 0, y: 15 }}
-                  animate={{ scale: 1, opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                  className="relative w-32 h-32 sm:w-40 sm:h-40 flex items-center justify-center"
-                >
-                  {/* Outer Ambient Caustics Aura */}
-                  <div className="absolute inset-0 rounded-[32px] bg-gradient-to-tr from-[#F9931F]/30 via-transparent to-blue-500/20 blur-2xl pointer-events-none" />
+              <div className="mt-7 flex flex-col items-center">
+                <span className="font-mono text-[11px] tracking-[0.4em] text-[#E8E6E1]/80 uppercase">
+                  Sun Robotics & AI
+                </span>
 
-                  {/* Refractive Glassmorphic Chassis */}
-                  <div className="relative w-full h-full rounded-[28px] p-5 sm:p-6 bg-gradient-to-br from-white/[0.12] via-white/[0.04] to-black/40 border border-white/25 backdrop-blur-3xl shadow-[0_25px_60px_rgba(0,0,0,0.85),inset_0_1px_2px_rgba(255,255,255,0.4),0_0_35px_rgba(249,147,31,0.25)] overflow-hidden flex items-center justify-center">
-                    
-                    {/* Inner Warm Amber Radial Core Glow */}
-                    <div className="absolute inset-4 rounded-full bg-[#F9931F]/20 blur-xl pointer-events-none" />
-
-                    {/* Prismatic Corner Reflections */}
-                    <div className="absolute -top-10 -left-10 w-24 h-24 bg-[#F9931F]/30 rounded-full blur-xl pointer-events-none" />
-                    <div className="absolute -bottom-10 -right-10 w-24 h-24 bg-blue-500/20 rounded-full blur-xl pointer-events-none" />
-
-                    {/* Official Sun Robotics Logo */}
-                    <img
-                      src="/logo.png"
-                      alt="Sun Robotics & AI Logo"
-                      className="relative z-10 w-full h-full object-contain filter drop-shadow-[0_4px_16px_rgba(249,147,31,0.5)]"
-                    />
-
-                    {/* Dynamic Specular Shimmer Glint */}
-                    <motion.div
-                      animate={{ x: ["-150%", "200%"] }}
-                      transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut", repeatDelay: 0.8 }}
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12 pointer-events-none"
-                    />
-
-                    {/* Edge Glass Bevel Glint */}
-                    <div className="absolute inset-0 rounded-[28px] border border-white/20 pointer-events-none" />
-                  </div>
-                </motion.div>
-
-                {/* Minimalist Hardware Telemetry & Progress Track */}
-                <div className="mt-8 flex flex-col items-center text-center">
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-xs tracking-[0.35em] text-[#E8E6E1] uppercase font-bold">
-                      SUN ROBOTICS & AI
-                    </span>
-                  </div>
-
-                  {/* High-Precision Progress Bar */}
-                  <div className="mt-4 w-36 h-[2px] bg-white/[0.08] relative overflow-hidden rounded-full">
-                    <motion.div
-                      initial={{ width: "0%" }}
-                      animate={{ width: `${Math.round(Math.max(loadProgress * 100, 15))}%` }}
-                      transition={{ ease: "easeOut", duration: 0.2 }}
-                      className="h-full bg-gradient-to-r from-[#F9931F] to-[#ffd188] shadow-[0_0_12px_#F9931F]"
-                    />
-                  </div>
-
-                  <div className="mt-2.5 font-mono text-[10px] tracking-[0.25em] text-[#878D99] uppercase">
-                    INITIALIZING // {Math.round(Math.max(loadProgress * 100, 15))}%
-                  </div>
+                <div className="mt-5 w-28 h-px bg-white/10 overflow-hidden">
+                  <motion.div
+                    initial={{ width: "0%" }}
+                    animate={{ width: `${Math.round(Math.max(loadProgress * 100, 15))}%` }}
+                    transition={{ ease: "easeOut", duration: 0.2 }}
+                    className="h-full bg-[#F9931F]"
+                  />
                 </div>
-
               </div>
             </motion.div>
           )}
@@ -440,23 +391,6 @@ function ScrubReveal() {
           style={{ height: scrubStarted ? "6vh" : "0vh" }}
           aria-hidden
         />
-
-        {/* HUD overlay */}
-        <div
-          className="absolute inset-0 pointer-events-none font-mono text-[#878D99] transition-opacity duration-500"
-          style={{ opacity: ready && !showTitleCard ? 1 : 0 }}
-          aria-hidden
-        >
-          <span className="absolute left-6 top-1/2 -translate-y-1/2 -rotate-90 origin-center text-[10px] tracking-[0.3em]">
-            REEL 01
-          </span>
-          <span className="absolute left-6 bottom-8 text-[10px] tracking-[0.15em]">
-            TC {formatTimecode(frameIndex, FPS)}
-          </span>
-          <span className="absolute right-6 bottom-8 text-[10px] tracking-[0.15em]">
-            FRAME {String(frameIndex + 1).padStart(3, "0")} / {String(totalFrames).padStart(3, "0")}
-          </span>
-        </div>
 
         {/* Cold-open scroll hint */}
         <div

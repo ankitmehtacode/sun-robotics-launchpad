@@ -1,8 +1,17 @@
+import { useRef } from "react";
+import { useInView } from "framer-motion";
 import { SplineScene } from "@/components/ui/splite";
 import { Card } from "@/components/ui/card";
 import { Spotlight } from "@/components/ui/spotlight";
 
 export function InteractiveArmScene() {
+  const sceneRef = useRef<HTMLDivElement>(null);
+  // The Spline runtime (renderer + physics + pathfinding + font/audio
+  // support) is ~2MB on its own. This section sits below the fold, so
+  // don't let it compete with the initial page load — only start
+  // fetching it once the viewer is about to scroll it into view.
+  const isNearView = useInView(sceneRef, { once: true, margin: "200px" });
+
   return (
     <section className="py-24 relative overflow-hidden">
       <div className="container mx-auto px-4 lg:px-8">
@@ -25,11 +34,13 @@ export function InteractiveArmScene() {
             </div>
 
             {/* Right content */}
-            <div className="flex-1 relative min-h-[280px] md:min-h-0">
-              <SplineScene
-                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                className="w-full h-full"
-              />
+            <div ref={sceneRef} className="flex-1 relative min-h-[280px] md:min-h-0">
+              {isNearView && (
+                <SplineScene
+                  scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                  className="w-full h-full"
+                />
+              )}
             </div>
           </div>
         </Card>

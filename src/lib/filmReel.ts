@@ -108,14 +108,3 @@ export function nearestLoadedIndex(frames: FrameSource[], target: number): numbe
   }
   return target;
 }
-
-export function formatTimecode(frameIndex: number, fps: number): string {
-  const totalFrames = Math.max(0, frameIndex);
-  const ff = totalFrames % fps;
-  const totalSeconds = Math.floor(totalFrames / fps);
-  const ss = totalSeconds % 60;
-  const mm = Math.floor(totalSeconds / 60) % 60;
-  const hh = Math.floor(totalSeconds / 3600);
-  const pad = (n: number) => String(n).padStart(2, "0");
-  return `${pad(hh)}:${pad(mm)}:${pad(ss)}:${pad(ff)}`;
-}
