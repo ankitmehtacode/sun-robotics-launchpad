@@ -299,7 +299,7 @@ const DeckCard = ({
               <div className="text-[9px] sm:text-xs font-mono text-primary font-bold tracking-widest uppercase mb-1">
                 {item.category}
               </div>
-              <h3 className="text-lg sm:text-2xl lg:text-3xl font-display font-bold tracking-tight text-white leading-tight truncate">
+              <h3 className="text-lg sm:text-2xl lg:text-3xl font-display font-bold tracking-tight text-white leading-tight">
                 {item.title}
               </h3>
             </div>
