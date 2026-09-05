@@ -22,14 +22,14 @@ export function InteractiveArmScene() {
             {/* Left content */}
             <div className="flex-1 p-8 relative z-10 flex flex-col justify-center">
               <span className="text-primary text-sm font-semibold tracking-wider uppercase">
-                Interactive 3D
+                Humanoid
               </span>
               <h2 className="text-4xl md:text-5xl font-display font-normal tracking-[-0.03em] mt-4 bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
-                Meet the arm, up close
+                Experience the Humanoid
               </h2>
               <p className="mt-4 text-neutral-300 max-w-lg tracking-[-0.01em]">
-                Drag to rotate our robotic arm and see every joint and
-                end-effector up close — the same platform reaching your factory floor.
+                Drag to rotate and inspect every joint and actuator up close —
+                the full-body platform behind our next generation of general-purpose machines.
               </p>
             </div>
 
