@@ -4,6 +4,9 @@ import { Factory, Warehouse, Eye, Users, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SEO } from "@/components/SEO";
 import { SITE_URL, productListSchema } from "@/lib/schema";
+import { ProductViewer3D, preloadProductModel } from "@/components/ProductViewer3D";
+
+preloadProductModel("/models/robot-arm-25kg.glb");
 
 const products = [
   {
@@ -109,6 +112,44 @@ const Products = () => {
               Explore our complete range of cutting-edge robotic solutions designed for every industry need.
             </p>
           </motion.div>
+        </div>
+      </section>
+
+      {/* 3D Product Viewer */}
+      <section className="py-16 relative overflow-hidden border-y border-border/50 bg-muted/10">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-10 items-center">
+            <div className="h-[380px] sm:h-[460px] lg:h-[520px] w-full order-2 lg:order-1 rounded-2xl overflow-hidden bg-gradient-to-b from-muted/30 to-transparent">
+              <ProductViewer3D modelPath="/models/robot-arm-25kg.glb" />
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6 }}
+              className="order-1 lg:order-2"
+            >
+              <span className="text-primary text-sm font-semibold tracking-wider uppercase">
+                Interactive 3D Preview
+              </span>
+              <h2 className="text-3xl md:text-4xl font-display font-bold mt-3 mb-4">
+                {products[0].name}
+              </h2>
+              <p className="text-muted-foreground mb-6 max-w-lg">
+                Rotate and inspect the SunBot Industrial X1 in real time. Drag to orbit, scroll or pinch to
+                zoom in on the 6-axis joint architecture.
+              </p>
+              <div className="grid grid-cols-2 gap-3 max-w-md">
+                {Object.entries(products[0].specs).map(([key, value]) => (
+                  <div key={key} className="bg-card/50 border border-border/50 rounded-lg p-3">
+                    <div className="text-xs text-muted-foreground uppercase tracking-wider">{key}</div>
+                    <div className="text-lg font-display font-semibold text-foreground">{value}</div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
