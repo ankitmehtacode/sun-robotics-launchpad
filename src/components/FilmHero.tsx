@@ -162,6 +162,7 @@ function StaticReveal() {
 function ScrubReveal() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const bgCanvasRef = useRef<HTMLCanvasElement>(null);
   const framesRef = useRef<FrameSource[]>([]);
   const frameCountRef = useRef(0);
   const progressRef = useRef(0);
@@ -188,41 +189,57 @@ function ScrubReveal() {
 
   const drawFrame = (index: number) => {
     const canvas = canvasRef.current;
+    const bgCanvas = bgCanvasRef.current;
     const frames = framesRef.current;
-    if (!canvas || frames.length === 0) return;
+    if (!canvas || !bgCanvas || frames.length === 0) return;
     const idx = nearestLoadedIndex(frames, Math.max(0, Math.min(index, frames.length - 1)));
     const src = frames[idx];
     if (!src || currentDrawnIndexRef.current === idx) return;
     currentDrawnIndexRef.current = idx;
 
     const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    const bgCtx = bgCanvas.getContext("2d");
+    if (!ctx || !bgCtx) return;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const cw = canvas.width / dpr;
     const ch = canvas.height / dpr;
     const sw = frameWidth(src);
     const sh = frameHeight(src);
-    const scale = Math.max(cw / sw, ch / sh);
-    const dw = sw * scale;
-    const dh = sh * scale;
+
+    // Foreground: fit the whole frame with no cropping, so the arm and
+    // parts tray are always fully visible — never cut off at the edges.
+    const containScale = Math.min(cw / sw, ch / sh);
+    const dw = sw * containScale;
+    const dh = sh * containScale;
     const dx = (cw - dw) / 2;
     const dy = (ch - dh) / 2;
     ctx.clearRect(0, 0, cw, ch);
     ctx.drawImage(src, dx, dy, dw, dh);
+
+    // Background: the same frame, cropped to fill every corner (blurred via
+    // CSS) so a mismatched aspect ratio never leaves flat dead space around
+    // the contained foreground image.
+    const coverScale = Math.max(cw / sw, ch / sh);
+    const bw = sw * coverScale;
+    const bh = sh * coverScale;
+    bgCtx.clearRect(0, 0, cw, ch);
+    bgCtx.drawImage(src, (cw - bw) / 2, (ch - bh) / 2, bw, bh);
   };
 
   const resizeCanvas = () => {
     const canvas = canvasRef.current;
-    if (!canvas || !canvas.parentElement) return;
+    const bgCanvas = bgCanvasRef.current;
+    if (!canvas || !bgCanvas || !canvas.parentElement) return;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const rect = canvas.parentElement.getBoundingClientRect();
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
-    const ctx = canvas.getContext("2d");
-    // Draw calls use CSS-pixel units (canvas.width/dpr), so the context's
-    // transform must scale them back up to the physical pixel buffer —
-    // otherwise only the top-left 1/dpr fraction of the canvas gets painted.
-    ctx?.setTransform(dpr, 0, 0, dpr, 0, 0);
+    for (const c of [canvas, bgCanvas]) {
+      c.width = rect.width * dpr;
+      c.height = rect.height * dpr;
+      // Draw calls use CSS-pixel units (canvas.width/dpr), so the context's
+      // transform must scale them back up to the physical pixel buffer —
+      // otherwise only the top-left 1/dpr fraction of the canvas gets painted.
+      c.getContext("2d")?.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
     currentDrawnIndexRef.current = -1;
     drawFrame(Math.round(progressRef.current * Math.max(0, frameCountRef.current - 1)));
   };
@@ -362,7 +379,16 @@ function ScrubReveal() {
           )}
         </AnimatePresence>
 
-        {/* Frame canvas */}
+        {/* Blurred cover-fill backdrop — fills any gap left by the
+            uncropped frame above so a mismatched aspect ratio never shows
+            flat dead space. */}
+        <canvas
+          ref={bgCanvasRef}
+          aria-hidden
+          className="absolute inset-0 w-full h-full scale-110 blur-3xl brightness-[0.45]"
+        />
+
+        {/* Frame canvas — always shows the full, uncropped shot */}
         <canvas ref={canvasRef} aria-hidden className="absolute inset-0 w-full h-full" />
 
         {/* Film grain */}
