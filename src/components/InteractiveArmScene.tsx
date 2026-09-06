@@ -1,16 +1,17 @@
-import { useRef } from "react";
-import { useInView } from "framer-motion";
+import { useState } from "react";
+import { Rotate3d } from "lucide-react";
 import { SplineScene } from "@/components/ui/splite";
 import { Card } from "@/components/ui/card";
 import { Spotlight } from "@/components/ui/spotlight";
 
 export function InteractiveArmScene() {
-  const sceneRef = useRef<HTMLDivElement>(null);
   // The Spline runtime (renderer + physics + pathfinding + font/audio
-  // support) is ~2MB on its own. This section sits below the fold, so
-  // don't let it compete with the initial page load — only start
-  // fetching it once the viewer is about to scroll it into view.
-  const isNearView = useInView(sceneRef, { once: true, margin: "200px" });
+  // support) is ~1.4MB gzipped on its own — by far the heaviest asset on
+  // the site. Auto-fetching it whenever this section scrolled near view
+  // meant every visitor paid that download just by scrolling past the
+  // hero. Instead, show a lightweight static poster of the real scene and
+  // only fetch/mount the interactive model on an explicit tap.
+  const [activated, setActivated] = useState(false);
 
   return (
     <section className="py-24 relative overflow-hidden">
@@ -34,12 +35,33 @@ export function InteractiveArmScene() {
             </div>
 
             {/* Right content */}
-            <div ref={sceneRef} className="flex-1 relative min-h-[280px] md:min-h-0">
-              {isNearView && (
+            <div className="flex-1 relative min-h-[280px] md:min-h-0">
+              {activated ? (
                 <SplineScene
                   scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
                   className="w-full h-full"
                 />
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => setActivated(true)}
+                  className="group absolute inset-0 w-full h-full cursor-pointer"
+                  aria-label="Load the interactive 3D humanoid model"
+                >
+                  <img
+                    src="/humanoid-poster.webp"
+                    alt="Sun Robotics humanoid model, standing"
+                    className="absolute inset-0 w-full h-full object-contain"
+                  />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/0 group-hover:bg-black/20 transition-colors">
+                    <span className="w-14 h-14 rounded-full bg-white/10 border border-white/20 backdrop-blur-md flex items-center justify-center group-hover:bg-primary/20 group-hover:border-primary/50 group-hover:scale-110 transition-all">
+                      <Rotate3d className="w-6 h-6 text-white group-hover:text-primary transition-colors" strokeWidth={1.5} />
+                    </span>
+                    <span className="font-mono text-xs uppercase tracking-widest text-white/70 group-hover:text-white transition-colors">
+                      Tap to load interactive 3D
+                    </span>
+                  </div>
+                </button>
               )}
             </div>
           </div>

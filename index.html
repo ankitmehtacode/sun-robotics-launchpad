@@ -8,6 +8,21 @@
     <link rel="icon" href="/favicon.ico" />
 
     <!--
+      Preconnect + direct <link> instead of a CSS @import: the browser can
+      start the DNS/TLS handshake to these domains the moment it starts
+      parsing this document, in parallel with the JS/CSS bundles, rather
+      than discovering them only after fetching and parsing index.css.
+      Weights are trimmed to what's actually used in the codebase — Syne
+      was imported at 4 weights and used nowhere.
+    -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@700;800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    />
+
+    <!--
       Everything below, tagged data-static-fallback, is for crawlers that read
       raw HTML without executing JS (most AI-assistant crawlers) and only ever
       see this document's initial markup — every real route renders its own
