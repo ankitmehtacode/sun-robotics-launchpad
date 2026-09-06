@@ -29,8 +29,11 @@ const defaultContactInfo: ContactInfoItem[] = [
   },
 ];
 
+// Just location + hours — used on the contact page, where email/phone/
+// WhatsApp are already surfaced as quick actions in the page header, so
+// repeating them here would just duplicate the same info twice on one page.
 const extendedContactInfo: ContactInfoItem[] = [
-  ...defaultContactInfo,
+  defaultContactInfo[2], // Address
   {
     icon: Clock,
     label: "Business Hours",
@@ -40,7 +43,7 @@ const extendedContactInfo: ContactInfoItem[] = [
 ];
 
 interface ContactInfoProps {
-  /** Show extended info including business hours */
+  /** Show the location + business hours variant instead of email/phone/address */
   extended?: boolean;
   /** Enable animation */
   animate?: boolean;
