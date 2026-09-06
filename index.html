@@ -30,17 +30,24 @@
       main.tsx strips this whole block on hydrate so JS-executing crawlers and
       browsers never see both at once. Kept in sync with src/lib/schema.ts by
       hand since this file can't import it.
+
+      Deliberately NOT included here: rel="canonical" and og:url. This one
+      static file is served identically for every client-side route, so a
+      hardcoded URL here would tell every non-JS crawler that every page
+      (products, robotics, contact, ...) canonicalizes to the homepage —
+      actively suppressing independent indexing of the rest of the site for
+      that whole category of bot. Each real route sets its own correct
+      canonical/og:url via <SEO>; going without one here for non-JS crawlers
+      is safe, claiming the wrong one for every page is not.
     -->
     <meta data-static-fallback name="description" content="Sun Robotics & AI is building India's next generation of humanoid and industrial robots — precision robotic arms, computer-vision inspection, and an in-house AI and software engineering team, based in Indore." />
     <meta data-static-fallback name="author" content="Sun Robotics & AI" />
-    <link data-static-fallback rel="canonical" href="https://sunroboticsandai.in/" />
 
     <meta data-static-fallback property="og:title" content="Sun Robotics & AI | India's Humanoid & Industrial Robotics Company" />
     <meta data-static-fallback property="og:description" content="Sun Robotics & AI is building India's next generation of humanoid and industrial robots — precision robotic arms, computer-vision inspection, and an in-house AI and software engineering team, based in Indore." />
     <meta data-static-fallback property="og:type" content="website" />
     <meta data-static-fallback property="og:site_name" content="Sun Robotics & AI" />
     <meta data-static-fallback property="og:locale" content="en_IN" />
-    <meta data-static-fallback property="og:url" content="https://sunroboticsandai.in/" />
     <meta data-static-fallback property="og:image" content="https://sunroboticsandai.in/logo.png" />
 
     <meta data-static-fallback name="twitter:card" content="summary_large_image" />
