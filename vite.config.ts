@@ -21,6 +21,17 @@ export default defineConfig(({ mode }) => ({
         },
     },
     plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
+    build: {
+        rollupOptions: {
+            output: {
+                // Framework code changes far less often than app code; a
+                // separate chunk keeps it cached across deploys.
+                manualChunks: {
+                    react: ["react", "react-dom", "react-router-dom"],
+                },
+            },
+        },
+    },
     resolve: {
         alias: {
             "@": path.resolve(__dirname, "./src"),

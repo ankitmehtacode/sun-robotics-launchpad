@@ -1,8 +1,17 @@
+import { lazy, Suspense } from "react";
 import { FilmHero } from "@/components/FilmHero";
-import { InteractiveArmScene } from "@/components/InteractiveArmScene";
-import { ServicesSummary } from "@/components/ServicesSummary";
 import { SEO } from "@/components/SEO";
 import { SITE_URL, organizationSchema, websiteSchema } from "@/lib/schema";
+
+// Both sections sit below a 260–340vh pinned hero, so nobody sees them on
+// first paint. Splitting them out keeps GSAP/ScrollTrigger and the Spline
+// wrapper off the critical path — they download while the hero plays.
+const InteractiveArmScene = lazy(() =>
+  import("@/components/InteractiveArmScene").then((m) => ({ default: m.InteractiveArmScene })),
+);
+const ServicesSummary = lazy(() =>
+  import("@/components/ServicesSummary").then((m) => ({ default: m.ServicesSummary })),
+);
 
 const Index = () => {
   return (
@@ -16,9 +25,10 @@ const Index = () => {
       />
 
       <FilmHero />
-      <InteractiveArmScene />
-
-      <ServicesSummary />
+      <Suspense fallback={<div className="min-h-[600px]" />}>
+        <InteractiveArmScene />
+        <ServicesSummary />
+      </Suspense>
     </>
   );
 };

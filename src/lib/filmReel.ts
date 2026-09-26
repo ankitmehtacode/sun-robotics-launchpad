@@ -46,11 +46,14 @@ interface LoadFrameSequenceOptions {
 }
 
 /**
- * Loads frames in two phases:
+ * Loads frames in three phases:
+ *   0. **First frame** — the only frame visible before the user scrolls.
+ *      `onSparseReady` fires as soon as it's decoded, so the hero appears
+ *      after a single image round-trip instead of waiting on dozens.
  *   1. **Sparse pass** — every 3rd frame, loaded in small batches (not all at
  *      once) to avoid saturating the browser's per-origin connection pool
- *      (typically 6 connections). As soon as this pass finishes, `onSparseReady`
- *      fires so the UI can become interactive.
+ *      (typically 6 connections). Until the gaps fill in, the draw loop
+ *      falls back to the nearest loaded neighbor.
  *   2. **Backfill pass** — remaining frames in small batches.
  *
  * Each individual frame fetch has a 10 s timeout so a single stalled TCP
@@ -86,15 +89,23 @@ export async function loadFrameSequence({
     }
   };
 
+  if (filenames.length === 0) {
+    if (!signal?.aborted) onSparseReady();
+    return;
+  }
+
   const allIndices = filenames.map((_, i) => i);
-  const sparseIndices = allIndices.filter((i) => i % 3 === 0);
+  const sparseIndices = allIndices.filter((i) => i % 3 === 0 && i !== 0);
   const restIndices = allIndices.filter((i) => i % 3 !== 0);
+
+  // Phase 0 — the opening frame alone, then reveal the hero.
+  await loadOne(0);
+  if (!signal?.aborted) onSparseReady();
 
   // Phase 1 — sparse frames in batches of 6 (matches typical browser
   // connection limit).  The old code fired all ~32 at once which
   // exhausted connection slots and caused silent hangs.
   await loadBatched(sparseIndices, 6);
-  if (!signal?.aborted) onSparseReady();
 
   // Phase 2 — backfill the rest
   await loadBatched(restIndices, 6);

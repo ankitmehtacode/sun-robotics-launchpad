@@ -1,8 +1,5 @@
 //
 import { lazy, Suspense } from "react";
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Outlet, Navigate } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
@@ -13,6 +10,11 @@ import ScrollToTop from "@/components/ScrollToTop";
 // fetched on demand so a homepage visitor never downloads the admin
 // dashboard, blog editor, etc.
 import Index from "./pages/Index";
+
+// Toasts only fire after a form submit, long after these chunks have loaded,
+// so there's no reason to ship Radix Toast + Sonner in the initial bundle.
+const Toaster = lazy(() => import("@/components/ui/toaster").then((m) => ({ default: m.Toaster })));
+const Sonner = lazy(() => import("@/components/ui/sonner").then((m) => ({ default: m.Toaster })));
 
 const Robotics = lazy(() => import("./pages/Robotics"));
 const ITSolutionsPage = lazy(() => import("./pages/ITSolutionsPage"));
@@ -51,46 +53,46 @@ const PublicLayout = () => {
 
 const App = () => (
     <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
+        <Suspense fallback={null}>
             <Toaster />
             <Sonner />
-            <BrowserRouter>
-                <ScrollToTop />
-                <Suspense fallback={null}>
-                    <Routes>
-                        {/* --- PUBLIC ROUTES (Wrapped in PublicLayout) --- */}
-                        <Route element={<PublicLayout />}>
-                            <Route path="/" element={<Index />} />
-                            <Route path="/robotics" element={<Robotics />} />
-                            <Route path="/sunitservices" element={<ITSolutionsPage />} />
-                            <Route path="/it-solutions" element={<Navigate to="/sunitservices" replace />} />
-                            <Route path="/products" element={<Products />} />
-                            <Route path="/contact" element={<ContactPage />} />
-                            <Route path="/about" element={<About />} />
-                            <Route path="/careers" element={<Careers />} />
-                            <Route path="/privacy" element={<Privacy />} />
-                            <Route path="/terms" element={<Terms />} />
-                            <Route path="/blog" element={<Blog />} />
-                            <Route path="/blog/:id" element={<BlogPost />} />
-                            {/* Catch-all for public 404 */}
-                            <Route path="*" element={<NotFound />} />
-                        </Route>
+        </Suspense>
+        <BrowserRouter>
+            <ScrollToTop />
+            <Suspense fallback={null}>
+                <Routes>
+                    {/* --- PUBLIC ROUTES (Wrapped in PublicLayout) --- */}
+                    <Route element={<PublicLayout />}>
+                        <Route path="/" element={<Index />} />
+                        <Route path="/robotics" element={<Robotics />} />
+                        <Route path="/sunitservices" element={<ITSolutionsPage />} />
+                        <Route path="/it-solutions" element={<Navigate to="/sunitservices" replace />} />
+                        <Route path="/products" element={<Products />} />
+                        <Route path="/contact" element={<ContactPage />} />
+                        <Route path="/about" element={<About />} />
+                        <Route path="/careers" element={<Careers />} />
+                        <Route path="/privacy" element={<Privacy />} />
+                        <Route path="/terms" element={<Terms />} />
+                        <Route path="/blog" element={<Blog />} />
+                        <Route path="/blog/:id" element={<BlogPost />} />
+                        {/* Catch-all for public 404 */}
+                        <Route path="*" element={<NotFound />} />
+                    </Route>
 
-                        {/* --- ADMIN LOGIN (Standalone - No Navbar/Footer, No Auth Check) --- */}
-                        <Route path="/admin/login" element={<Login />} />
+                    {/* --- ADMIN LOGIN (Standalone - No Navbar/Footer, No Auth Check) --- */}
+                    <Route path="/admin/login" element={<Login />} />
 
-                        {/* --- ADMIN ROUTES (Wrapped in AdminLayout - Requires Auth) --- */}
-                        <Route path="/admin" element={<AdminLayout />}>
-                            <Route index element={<AdminDashboard />} />
-                            <Route path="jobs" element={<AdminJobs />} />
-                            <Route path="applications" element={<AdminApplications />} />
-                            <Route path="messages" element={<AdminMessages />} />
-                            <Route path="blogs" element={<AdminBlogs />} />
-                        </Route>
-                    </Routes>
-                </Suspense>
-            </BrowserRouter>
-        </TooltipProvider>
+                    {/* --- ADMIN ROUTES (Wrapped in AdminLayout - Requires Auth) --- */}
+                    <Route path="/admin" element={<AdminLayout />}>
+                        <Route index element={<AdminDashboard />} />
+                        <Route path="jobs" element={<AdminJobs />} />
+                        <Route path="applications" element={<AdminApplications />} />
+                        <Route path="messages" element={<AdminMessages />} />
+                        <Route path="blogs" element={<AdminBlogs />} />
+                    </Route>
+                </Routes>
+            </Suspense>
+        </BrowserRouter>
     </QueryClientProvider>
 );
 
