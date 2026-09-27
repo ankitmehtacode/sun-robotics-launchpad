@@ -78,6 +78,12 @@ const Blog = () => {
                                 </div>
                             ))}
                         </div>
+                    ) : posts.length === 0 ? (
+                        <div className="text-center py-20 glass-card max-w-2xl mx-auto rounded-xl">
+                            <p className="text-muted-foreground">
+                                No articles published yet. Check back soon for updates from our engineering team.
+                            </p>
+                        </div>
                     ) : (
                         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
                             {posts.map((post, index) => (

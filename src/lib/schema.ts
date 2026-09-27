@@ -9,8 +9,6 @@ export const ORG_EMAIL = "info@sunroboticsandai.in";
 export const ORG_PHONE = "+91-8144426440";
 export const ORG_SAME_AS = [
   "https://www.linkedin.com/company/sunroboticsandai/",
-  "https://twitter.com/SunRoboticsAI",
-  "https://github.com/sunrobotics",
   "https://www.google.com/maps/place/Sun+Robotics+And+AI/@22.696969,75.78662,17z/data=!3m1!4b1!4m6!3m5!1s0x3962fb12cafca601:0x786226d5dd84df3e!8m2!3d22.696969!4d75.78662!16s%2Fg%2F11xvsdzpc2",
 ];
 

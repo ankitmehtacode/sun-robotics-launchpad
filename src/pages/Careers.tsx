@@ -86,7 +86,7 @@ const Careers = () => {
                 setJobs(data.filter((j) => j.active));
             } catch (error) {
                 console.error("Failed to fetch jobs:", error);
-                toast.error("Could not load open positions. Is the backend running?");
+                toast.error("Couldn't load open positions right now. Please try again shortly.");
             } finally {
                 setLoading(false);
             }

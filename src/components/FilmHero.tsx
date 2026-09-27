@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence, useMotionValueEvent, useScroll } from "framer-motion";
 import { MaskedHeading } from "@/components/ui/MaskedHeading";
+import { api } from "@/lib/api";
 import {
   FrameSource,
   frameHeight,
@@ -54,19 +55,26 @@ function NotifyForm({ variant }: { variant: "overlay" | "static" }) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const endpoint = import.meta.env.VITE_NOTIFY_ENDPOINT as string | undefined;
-    if (!endpoint) {
-      console.warn("VITE_NOTIFY_ENDPOINT is not configured — notify signups have nowhere to go.");
-      setState("error");
-      return;
-    }
     setState("submitting");
     try {
-      const res = await fetch(endpoint, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({ email }),
-      });
-      if (!res.ok) throw new Error("Request failed");
+      if (endpoint) {
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({ email }),
+        });
+        if (!res.ok) throw new Error("Request failed");
+      } else {
+        // No dedicated list configured — record the signup through the
+        // contact API instead so it lands in the admin Messages inbox
+        // rather than being silently dropped.
+        await api.sendContactMessage({
+          name: "Arm reveal waitlist",
+          email,
+          subject: "Notify me: robotic arm reveal",
+          message: `${email} asked to be notified when the modular robotic arm is revealed.`,
+        });
+      }
       setState("done");
     } catch {
       setState("error");
@@ -82,32 +90,34 @@ function NotifyForm({ variant }: { variant: "overlay" | "static" }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex items-center gap-3 max-w-sm">
-      <label htmlFor={`notify-email-${variant}`} className="sr-only">
-        Email address
-      </label>
-      <input
-        id={`notify-email-${variant}`}
-        type="email"
-        required
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="your@email.com"
-        className="flex-1 bg-transparent border-0 border-b border-[#23262D] font-mono text-sm text-[#E8E6E1] placeholder:text-[#878D99] py-2 focus:outline-none focus:border-[#F9931F] transition-colors"
-      />
-      <button
-        type="submit"
-        disabled={state === "submitting"}
-        className="font-mono text-xs tracking-widest uppercase text-[#F9931F] hover:text-[#E8E6E1] transition-colors whitespace-nowrap disabled:opacity-50"
-      >
-        {state === "submitting" ? "SENDING…" : "NOTIFY ME"}
-      </button>
+    <div className="max-w-sm">
+      <form onSubmit={handleSubmit} className="flex items-center gap-3">
+        <label htmlFor={`notify-email-${variant}`} className="sr-only">
+          Email address
+        </label>
+        <input
+          id={`notify-email-${variant}`}
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="your@email.com"
+          className="flex-1 bg-transparent border-0 border-b border-[#23262D] font-mono text-sm text-[#E8E6E1] placeholder:text-[#878D99] py-2 focus:outline-none focus:border-[#F9931F] transition-colors"
+        />
+        <button
+          type="submit"
+          disabled={state === "submitting"}
+          className="font-mono text-xs tracking-widest uppercase text-[#F9931F] hover:text-[#E8E6E1] transition-colors whitespace-nowrap disabled:opacity-50"
+        >
+          {state === "submitting" ? "SENDING…" : "NOTIFY ME"}
+        </button>
+      </form>
       {state === "error" && (
-        <span className="sr-only" role="alert">
-          Something went wrong. Please try again.
-        </span>
+        <p role="alert" className="mt-2 font-mono text-xs text-red-400">
+          Couldn't sign you up just now. Please try again, or email info@sunroboticsandai.in.
+        </p>
       )}
-    </form>
+    </div>
   );
 }
 
