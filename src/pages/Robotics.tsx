@@ -1,15 +1,14 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { AIBrain } from "@/components/AIBrain";
-import { MultipurposeRobotics } from "@/components/MultipurposeRobotics";
+import { RoboticsRoadmap } from "@/components/RoboticsRoadmap";
 import { SEO } from "@/components/SEO";
 import { SITE_URL, serviceSchema, breadcrumbSchema } from "@/lib/schema";
 
 const structuredData = [
   serviceSchema({
-    name: "Industrial Robotics & AI Automation",
+    name: "Robotics & Vision Inspection",
     description:
-      "Heavy-duty industrial robotic arms, AI-driven automation, and intelligent multipurpose robotics platforms engineered for manufacturing, logistics, and quality control.",
+      "A modular robotic arm and a humanoid platform in development, and SunBot Vision AI camera-based defect inspection for production lines.",
     serviceType: "Industrial Automation",
   }),
   breadcrumbSchema([
@@ -25,8 +24,8 @@ const Robotics = () => {
   return (
     <>
       <SEO
-        title="Industrial Robotic Arms & Automation Solutions"
-        description="Sun Robotics & AI engineers heavy-duty industrial robotic arms and multipurpose robotics platforms for manufacturing, logistics, and quality control — built and supported from Indore, India."
+        title="Robotic Arm, Humanoid & Vision Inspection"
+        description="Sun Robotics & AI in Indore is developing a modular robotic arm and a humanoid platform, and makes SunBot Vision AI for camera-based defect inspection."
         keywords="industrial robotic arms India, robotic arm manufacturer Indore, multipurpose robotics platform, industrial automation India, robotics company Indore"
         canonical={`${SITE_URL}/robotics`}
         structuredData={structuredData}
@@ -36,10 +35,7 @@ const Robotics = () => {
       <section className="pt-32 pb-16 relative overflow-hidden" ref={headerRef}>
         <div className="absolute inset-0 hero-gradient" />
         <div className="absolute inset-0 grid-bg opacity-40" />
-        
-        {/* Animated Orbs */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[128px] animate-pulse-slow" />
-        
+
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -48,24 +44,20 @@ const Robotics = () => {
             className="text-center max-w-4xl mx-auto"
           >
             <span className="text-primary text-sm font-semibold tracking-wider uppercase">
-              Robotics Solutions
+              Robotics
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mt-4 mb-6">
-              Next-Generation <span className="neon-text">Robotics</span>
+              What we're building
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-              From heavy-duty industrial arms to intelligent multipurpose platforms, 
-              our robotics solutions are engineered for peak performance and reliability.
+              Two robots in development and one inspection product. Here's where each one
+              stands.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* AI Brain Section */}
-      <AIBrain />
-
-      {/* Multipurpose Robotics Section */}
-      <MultipurposeRobotics />
+      <RoboticsRoadmap />
     </>
   );
 };

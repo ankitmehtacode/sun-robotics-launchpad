@@ -26,11 +26,11 @@ export function InteractiveArmScene() {
                 Humanoid
               </span>
               <h2 className="text-4xl md:text-5xl font-display font-normal tracking-[-0.03em] mt-4 bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
-                Experience the Humanoid
+                Our humanoid, in 3D
               </h2>
               <p className="mt-4 text-neutral-300 max-w-lg tracking-[-0.01em]">
-                Drag to rotate and inspect every joint and actuator up close —
-                the full-body platform behind our next generation of general-purpose machines.
+                The current design of the full-body robot we are developing.
+                Drag to rotate it.
               </p>
             </div>
 

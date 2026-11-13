@@ -81,8 +81,8 @@ export const Footer = () => {
               </motion.div>
             </Link>
             <p className="text-muted-foreground mb-6 max-w-sm">
-              Building the future of industrial automation with cutting-edge AI
-              and robotics solutions for enterprises worldwide.
+              Robots, inspection products and custom software, built in
+              Indore, India.
             </p>
             <div className="flex gap-3">
               {socialLinks.map((social) => (
@@ -149,7 +149,7 @@ export const Footer = () => {
             © 2026 Sun Robotics & AI Private Limited. All rights reserved.
           </p>
           <p className="text-sm text-muted-foreground">
-            Crafted with precision in Indore, India 🇮🇳
+            Indore, India
           </p>
         </div>
       </div>

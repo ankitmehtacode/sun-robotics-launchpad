@@ -17,9 +17,9 @@ const Index = () => {
   return (
     <>
       <SEO
-        title="India's Humanoid & Industrial Robotics Company"
-        description="Sun Robotics & AI is building India's next generation of humanoid and industrial robots — precision robotic arms, computer-vision inspection, and enterprise IT solutions, engineered from Indore."
-        keywords="humanoid robot India, humanoid robotics company, industrial robotics India, robotic arm manufacturer Indore, AI robotics company India, Make in India robotics, IT solutions Indore"
+        title="Robotics & Software Company in Indore"
+        description="Sun Robotics & AI is an Indore company developing a modular robotic arm and a humanoid robot. We also make SunBot Vision AI inspection and build custom software through Sun IT Services."
+        keywords="humanoid robot India, robotic arm Indore, robotics company Indore, vision inspection, AI robotics India, IT services Indore"
         canonical={`${SITE_URL}/`}
         structuredData={[organizationSchema(), websiteSchema()]}
       />

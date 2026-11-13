@@ -66,9 +66,9 @@ const ContactPage = () => {
               </span>
               <div className="mt-5">
                 <MaskedHeading
-                  heading={["Let's Build the"]}
-                  accentText="Future Together"
-                  subhead="Ready to transform your operations with AI and robotics? Our team is here to help you every step of the way."
+                  heading={["Tell us what"]}
+                  accentText="you need"
+                  subhead="Robotics, inspection or a software project. Send a message, call, or WhatsApp us, and we'll get back to you."
                   as="h1"
                   variant="monochrome"
                   className="text-4xl md:text-5xl lg:text-6xl font-display font-bold tracking-tight"

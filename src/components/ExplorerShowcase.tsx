@@ -9,31 +9,31 @@ export const portfolioProjects = [
     name: "PRYME Loans",
     category: "FinTech · Loan Matchmaking",
     description:
-      "Bank-grade intelligent loan matchmaking platform connecting borrowers with 15+ lending partners.",
+      "Loan matchmaking platform that matches borrowers with lending partners.",
     image: "/portfolio/prymeloans.jpg",
     url: "https://prymeloans.in",
     displayUrl: "prymeloans.in",
-    attribution: "Engineered by Sun Robotics & AI · Indore",
+    attribution: "Built by Sun IT Services",
   },
   {
     index: "02",
     name: "ProtoDesign Studio",
     category: "E-Commerce · 3D Printing",
-    description: "High-fidelity 3D printing storefront with instant custom-print quoting.",
+    description: "Online store for 3D printing, with instant quotes for custom prints.",
     image: "/portfolio/protodesignstudio.jpg",
     url: "https://www.protodesignstudio.com/",
     displayUrl: "protodesignstudio.com",
-    attribution: "Engineered by Sun Robotics & AI · Indore",
+    attribution: "Built by Sun IT Services",
   },
   {
     index: "03",
     name: "911 Fashion",
     category: "Retail · Fashion",
-    description: "Fashion & lifestyle e-commerce platform for a leading retail brand.",
+    description: "Online store for a fashion and lifestyle retailer.",
     image: "/portfolio/911fashion.jpg",
     url: "https://www.911fashion.co.il/",
     displayUrl: "911fashion.co.il",
-    attribution: "Engineered by Sun Robotics & AI · Indore",
+    attribution: "Built by Sun IT Services",
   },
 ];
 
@@ -79,15 +79,15 @@ const ExplorerShowcase = () => {
           <motion.div ref={trackRef} style={{ x }} className="explorer-track">
             <div className="explorer-panel explorer-panel--intro">
               <span className="text-primary text-sm font-semibold tracking-wider uppercase">
-                IT Solutions · Portfolio
+                Client work
               </span>
               <h2 className="explorer-headline">
-                <span className="block text-foreground">Calling All</span>
-                <span className="block gradient-text">Innovators</span>
+                <span className="block text-foreground">Sites we've</span>
+                <span className="block gradient-text">shipped</span>
               </h2>
               <p className="text-lg text-muted-foreground max-w-md mt-6 tracking-[-0.01em]">
-                From fintech to fashion, we engineer the software backbone for
-                teams who refuse to stand still.
+                A loan platform, a 3D printing store and a fashion store. Click
+                through to see them live.
               </p>
             </div>
 
@@ -116,10 +116,6 @@ const ExplorerShowcase = () => {
                   <div className="flex items-center gap-2">
                     <span className="text-xs font-semibold tracking-wider uppercase text-primary">
                       {project.category}
-                    </span>
-                    <span className="text-white/20">·</span>
-                    <span className="text-[10px] font-mono text-white/50">
-                      Indore Dev Lab
                     </span>
                   </div>
                   <h3 className="text-2xl font-display font-semibold text-foreground mt-1 mb-2">
@@ -162,7 +158,7 @@ const ExplorerShowcase = () => {
                 <span className="explorer-badge-core" />
               </div>
               <p className="text-xl md:text-2xl font-display text-foreground mt-8">
-                Your project could be next.
+                Want something like this?
               </p>
               <a href="/contact" className="explorer-visit-chip mt-6">
                 Start a Project <ExternalLink className="w-4 h-4" />
@@ -178,10 +174,10 @@ const ExplorerShowcase = () => {
         <div className="absolute inset-0 grid-bg opacity-30" />
         <div className="container mx-auto px-4 relative z-10 mb-8">
           <span className="text-primary text-sm font-semibold tracking-wider uppercase">
-            IT Solutions · Portfolio
+            Client work
           </span>
           <h2 className="text-3xl font-display font-bold mt-3">
-            Calling All <span className="gradient-text">Innovators</span>
+            Sites we've <span className="gradient-text">shipped</span>
           </h2>
         </div>
         <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-4 pb-4 relative z-10 explorer-mobile-row">

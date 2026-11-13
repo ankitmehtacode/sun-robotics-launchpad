@@ -155,7 +155,7 @@ const Careers = () => {
         <>
             <SEO
                 title="Careers"
-                description="Join Sun Robotics & AI and build the future of industrial automation. Explore open positions in engineering, AI research, and more."
+                description="Open positions at Sun Robotics & AI in Indore."
                 canonical={`${SITE_URL}/careers`}
             />
 
@@ -176,12 +176,11 @@ const Careers = () => {
                             Careers
                         </span>
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mt-4 mb-6">
-                            Join the <span className="gradient-text">Revolution</span>
+                            Work with us
                         </h1>
                         <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-                            Build the future with us. We're looking for passionate engineers,
-                            researchers, and innovators to shape the next generation of
-                            industrial automation.
+                            Current openings at Sun Robotics & AI in Indore are listed
+                            below.
                         </p>
                     </motion.div>
                 </div>
@@ -197,11 +196,10 @@ const Careers = () => {
                         className="text-center max-w-3xl mx-auto mb-16"
                     >
                         <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-                            Open <span className="neon-text">Positions</span>
+                            Open positions
                         </h2>
                         <p className="text-lg text-muted-foreground">
-                            Find your place in our growing team and help us build something
-                            extraordinary.
+                            Pick a role and apply with your CV.
                         </p>
                     </motion.div>
 

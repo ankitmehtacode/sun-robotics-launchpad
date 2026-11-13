@@ -11,24 +11,24 @@ const services = [
     icon: Bot,
     number: "01",
     title: "Robotics",
-    description: "6-axis industrial arms and autonomous mobile platforms, engineered for continuous duty-cycle operation.",
-    spec: "500kg payload · ±0.02mm repeatability",
+    description: "A modular robotic arm and a humanoid platform. Both are in development.",
+    spec: "In development",
     href: "/robotics",
   },
   {
     icon: Code,
     number: "02",
     title: "Sun IT Services",
-    description: "Custom website development, iOS/Android apps, scalable cloud APIs, and AI business intelligence portals.",
-    spec: "Sub-second load · Bank-grade security",
+    description: "Websites, iOS and Android apps, APIs, dashboards and cloud hosting for businesses.",
+    spec: "Web · Mobile · Cloud",
     href: "/sunitservices",
   },
   {
     icon: Package,
     number: "03",
     title: "Products",
-    description: "The full SunBot line — from heavy manufacturing arms to vision-guided inspection systems.",
-    spec: "4 platforms · built for 24/7 operation",
+    description: "SunBot Vision AI: camera-based inspection that flags defects on a production line.",
+    spec: "SunBot Vision AI",
     href: "/products",
   },
 ];
@@ -129,24 +129,24 @@ export const ServicesSummary = () => {
           <div className="md:col-span-8">
             <span className="text-primary text-sm font-semibold tracking-wider uppercase flex items-center gap-2">
               <span className="w-6 h-px bg-primary" />
-              Capabilities
+              Three divisions
             </span>
             <h2 className="mt-5 font-display font-bold tracking-[-0.03em] text-[13vw] leading-[0.95] md:text-[5.5vw] md:leading-[0.95]">
               <span className="block overflow-hidden">
                 <span ref={headingLine1Ref} className="block">
-                  Three Disciplines.
+                  What we
                 </span>
               </span>
               <span className="block overflow-hidden">
                 <span ref={headingLine2Ref} className="block gradient-text">
-                  One Platform.
+                  build.
                 </span>
               </span>
             </h2>
           </div>
           <div className="md:col-span-4 flex md:items-end">
             <p className="text-base md:text-lg text-muted-foreground md:text-right">
-              Hardware, software, and the systems that connect them — built and supported by one team.
+              Robots, software for clients, and inspection products. One team, based in Indore.
             </p>
           </div>
         </div>

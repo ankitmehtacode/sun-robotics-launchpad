@@ -8,7 +8,6 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import { ArrowUpRight, CheckCircle2 } from "lucide-react";
-import BorderGlow from "@/components/ui/BorderGlow";
 
 interface SolutionItem {
   id: string;
@@ -26,71 +25,71 @@ const solutionPillars: SolutionItem[] = [
   {
     id: "custom-apis",
     number: "01",
-    category: "WEB & MOBILE PLATFORMS",
-    title: "Custom Websites, Web Apps & APIs",
+    category: "WEB & MOBILE",
+    title: "Websites, Web Apps & Mobile Apps",
     description:
-      "Ultra-fast web platforms, native iOS/Android applications, and high-throughput APIs engineered for effortless scale.",
+      "Company websites, online stores, customer portals, and iOS and Android apps, with the APIs behind them.",
     highlights: [
-      "Sub-12ms edge response with serverless SSR",
-      "Native iOS, Android & multi-device web apps",
-      "Distributed PostgreSQL & encrypted caching",
+      "Websites and web apps in React and Next.js",
+      "iOS and Android apps from one codebase",
+      "APIs and databases built for your data",
     ],
     tags: ["React 19", "Next.js", "Node.js", "PostgreSQL"],
     image: "/solutions/web-platform.jpg",
-    caption: "Custom Web & Mobile Architecture",
+    caption: "Web & mobile",
   },
   {
     id: "data-dashboards",
     number: "02",
-    category: "DATA & BUSINESS INTELLIGENCE",
-    title: "Real-Time Analytics & Live Dashboards",
+    category: "DATA & DASHBOARDS",
+    title: "Dashboards & Reporting",
     description:
-      "Transform complex data streams into clean, actionable real-time visualizations your team can act on instantly.",
+      "Dashboards that pull your business data into one place, so your team can see the numbers without building spreadsheets by hand.",
     highlights: [
-      "Real-time telemetry & executive dashboards",
-      "Automated threshold alerts & monitoring",
-      "Instant data export & scheduled reporting",
+      "Live dashboards for management and operations",
+      "Alerts when a number crosses a limit you set",
+      "Data export and scheduled reports",
     ],
-    tags: ["Live Telemetry", "ETL Pipelines", "Custom Reporting"],
+    tags: ["Dashboards", "Data pipelines", "Reports"],
     image: "/solutions/ai-analytics.jpg",
-    caption: "Real-Time Telemetry & Live Dashboards",
+    caption: "Dashboards",
   },
   {
     id: "cloud-iot",
     number: "03",
     category: "HARDWARE & IOT",
-    title: "Connected Devices & Hardware IoT",
+    title: "Connected Devices",
     description:
-      "Deterministic remote control and telemetry connecting physical hardware to digital control planes with zero jitter.",
+      "Software that connects machines and sensors to the internet, so you can monitor and control them remotely.",
     highlights: [
-      "Sub-5ms low-latency control via MQTT",
-      "TLS 1.3 cryptographic hardware identity",
-      "Encrypted over-the-air firmware updates",
+      "Device messaging over MQTT",
+      "Encrypted connections between devices and servers",
+      "Over-the-air firmware updates",
     ],
     tags: ["Edge Gateways", "MQTT", "OTA Firmware"],
     image: "/solutions/hardware-iot.jpg",
-    caption: "Industrial IoT Edge Gateway",
+    caption: "Connected devices",
   },
   {
     id: "cloud-infrastructure",
     number: "04",
-    category: "CLOUD & SECURITY",
-    title: "Cloud Hosting & Data Security",
+    category: "CLOUD & HOSTING",
+    title: "Hosting & Maintenance",
     description:
-      "Enterprise hosting engineered for 99.99% uptime with automated snapshots and multi-region failover protection.",
+      "We host what we build on AWS or GCP and keep it running after launch.",
     highlights: [
-      "99.99% uptime SLA with instant failover",
-      "AES-256 bank-grade data encryption",
-      "24/7 automated monitoring & DDoS shield",
+      "Uptime monitoring and alerts",
+      "Daily database backups",
+      "Security patches and updates",
     ],
-    tags: ["AWS / GCP", "Auto-Scaling", "DDoS Shield"],
+    tags: ["AWS / GCP", "Backups", "Monitoring"],
     image: "/solutions/cloud-security.jpg",
-    caption: "Enterprise Cloud Infrastructure",
+    caption: "Hosting",
   },
 ];
 
 // ==========================================
-// Minimalist Silicon Valley Showcase Stage
+// Service image
 // ==========================================
 
 const RealWorldShowcase = ({ item }: { item: SolutionItem }) => {
@@ -174,7 +173,7 @@ export const StackedSolutionsDeck = () => {
               onClick={() => jumpToSlide(idx)}
               className={`px-3 sm:px-3.5 py-1 rounded-full text-[9px] sm:text-[10px] font-mono transition-all flex items-center gap-1 sm:gap-1.5 cursor-pointer shrink-0 ${
                 activeCardIndex === idx
-                  ? "bg-primary text-black font-bold shadow-[0_0_15px_rgba(245,158,11,0.5)]"
+                  ? "bg-primary text-black font-bold"
                   : "text-white/50 hover:text-white hover:bg-white/5"
               }`}
             >
@@ -204,7 +203,7 @@ export const StackedSolutionsDeck = () => {
 };
 
 // ==========================================
-// Cinematic Card
+// Card
 // ==========================================
 
 interface DeckCardProps {
@@ -281,17 +280,12 @@ const DeckCard = ({
       }}
       className="absolute inset-0 w-full h-full will-change-transform preserve-3d"
     >
-      <BorderGlow
-        className="w-full h-full rounded-xl sm:rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.85)]"
-        borderRadius={16}
-        glowColor="32 95 55"
-        colors={["#f59e0b", "#ea580c", "#d97706"]}
-        glowIntensity={isActive ? 0.95 : 0.4}
-        fillOpacity={0.5}
+      <div
+        className={`w-full h-full rounded-xl sm:rounded-2xl overflow-hidden border shadow-[0_20px_60px_rgba(0,0,0,0.85)] transition-colors ${
+          isActive ? "border-white/20" : "border-white/10"
+        }`}
       >
-        <div className="w-full h-full p-4 sm:p-6 md:p-8 bg-[#080a0f]/95 backdrop-blur-2xl flex flex-col justify-between overflow-hidden relative">
-          {/* Subtle Top Laser Beam */}
-          <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent opacity-70" />
+        <div className="w-full h-full p-4 sm:p-6 md:p-8 bg-[#080a0f] flex flex-col justify-between overflow-hidden relative">
 
           {/* Header Row */}
           <div className="flex items-start justify-between gap-2 sm:gap-3 border-b border-white/10 pb-2 sm:pb-4 shrink-0">
@@ -309,7 +303,7 @@ const DeckCard = ({
             </span>
           </div>
 
-          {/* Body: High-Impact Minimalist Layout */}
+          {/* Body */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 my-2 sm:my-3 items-center flex-1 min-h-0">
             {/* Left Column: Description, Highlights & Tech Stack */}
             <div className="lg:col-span-6 space-y-2.5 sm:space-y-4 flex flex-col justify-center">
@@ -340,7 +334,7 @@ const DeckCard = ({
               </div>
             </div>
 
-            {/* Right Column: Clean Gallery-Grade Showcase */}
+            {/* Right column: image */}
             <div className="lg:col-span-6 h-40 sm:h-52 lg:h-full flex items-center justify-center min-h-0">
               <RealWorldShowcase item={item} />
             </div>
@@ -348,19 +342,17 @@ const DeckCard = ({
 
           {/* Footer Action */}
           <div className="flex items-center justify-between gap-2 pt-2 sm:pt-3 border-t border-white/10 text-xs shrink-0">
-            <span className="text-[10px] sm:text-xs font-mono text-white/40">
-              PRODUCTION-READY ARCHITECTURE
-            </span>
+            <span />
             <a
               href="/contact"
               className="inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-lg bg-primary/10 border border-primary/30 text-primary font-mono font-bold text-[10px] sm:text-xs hover:bg-primary hover:text-black transition-all group shrink-0"
             >
-              <span>GET A QUOTE</span>
+              <span>ASK FOR A QUOTE</span>
               <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
           </div>
         </div>
-      </BorderGlow>
+      </div>
     </motion.div>
   );
 };

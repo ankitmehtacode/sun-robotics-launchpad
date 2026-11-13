@@ -35,7 +35,7 @@ const Blog = () => {
         <>
             <SEO
                 title="Blog"
-                description="Insights and updates from Sun Robotics & AI on industrial automation, AI research, and the future of robotics."
+                description="Posts from the Sun Robotics & AI team on robotics, AI and software work in Indore."
                 canonical={`${SITE_URL}/blog`}
             />
 
@@ -55,11 +55,11 @@ const Blog = () => {
               Blog
             </span>
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold mt-4 mb-6">
-                            Insights & <span className="gradient-text">Updates</span>
+                            Blog
                         </h1>
                         <p className="text-lg md:text-xl text-muted-foreground">
-                            Stay updated with the latest in industrial automation, AI
-                            research, and robotics innovation.
+                            Notes from our team on the robots we're building and the software
+                            we ship.
                         </p>
                     </motion.div>
                 </div>

@@ -65,8 +65,8 @@ export const organizationSchema = () => ({
     "Mobile App Development",
     "Custom Software Development in Indore",
     "UI/UX Design & Frontend Engineering",
-    "Humanoid & Industrial Robotics",
-    "Computer Vision & Industrial AI",
+    "Robotics",
+    "Computer Vision",
     "IoT & Hardware Telemetry",
     "Cloud Architecture & AWS Services",
   ],
@@ -141,7 +141,7 @@ export const clientProjectSchema = (projects: {
 }[]) => ({
   "@context": "https://schema.org",
   "@type": "ItemList",
-  name: "Client Software & Web Solutions Engineered by Sun Robotics & AI",
+  name: "Client work by Sun IT Services",
   itemListElement: projects.map((proj, idx) => ({
     "@type": "ListItem",
     position: idx + 1,
@@ -195,7 +195,7 @@ export const itServicesSchema = () => ({
     "Sun Robotics Web & App Development",
   ],
   description:
-    "Sun IT Services by Sun Robotics & AI is Indore's top IT company offering custom website development, iOS and Android mobile app development, high-throughput cloud APIs, and enterprise software engineering.",
+    "Sun IT Services, the software division of Sun Robotics & AI in Indore, builds custom websites, iOS and Android apps, APIs, dashboards and cloud hosting for businesses.",
   provider: {
     "@type": "Organization",
     "@id": ORG_ID,
@@ -229,8 +229,6 @@ export const itServicesSchema = () => ({
     { "@type": "City", name: "Ujjain" },
     { "@type": "State", name: "Madhya Pradesh" },
     { "@type": "Country", name: "India" },
-    { "@type": "Country", name: "United States" },
-    { "@type": "Country", name: "United Kingdom" },
   ],
   url: `${SITE_URL}/sunitservices`,
   hasOfferCatalog: {
@@ -242,7 +240,7 @@ export const itServicesSchema = () => ({
         itemOffered: {
           "@type": "Service",
           name: "Website Design & Development in Indore",
-          description: "High-performance React, Next.js, and custom corporate websites.",
+          description: "Company websites and web apps built with React and Next.js.",
         },
       },
       {
@@ -250,7 +248,7 @@ export const itServicesSchema = () => ({
         itemOffered: {
           "@type": "Service",
           name: "Mobile App Development (iOS & Android)",
-          description: "Native and React Native cross-platform mobile apps with cloud syncing.",
+          description: "iOS and Android apps, cross-platform or native.",
         },
       },
       {
@@ -258,7 +256,7 @@ export const itServicesSchema = () => ({
         itemOffered: {
           "@type": "Service",
           name: "Enterprise Software & Cloud Systems",
-          description: "Custom ERP, CRM, scalable APIs, and database engineering.",
+          description: "Custom ERP and CRM tools, APIs and databases.",
         },
       },
       {
@@ -266,7 +264,7 @@ export const itServicesSchema = () => ({
         itemOffered: {
           "@type": "Service",
           name: "IoT & Connected Device Integration",
-          description: "Real-time device sync, remote controls, and hardware telemetry dashboards.",
+          description: "Software to monitor and control connected devices remotely.",
         },
       },
     ],
